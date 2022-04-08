@@ -12,7 +12,11 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_home.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_login.xml" value="0.16799999999999998" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_bang_tin.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_home.xml" value="0.176" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_lich_hoat_dong.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_menu.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_thong_bao.xml" value="0.1" />
       </map>
     </option>
   </component>

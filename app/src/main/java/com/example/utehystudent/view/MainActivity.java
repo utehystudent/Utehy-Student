@@ -2,8 +2,6 @@ package com.example.utehystudent.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.WindowManager;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
