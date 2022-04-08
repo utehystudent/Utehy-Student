@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:background="@drawable/rounded_bottom_corners">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Home_cardAvt"
+                android:layout_width="80dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="40dp"
+                android:layout_marginTop="10dp"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:thicknessRatio="1.9">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/anhthe"></ImageView>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/Home_tvXinChao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/Home_cardAvt"
+                android:fontFamily="@font/nunito"
+                android:text="Xin chào!"
+                android:textAllCaps="true"
+                android:textColor="#C6FF00"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/Home_tvTenSV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Home_tvXinChao"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/Home_cardAvt"
+                android:fontFamily="@font/nunito"
+                android:maxLines="1"
+                android:text="Nguyễn Thị Ánh (10118657)"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/Home_tvLop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Home_tvTenSV"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/Home_cardAvt"
+                android:fontFamily="@font/nunito"
+                android:text="Lớp: MK14.2 - 107172"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="15sp"></TextView>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="LỊCH HỌC HÔM NAY"
+                android:fontFamily="@font/nunito"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Sáng: "
+                    android:fontFamily="@font/nunito"
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Lập trình cơ bản (1234) - ĐH502"
+                    android:fontFamily="@font/nunito_light"
+                    android:textStyle="normal"
+                    android:textColor="#000"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="-5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Chiều: "
+                    android:fontFamily="@font/nunito"
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Nghỉ"
+                    android:fontFamily="@font/nunito_light"
+                    android:textStyle="normal"
+                    android:textColor="#000"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"></TextView>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="MÔN HỌC ĐÃ VẮNG"
+                android:fontFamily="@font/nunito"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="10dp"></TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="THÔNG BÁO"
+                android:fontFamily="@font/nunito"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="10dp"></TextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="15dp"
+                android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

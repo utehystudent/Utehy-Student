@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login"
+    tools:context=".view.Activity_Login">
+
+    <ImageView
+        android:id="@+id/Login_logo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="-25dp"
+        android:layout_marginTop="-10dp"
+        android:src="@drawable/utehy_logo"></ImageView>
+
+
+    <TextView
+        android:id="@+id/Login_tvDN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Login_logo"
+        android:layout_marginLeft="15sp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/nunito"
+        android:text="ĐĂNG NHẬP"
+        android:textColor="#2F80ED"
+        android:textSize="36sp"
+        android:textStyle="bold"></TextView>
+
+
+    <TextView
+        android:id="@+id/Login_tvTK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Login_tvDN"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/nunito"
+        android:text="Tài khoản"
+        android:textColor="#2F80ED"
+        android:textSize="14sp"></TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/Login_cardTK"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        app:cardElevation="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15sp"
+        app:strokeColor ="#2F80ED"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="10dp"
+        android:layout_below="@+id/Login_tvTK"
+        >
+        <EditText
+            android:id="@+id/Login_edtTK"
+            android:background="@drawable/bo_edt"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="match_parent"></EditText>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/Login_tvMK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mật khẩu"
+        android:textSize="14sp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/nunito"
+        android:textColor="#2F80ED"
+        android:layout_below="@+id/Login_cardTK"
+        android:layout_marginLeft="15dp"></TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/Login_cardMK"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        app:cardElevation="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15sp"
+        app:strokeColor ="#2F80ED"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="10dp"
+        android:layout_below="@+id/Login_tvMK"
+        >
+        <EditText
+            android:id="@+id/Login_edtMK"
+            android:background="@drawable/bo_edt"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:inputType="textPassword"
+            android:layout_height="match_parent"></EditText>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quên mật khẩu?"
+        android:fontFamily="@font/nunito"
+        android:textColor="#FF3D00"
+        android:layout_below="@+id/Login_cardMK"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textSize="16sp"></TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="144dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        app:cardCornerRadius="7dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="20dp"
+        app:cardElevation="5dp"
+        app:strokeColor ="#FFEA00"
+        app:strokeWidth="1dp">
+        <Button
+            android:id="@+id/Login_btnDN"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2F80ED"
+            android:text="Đăng nhập"
+            android:fontFamily="@font/nunito"></Button>
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

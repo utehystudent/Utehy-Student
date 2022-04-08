@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "480704885956",
+    "project_id": "utehy-student",
+    "storage_bucket": "utehy-student.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480704885956:android:3f325adc23d3f7f7d58591",
+        "android_client_info": {
+          "package_name": "com.example.utehystudent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480704885956-b7cro187r4i07irfuhs51gg2bjhtk6fs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1T5cwlj0JoK4H80ZTwfsxAPeqJVpBwR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480704885956-b7cro187r4i07irfuhs51gg2bjhtk6fs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
