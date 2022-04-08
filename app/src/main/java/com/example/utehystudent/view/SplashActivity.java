@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.WindowManager;
+import android.widget.Toast;
+
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.LoginViewModel;
 import com.example.utehystudent.model.Account;
@@ -31,21 +33,25 @@ public class SplashActivity extends AppCompatActivity {
         String account_type = preferences.getString("account_type", "");
         String device_token = preferences.getString("device_token", "");
 
+        Toast.makeText(SplashActivity.this, ""+username, Toast.LENGTH_SHORT).show();
+
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent it;
                 //nếu đã có tài khoản đăng nhập -> chuyển sang màn hình Home
-                if (username != null) {
+                if (!username.equals("")) {
                     loginViewModel.setAccountLiveData(new Account(username, password, account_type, device_token));
                     it = new Intent(SplashActivity.this,MainActivity.class);
+                    startActivity(it);
+                    finish();
                 //nếu chưa -> chuyển sang màn đăng nhập tài khoản
-                }else {
+                }else if (username.equals("")){
                     it = new Intent(SplashActivity.this,Activity_Login.class);
+                    startActivity(it);
+                    finish();
                 }
-                startActivity(it);
-                finish();
             }
         }, 1800);
     }
