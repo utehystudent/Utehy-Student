@@ -21,8 +21,8 @@
         android:layout_centerInParent="true"
         app:mbn_backgroundBottomColor="#2F80ED"
         app:mbn_circleColor="@color/white"
-        app:mbn_countBackgroundColor="#ff6f00"
-        app:mbn_defaultIconColor="#2C302C"></com.etebarian.meowbottomnavigation.MeowBottomNavigation>
+        app:mbn_countBackgroundColor="#FF3D00"
+        app:mbn_defaultIconColor="#FFFFFF"></com.etebarian.meowbottomnavigation.MeowBottomNavigation>
 
 
 </RelativeLayout>

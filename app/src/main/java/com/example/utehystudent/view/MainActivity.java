@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.utehystudent.R;
+import com.example.utehystudent.RegisterForPushNotificationsAsync;
 import com.example.utehystudent.fragments.BangTinFragment;
 import com.example.utehystudent.fragments.HomeFragment;
 import com.example.utehystudent.fragments.LichHoatDongFragment;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        new RegisterForPushNotificationsAsync(this).execute();
         Init();
 
     }

@@ -49,6 +49,10 @@ public class LoginViewModel extends AndroidViewModel {
         this.accountLiveData.setValue(account);
     }
 
+    public void setUserLiveData(User user) {
+        this.userLiveData.setValue(user);
+    }
+
     public void LoginWithAccount(String username, String password) {
         db.collection("Account").document(username)
                 .get()

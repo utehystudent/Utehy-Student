@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.MainActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:orientation="vertical"
@@ -29,10 +28,12 @@
                 android:shape="ring"
                 android:thicknessRatio="1.9">
                 <ImageView
+                    android:id="@+id/Home_imgAvt"
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/anhthe"></ImageView>
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/loading_circle"></ImageView>
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -43,7 +44,6 @@
                 android:layout_marginTop="15dp"
                 android:layout_toRightOf="@+id/Home_cardAvt"
                 android:fontFamily="@font/nunito"
-                android:text="Xin chào!"
                 android:textAllCaps="true"
                 android:textColor="#C6FF00"
                 android:textSize="18sp"></TextView>
@@ -58,7 +58,6 @@
                 android:layout_toRightOf="@+id/Home_cardAvt"
                 android:fontFamily="@font/nunito"
                 android:maxLines="1"
-                android:text="Nguyễn Thị Ánh (10118657)"
                 android:textAllCaps="true"
                 android:textColor="#fff"
                 android:textSize="18sp"></TextView>
@@ -72,7 +71,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/Home_cardAvt"
                 android:fontFamily="@font/nunito"
-                android:text="Lớp: MK14.2 - 107172"
                 android:textAllCaps="true"
                 android:textColor="#fff"
                 android:textSize="15sp"></TextView>
@@ -93,7 +91,7 @@
                 android:text="LỊCH HỌC HÔM NAY"
                 android:fontFamily="@font/nunito"
                 android:textStyle="bold"
-                android:textColor="#000"
+                android:textColor="#2F80ED"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"></TextView>
 
@@ -156,7 +154,7 @@
                 android:text="MÔN HỌC ĐÃ VẮNG"
                 android:fontFamily="@font/nunito"
                 android:textStyle="bold"
-                android:textColor="#000"
+                android:textColor="#2F80ED"
                 android:layout_marginTop="35dp"
                 android:layout_marginLeft="10dp"></TextView>
 
@@ -173,7 +171,7 @@
                 android:text="THÔNG BÁO"
                 android:fontFamily="@font/nunito"
                 android:textStyle="bold"
-                android:textColor="#000"
+                android:textColor="#2F80ED"
                 android:layout_marginTop="35dp"
                 android:layout_marginLeft="10dp"></TextView>
 

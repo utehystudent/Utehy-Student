@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.LoginViewModel;
 
-public class Activity_Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText edtTK, edtMK;
     Button btnLogin;
@@ -59,14 +59,14 @@ public class Activity_Login extends AppCompatActivity {
         edtMK= findViewById(R.id.Login_edtMK);
         btnLogin = findViewById(R.id.Login_btnDN);
 
-        progressDialog = new ProgressDialog(Activity_Login.this);
+        progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setMessage("Đăng nhập tài khoản ...");
         progressDialog.setCancelable(false);
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.isLoginSuccess.observe(this, aBoolean -> {
             if (aBoolean) {
-                Toast.makeText(Activity_Login.this, "Login success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_SHORT).show();
             }else {
                 edtTK.setError("Kiểm tra lại tài khoản");
                 edtMK.setError("Kiểm tra lại tài khoản");

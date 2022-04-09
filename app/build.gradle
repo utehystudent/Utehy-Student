@@ -12,10 +12,10 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    useLibrary 'org.apache.http.legacy'
     buildTypes {
         release {
             minifyEnabled false
@@ -48,5 +48,18 @@ dependencies {
     //meow bottom navigation
     implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
 
+    //pushy
+    implementation 'me.pushy:sdk:1.0.81'
+
+    //okHttp
+    implementation 'com.squareup.okhttp3:okhttp:3.0.1'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    // FCM Fallback Delivery
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }

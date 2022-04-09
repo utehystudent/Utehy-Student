@@ -48,12 +48,12 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 //nếu chưa -> chuyển sang màn đăng nhập tài khoản
                 }else if (username.equals("")){
-                    it = new Intent(SplashActivity.this,Activity_Login.class);
+                    it = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(it);
                     finish();
                 }
             }
-        }, 1800);
+        }, 1300);
     }
 
     @Override
