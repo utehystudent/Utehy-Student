@@ -1,21 +1,23 @@
 package com.example.utehystudent.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.LoginViewModel;
 import com.example.utehystudent.model.Account;
 
 public class SplashActivity extends AppCompatActivity {
+    public static String usn = "";
+    final String TAG = "SplashActivity";
     final Handler handler = new Handler(Looper.getMainLooper());;
     LoginViewModel loginViewModel;
     @Override
@@ -43,9 +45,11 @@ public class SplashActivity extends AppCompatActivity {
                 //nếu đã có tài khoản đăng nhập -> chuyển sang màn hình Home
                 if (!username.equals("")) {
                     loginViewModel.setAccountLiveData(new Account(username, password, account_type, device_token));
+                    usn = username;
                     it = new Intent(SplashActivity.this,MainActivity.class);
                     startActivity(it);
                     finish();
+                    Log.d(TAG, loginViewModel.getAccountLiveData().toString());
                 //nếu chưa -> chuyển sang màn đăng nhập tài khoản
                 }else if (username.equals("")){
                     it = new Intent(SplashActivity.this, LoginActivity.class);

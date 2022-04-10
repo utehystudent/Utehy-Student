@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import com.example.utehystudent.model.Account;
 import com.example.utehystudent.model.User;
+import com.example.utehystudent.view.SplashActivity;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,8 +34,8 @@ public class LoginViewModel extends AndroidViewModel {
         userLiveData = new MutableLiveData<>();
         isLoginSuccess = new MutableLiveData<>();
         context = application.getApplicationContext();
-
         db = FirebaseFirestore.getInstance();
+
     }
 
     public MutableLiveData<Account> getAccountLiveData() {
@@ -42,6 +43,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<User> getUserLiveData() {
+        Log.d(TAG, "getUserLiveData: "+userLiveData.getValue());
         return userLiveData;
     }
 
@@ -51,6 +53,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void setUserLiveData(User user) {
         this.userLiveData.setValue(user);
+        Log.d(TAG, "setUserLiveData: "+userLiveData.getValue().toString());
     }
 
     public void LoginWithAccount(String username, String password) {
@@ -77,7 +80,10 @@ public class LoginViewModel extends AndroidViewModel {
                                     editor.putString("account_type", account.getAccount_type());
                                     editor.putString("device_token", account.getDevice_token());
                                     editor.commit();
-                                    //
+                                    Log.d(TAG, ""+editor.toString());
+                                    Log.d(TAG, account.getUsername()+", "+account.getPassword());
+                                    SplashActivity.usn = username;
+                                    getUserFromFirestore();
                                 }else {
                                     Log.d(TAG, "Password not correct");
                                     isLoginSuccess.setValue(false);
@@ -112,4 +118,60 @@ public class LoginViewModel extends AndroidViewModel {
                     }
                 });
     }
+
+    public void getUserFromFirestore() {
+        db.collection("User").document(SplashActivity.usn)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                User user = new User();
+                                user = (User) document.toObject(User.class);
+                                //set value to LoginViewModel
+                                setUserLiveData(user);
+
+                                Log.d(TAG, userLiveData.getValue()+"");
+
+                                //save user to shared preferences
+                                SharedPreferences preferences = getApplication().getSharedPreferences("User", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("username", user.getUsername());
+                                editor.putString("class_ID", user.getClass_ID());
+                                editor.putString("name", user.getName());
+                                editor.putString("faculty_ID", user.getFaculty_ID());
+                                editor.putString("regency", user.getRegency());
+                                editor.putString("avt_link", user.getAvt_link());
+                                editor.commit();
+
+                                Log.d("save user live data", "success: "+user.getClass_ID());
+                            }else {
+                                Log.d("save user live data", "User doesn't exist");
+                                return;
+                            }
+                        }else {
+                            Log.d("save user live data", "fail");
+                            return;
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("save user live data", "failure");
+                        return;
+                    }
+                })
+                .addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        Log.d("save user live data", "cancel");
+                        return;
+                    }
+                });
+    }
+
+
 }

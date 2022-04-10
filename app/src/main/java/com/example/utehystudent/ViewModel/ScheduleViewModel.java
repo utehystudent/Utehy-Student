@@ -17,9 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ScheduleViewModel extends AndroidViewModel {
     private final String TAG = "ScheduleViewModel";
-
-    private MutableLiveData<Schedule> scheduleMutableLiveData;
-    private MutableLiveData<Schedule_detail> schedule_detailMutableLiveData;
+    public MutableLiveData<Schedule> scheduleMutableLiveData;
+    public MutableLiveData<Schedule_detail> schedule_detailMutableLiveData;
 
     FirebaseFirestore db;
 
@@ -29,26 +28,23 @@ public class ScheduleViewModel extends AndroidViewModel {
         schedule_detailMutableLiveData = new MutableLiveData<>();
         db = FirebaseFirestore.getInstance();
 
+        //get schedule from firebase
+        getSchedule();
+    }
 
+    //get schedule of current classroom
+    public void getSchedule() {
         //get current class_ID
-        SharedPreferences preferences = application.getApplicationContext().getSharedPreferences("User", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getApplication().getSharedPreferences("User", Context.MODE_PRIVATE);
         String class_ID = preferences.getString("class_ID", "");
         Log.d("schedule", "class_ID: "+class_ID);
-
         //get current day string
         DateHelper dateHelper = new DateHelper();
         String day_string = dateHelper.getDayString();
 
-        //get schedule from firebase
-        getSchedule(class_ID, day_string);
-    }
-
-    //get schedule of current classroom
-    private void getSchedule(String class_ID, String day_string) {
-
         //get schedule information
         db.collection("Schedule")
-                .document(class_ID)
+                .document("101185")
                 .collection("Schedule_detail")
                 .document(day_string)
                 .get()
@@ -58,11 +54,9 @@ public class ScheduleViewModel extends AndroidViewModel {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 String morning = document.get("morning").toString();
                                 String afternoon = document.get("afternoon").toString();
                                 Schedule_detail detail = new Schedule_detail(morning, afternoon);
-
                                 //set data for schedule_detail live data
                                 setSchedule_detailMutableLiveData(detail);
                             } else {
@@ -90,4 +84,5 @@ public class ScheduleViewModel extends AndroidViewModel {
     public MutableLiveData<Schedule_detail> getSchedule_detailMutableLiveData() {
         return schedule_detailMutableLiveData;
     }
+
 }

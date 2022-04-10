@@ -1,9 +1,11 @@
 package com.example.utehystudent.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.utehystudent.R;
 import com.example.utehystudent.RegisterForPushNotificationsAsync;

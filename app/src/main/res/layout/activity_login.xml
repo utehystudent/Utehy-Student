@@ -59,6 +59,7 @@
             android:background="@drawable/bo_edt"
             android:layout_width="match_parent"
             android:padding="10dp"
+            android:text="10118456"
             android:layout_height="match_parent"></EditText>
     </com.google.android.material.card.MaterialCardView>
 
@@ -92,6 +93,7 @@
             android:background="@drawable/bo_edt"
             android:layout_width="match_parent"
             android:padding="10dp"
+            android:text="10118456"
             android:inputType="textPassword"
             android:layout_height="match_parent"></EditText>
     </com.google.android.material.card.MaterialCardView>

@@ -12,25 +12,19 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.utehystudent.ViewModel.LoginViewModel;
-import com.example.utehystudent.model.User;
-import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import me.pushy.sdk.Pushy;
 
 public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Object> {
-    String username;
     Activity mActivity;
     FirebaseFirestore db;
     LoginViewModel loginViewModel;
 
     public RegisterForPushNotificationsAsync(Activity activity) {
         this.mActivity = activity;
-        username = "";
         loginViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(LoginViewModel.class);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -69,8 +63,9 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
             return;
         }
         String message;
+
         saveDeviceToken(result.toString());
-        getUserFromFirestore(username);
+
         // Registration failed?
         if (result instanceof Exception) {
             // Log to console
@@ -84,7 +79,7 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
         Log.d("get token", ""+message);
     }
 
-    private void getUserFromFirestore(String username) {
+    /*private void getUserFromFirestore(String username) {
         db.collection("User").document(username)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -134,7 +129,7 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
                         return;
                     }
                 });
-    }
+    }*/
 
     private void saveDeviceToken(String deviceToken) {
         //save device token to Shared Preferences
@@ -143,7 +138,7 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
         editor.putString("device_token", deviceToken);
         editor.commit();
 
-        username = preferences.getString("username", "");
+        String username = preferences.getString("username", "");
 
         //save device_token to Firestore user
         db.collection("Account").document(username)

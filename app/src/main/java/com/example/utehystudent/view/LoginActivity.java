@@ -1,13 +1,16 @@
 package com.example.utehystudent.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.LoginViewModel;
 
@@ -67,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.isLoginSuccess.observe(this, aBoolean -> {
             if (aBoolean) {
                 Toast.makeText(LoginActivity.this, "Login success", Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(it);
+                finish();
             }else {
                 edtTK.setError("Kiểm tra lại tài khoản");
                 edtMK.setError("Kiểm tra lại tài khoản");
