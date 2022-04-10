@@ -6,12 +6,12 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.utehystudent.ViewModel.LoginViewModel;
-import com.example.utehystudent.model.Account;
 import com.example.utehystudent.model.User;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -97,7 +97,19 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
                                 user = (User) document.toObject(User.class);
                                 //set value to LoginViewModel
                                 loginViewModel.setUserLiveData(user);
-                                Log.d("save user live data", "success: "+user.getUsername());
+
+                                //save user to shared preferences
+                                SharedPreferences preferences = mActivity.getSharedPreferences("User", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("username", user.getUsername());
+                                editor.putString("class_ID", user.getClass_ID());
+                                editor.putString("name", user.getName());
+                                editor.putString("faculty_ID", user.getFaculty_ID());
+                                editor.putString("regency", user.getRegency());
+                                editor.putString("avt_link", user.getAvt_link());
+                                editor.commit();
+
+                                Log.d("save user live data", "success: "+user.getClass_ID());
                             }else {
                                 Log.d("save user live data", "User doesn't exist");
                                 return;

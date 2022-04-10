@@ -62,4 +62,17 @@ public class User {
     public void setAvt_link(String avt_link) {
         this.avt_link = avt_link;
     }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", faculty_ID='" + faculty_ID + '\'' +
+                ", class_ID='" + class_ID + '\'' +
+                ", name='" + name + '\'' +
+                ", regency='" + regency + '\'' +
+                ", avt_link='" + avt_link + '\'' +
+                '}';
+    }
 }

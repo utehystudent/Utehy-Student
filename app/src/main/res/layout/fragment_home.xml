@@ -110,6 +110,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="10dp"></TextView>
                 <TextView
+                    android:id="@+id/Home_tvMorning"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
@@ -137,6 +138,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="10dp"></TextView>
                 <TextView
+                    android:id="@+id/Home_tvAfternoon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
