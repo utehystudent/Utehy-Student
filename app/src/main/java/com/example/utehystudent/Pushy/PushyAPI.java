@@ -1,4 +1,4 @@
-package com.example.utehystudent;
+package com.example.utehystudent.Pushy;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

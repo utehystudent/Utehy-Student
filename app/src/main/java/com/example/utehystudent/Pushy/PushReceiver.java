@@ -1,4 +1,4 @@
-package com.example.utehystudent;
+package com.example.utehystudent.Pushy;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,7 +10,8 @@ import android.media.RingtoneManager;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.utehystudent.view.MainActivity;
+import com.example.utehystudent.R;
+import com.example.utehystudent.activity.MainActivity;
 
 import me.pushy.sdk.Pushy;
 

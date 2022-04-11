@@ -44,4 +44,14 @@ public class Account {
     public void setDevice_token(String device_token) {
         this.device_token = device_token;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", account_type='" + account_type + '\'' +
+                ", device_token='" + device_token + '\'' +
+                '}';
+    }
 }

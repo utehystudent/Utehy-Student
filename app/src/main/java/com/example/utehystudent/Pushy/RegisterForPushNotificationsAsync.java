@@ -1,4 +1,4 @@
-package com.example.utehystudent;
+package com.example.utehystudent.Pushy;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,11 +6,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
-
 import com.example.utehystudent.ViewModel.LoginViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,10 +29,8 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
 
         db  = FirebaseFirestore.getInstance();
 
-
         // Start Pushy notification service if not already running
         Pushy.listen(activity);
-
 
         // Enable FCM Fallback Delivery
         Pushy.toggleFCM(true, activity);
@@ -79,57 +75,6 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
         Log.d("get token", ""+message);
     }
 
-    /*private void getUserFromFirestore(String username) {
-        db.collection("User").document(username)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                User user = new User();
-                                user = (User) document.toObject(User.class);
-                                //set value to LoginViewModel
-                                loginViewModel.setUserLiveData(user);
-
-                                //save user to shared preferences
-                                SharedPreferences preferences = mActivity.getSharedPreferences("User", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("username", user.getUsername());
-                                editor.putString("class_ID", user.getClass_ID());
-                                editor.putString("name", user.getName());
-                                editor.putString("faculty_ID", user.getFaculty_ID());
-                                editor.putString("regency", user.getRegency());
-                                editor.putString("avt_link", user.getAvt_link());
-                                editor.commit();
-
-                                Log.d("save user live data", "success: "+user.getClass_ID());
-                            }else {
-                                Log.d("save user live data", "User doesn't exist");
-                                return;
-                            }
-                        }else {
-                            Log.d("save user live data", "fail");
-                            return;
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("save user live data", "failure");
-                        return;
-                    }
-                })
-                .addOnCanceledListener(new OnCanceledListener() {
-                    @Override
-                    public void onCanceled() {
-                        Log.d("save user live data", "cancel");
-                        return;
-                    }
-                });
-    }*/
 
     private void saveDeviceToken(String deviceToken) {
         //save device token to Shared Preferences

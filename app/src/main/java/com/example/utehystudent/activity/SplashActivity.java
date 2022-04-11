@@ -1,4 +1,4 @@
-package com.example.utehystudent.view;
+package com.example.utehystudent.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,27 +6,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+
 import com.example.utehystudent.R;
-import com.example.utehystudent.ViewModel.LoginViewModel;
-import com.example.utehystudent.model.Account;
 
 public class SplashActivity extends AppCompatActivity {
-    public static String usn = "";
     final String TAG = "SplashActivity";
     final Handler handler = new Handler(Looper.getMainLooper());;
-    LoginViewModel loginViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         //kiểm tra xem đã có tài khoản nào đăng nhập chưa
         SharedPreferences preferences = this.getSharedPreferences("Account", Context.MODE_PRIVATE);
@@ -37,6 +31,8 @@ public class SplashActivity extends AppCompatActivity {
 
         Toast.makeText(SplashActivity.this, ""+username, Toast.LENGTH_SHORT).show();
 
+        SharedPreferences preferences2 = this.getSharedPreferences("User", Context.MODE_PRIVATE);
+        Toast.makeText(SplashActivity.this, "name: "+preferences2.getString("name", ""), Toast.LENGTH_SHORT).show();
 
         handler.postDelayed(new Runnable() {
             @Override
@@ -44,12 +40,9 @@ public class SplashActivity extends AppCompatActivity {
                 Intent it;
                 //nếu đã có tài khoản đăng nhập -> chuyển sang màn hình Home
                 if (!username.equals("")) {
-                    loginViewModel.setAccountLiveData(new Account(username, password, account_type, device_token));
-                    usn = username;
                     it = new Intent(SplashActivity.this,MainActivity.class);
                     startActivity(it);
                     finish();
-                    Log.d(TAG, loginViewModel.getAccountLiveData().toString());
                 //nếu chưa -> chuyển sang màn đăng nhập tài khoản
                 }else if (username.equals("")){
                     it = new Intent(SplashActivity.this, LoginActivity.class);

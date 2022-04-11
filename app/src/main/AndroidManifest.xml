@@ -20,13 +20,13 @@
         <!-- ADD THIS -->
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <activity
-            android:name=".view.MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +37,7 @@
         <!-- Pushy Declarations -->
         <!-- Pushy Notification Receiver -->
         <!-- Incoming push notifications will invoke the following BroadcastReceiver -->
-        <receiver android:name=".PushReceiver" android:exported="false">
+        <receiver android:name=".Pushy.PushReceiver" android:exported="false">
             <intent-filter>
                 <!-- Do not modify this -->
                 <action android:name="pushy.me" />
@@ -86,7 +86,7 @@
 
         <!-- Pushy Notification Receiver -->
         <!-- Incoming push notifications will invoke the following BroadcastReceiver -->
-        <receiver android:name=".PushReceiver" android:exported="false">
+        <receiver android:name=".Pushy.PushReceiver" android:exported="false">
             <intent-filter>
                 <!-- Do not modify this -->
                 <action android:name="pushy.me" />
