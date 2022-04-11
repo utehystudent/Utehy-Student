@@ -31,8 +31,6 @@ public class SplashActivity extends AppCompatActivity {
 
         Toast.makeText(SplashActivity.this, ""+username, Toast.LENGTH_SHORT).show();
 
-        SharedPreferences preferences2 = this.getSharedPreferences("User", Context.MODE_PRIVATE);
-        Toast.makeText(SplashActivity.this, "name: "+preferences2.getString("name", ""), Toast.LENGTH_SHORT).show();
 
         handler.postDelayed(new Runnable() {
             @Override

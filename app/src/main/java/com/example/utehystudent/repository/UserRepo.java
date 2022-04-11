@@ -58,7 +58,6 @@ public class UserRepo {
         editor.putString("regency",user.getRegency());
         editor.putString("avt_link",user.getAvt_link());
         editor.commit();
-        Log.d(TAG, "SaveUserToSF: SUCCESS");
         Log.d(TAG, "SaveUserToSF: "+user);
     }
 

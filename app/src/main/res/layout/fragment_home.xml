@@ -18,9 +18,9 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/Home_cardAvt"
                     android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_centerInParent="true"
                     android:layout_alignParentStart="true"
-                    android:layout_height="80dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     app:cardCornerRadius="40dp"
@@ -33,7 +33,7 @@
                         android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
+                        android:scaleType="center"
                         ></ImageView>
                 </androidx.cardview.widget.CardView>
 
@@ -58,7 +58,6 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/Home_cardAvt"
                     android:fontFamily="@font/nunito"
-                    android:maxLines="1"
                     android:textAllCaps="true"
                     android:textColor="#fff"
                     android:textSize="18sp"></TextView>

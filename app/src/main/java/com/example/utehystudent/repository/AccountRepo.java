@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.utehystudent.model.Account;
+import com.example.utehystudent.model.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AccountRepo {
@@ -31,5 +32,8 @@ public class AccountRepo {
         Log.d(TAG, "SaveAccountToSF: success");
         String us = preferences.getString("username","");
         Log.d(TAG, "Account: "+us);
+        //
+        User user = userRepo.GetUserFromFirestore(account.getUsername());
+//        userRepo.SaveUserToSF(user);
     }
 }
