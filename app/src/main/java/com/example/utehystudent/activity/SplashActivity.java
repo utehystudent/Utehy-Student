@@ -40,7 +40,6 @@ public class SplashActivity extends AppCompatActivity {
                 if (!username.equals("")) {
                     it = new Intent(SplashActivity.this,MainActivity.class);
                     startActivity(it);
-                    finish();
                 //nếu chưa -> chuyển sang màn đăng nhập tài khoản
                 }else if (username.equals("")){
                     it = new Intent(SplashActivity.this, LoginActivity.class);

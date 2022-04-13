@@ -4,9 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import com.example.utehystudent.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,6 +12,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserRepo {
+    public static String classID = "";
     final String TAG = "UserRepo";
     FirebaseFirestore db;
     Application application;
@@ -60,5 +59,4 @@ public class UserRepo {
         editor.commit();
         Log.d(TAG, "SaveUserToSF: "+user);
     }
-
 }

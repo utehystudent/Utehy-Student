@@ -1,7 +1,8 @@
 package com.example.utehystudent.model;
 
-public class Schedule_detail {
-    private String morning, afternoon;
+public class Schedule_detail{
+    private String morning;
+    private String afternoon;
 
     public Schedule_detail() {
     }

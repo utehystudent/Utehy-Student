@@ -1,6 +1,8 @@
 package com.example.utehystudent.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.utehystudent.R;
+import com.example.utehystudent.ViewModel.ScheduleViewModel;
 import com.example.utehystudent.ViewModel.UserViewModel;
+import com.example.utehystudent.model.Schedule_detail;
 import com.example.utehystudent.model.User;
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +25,8 @@ public class HomeFragment extends Fragment {
     ImageView imgAvt;
     TextView tvName, tvClass, tvXinChao, tvMorning, tvAfternoon;
     UserViewModel userViewModel;
+    ScheduleViewModel scheduleViewModel;
+    final Handler handler = new Handler(Looper.getMainLooper());;
     public HomeFragment() {
 
     }
@@ -56,6 +62,25 @@ public class HomeFragment extends Fragment {
                 tvXinChao.setText("XIN CHÀO");
             }
         });
+
+        scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
+        scheduleViewModel.getScheduleLiveData().observe(requireActivity(), new Observer<Schedule_detail>() {
+            @Override
+            public void onChanged(Schedule_detail schedule_detail) {
+                if (schedule_detail != null) {
+                    tvMorning.setText(schedule_detail.getMorning());
+                    tvAfternoon.setText(schedule_detail.getAfternoon());
+                }
+            }
+        });
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scheduleViewModel.GetData();
+            }
+        }, 1000);
+
         return view;
     }
 }
