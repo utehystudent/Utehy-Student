@@ -28,7 +28,7 @@ public class ScheduleViewModel extends AndroidViewModel {
         scheduleLiveData = new MutableLiveData<>();
         scheduleDetail = new Schedule_detail();
         this.context = application.getApplicationContext();
-
+        GetData();
     }
 
     public MutableLiveData<Schedule_detail> getScheduleLiveData() {

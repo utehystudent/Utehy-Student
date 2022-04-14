@@ -126,6 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#2F80ED"
+            android:textColor="#fff"
             android:text="Đăng nhập"
             android:fontFamily="@font/nunito"></Button>
     </com.google.android.material.card.MaterialCardView>

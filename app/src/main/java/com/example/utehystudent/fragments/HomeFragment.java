@@ -1,8 +1,6 @@
 package com.example.utehystudent.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +24,6 @@ public class HomeFragment extends Fragment {
     TextView tvName, tvClass, tvXinChao, tvMorning, tvAfternoon;
     UserViewModel userViewModel;
     ScheduleViewModel scheduleViewModel;
-    final Handler handler = new Handler(Looper.getMainLooper());;
     public HomeFragment() {
 
     }
@@ -48,7 +45,6 @@ public class HomeFragment extends Fragment {
         tvAfternoon = view.findViewById(R.id.Home_tvAfternoon);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-        userViewModel.GetUserData();
         userViewModel.getUserLiveData().observe(requireActivity(), new Observer<User>() {
             @Override
             public void onChanged(User user) {
@@ -64,6 +60,7 @@ public class HomeFragment extends Fragment {
         });
 
         scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
+        scheduleViewModel.GetData();
         scheduleViewModel.getScheduleLiveData().observe(requireActivity(), new Observer<Schedule_detail>() {
             @Override
             public void onChanged(Schedule_detail schedule_detail) {
@@ -73,13 +70,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                scheduleViewModel.GetData();
-            }
-        }, 1000);
 
         return view;
     }
