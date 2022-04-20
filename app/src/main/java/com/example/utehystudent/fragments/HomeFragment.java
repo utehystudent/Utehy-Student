@@ -1,16 +1,15 @@
 package com.example.utehystudent.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.ScheduleViewModel;
 import com.example.utehystudent.ViewModel.UserViewModel;
@@ -24,6 +23,8 @@ public class HomeFragment extends Fragment {
     TextView tvName, tvClass, tvXinChao, tvMorning, tvAfternoon;
     UserViewModel userViewModel;
     ScheduleViewModel scheduleViewModel;
+    Dialog dialog;
+
     public HomeFragment() {
 
     }
@@ -35,7 +36,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         imgAvt = view.findViewById(R.id.Home_imgAvt);
         tvName = view.findViewById(R.id.Home_tvTenSV);
@@ -45,6 +45,14 @@ public class HomeFragment extends Fragment {
         tvAfternoon = view.findViewById(R.id.Home_tvAfternoon);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
+        
+        BindData();
+        return view;
+    }
+
+    private void BindData() {
+        ShowLoadingDialog();
         userViewModel.getUserLiveData().observe(requireActivity(), new Observer<User>() {
             @Override
             public void onChanged(User user) {
@@ -59,7 +67,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
         scheduleViewModel.GetData();
         scheduleViewModel.getScheduleLiveData().observe(requireActivity(), new Observer<Schedule_detail>() {
             @Override
@@ -67,10 +74,20 @@ public class HomeFragment extends Fragment {
                 if (schedule_detail != null) {
                     tvMorning.setText(schedule_detail.getMorning());
                     tvAfternoon.setText(schedule_detail.getAfternoon());
+
+                    //dismiss loading dialog
+                    dialog.dismiss();
                 }
             }
         });
+    }
 
-        return view;
+    private void ShowLoadingDialog() {
+        dialog = new Dialog(requireActivity());
+        dialog.setContentView(R.layout.loading_layout1);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.create();
+        dialog.show();
     }
 }

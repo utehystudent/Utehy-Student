@@ -20,12 +20,9 @@
         ></TextView>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="112dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -38,7 +35,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 app:cardCornerRadius="40dp"
-
+                android:layout_marginTop="10dp"
                 android:innerRadius="0dp"
                 android:shape="ring"
                 android:thicknessRatio="1.9">
@@ -58,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="25dp"
                 android:layout_toRightOf="@+id/Home_cardAvt"
                 android:fontFamily="@font/nunito_light"
                 android:text="HOÀNG VIỆT (10118456)"
@@ -178,6 +175,7 @@
                 android:id="@+id/Menu_layoutQuanTri"
                 android:layout_width="match_parent"
                 android:layout_height="205dp"
+                android:visibility="gone"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
