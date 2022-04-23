@@ -44,7 +44,7 @@
                     android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/utehy_logo"
+                    android:layout_gravity="center"
                     android:scaleType="center"
                     ></ImageView>
             </androidx.cardview.widget.CardView>
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
                 android:layout_toRightOf="@+id/Home_cardAvt"
-                android:fontFamily="@font/nunito_light"
+                android:fontFamily="@font/nunito"
                 android:text="HOÀNG VIỆT (10118456)"
                 android:textAllCaps="true"
                 android:textColor="#050505"
@@ -73,7 +73,7 @@
                 android:layout_toRightOf="@+id/Home_cardAvt"
                 android:fontFamily="@font/nunito_light"
                 android:maxLines="1"
-                android:text="Lớp: 101185 - Thành viên"
+                android:text="Lớp: 101185 - Lớp trưởng"
                 android:textAllCaps="true"
                 android:textColor="#000000"
                 android:textSize="15sp"></TextView>
@@ -97,49 +97,45 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chung"
+                android:text="CHUNG"
                 android:textSize="20sp"
-                android:fontFamily="@font/nunito_light"
+                android:fontFamily="@font/nunito"
                 android:textColor="#2F80ED"
                 android:layout_marginLeft="10dp"
                 ></TextView>
             <LinearLayout
                 android:id="@+id/Menu_layoutChung"
                 android:layout_width="match_parent"
-                android:layout_height="195dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:paddingBottom="10dp"
                 android:orientation="vertical">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="13dp"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
                     <Button
                         android:id="@+id/Menu_btnTaiKhoan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="5dp"
                         android:text="   Tài khoản"
+                        style="?android:attr/borderlessButtonStyle"
                         android:fontFamily="@font/nunito_light"
                         android:textColor="#000"
                         android:drawableLeft="@drawable/ic_account"
                         android:drawableRight="@drawable/ic_right_arrow"
                         android:paddingRight="5dp"
+                        android:textAllCaps="false"
                         android:textAlignment="textStart"
                         android:paddingLeft="10dp"
                         android:background="#FFFFFF"></Button>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
+
                     <Button
                         android:id="@+id/Menu_btnBangDiem"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
                         android:text="   Bảng điểm"
+                        android:textAllCaps="false"
                         android:fontFamily="@font/nunito_light"
                         android:textColor="#000"
                         android:paddingRight="5dp"
@@ -148,18 +144,16 @@
                         android:textAlignment="textStart"
                         android:paddingLeft="10dp"
                         android:background="#FFFFFF"></Button>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
+
                     <Button
                         android:id="@+id/Menu_btnLienHe"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
                         android:text="   Liên hệ"
+                        android:textAllCaps="false"
                         android:fontFamily="@font/nunito_light"
                         android:textColor="#000"
                         android:paddingRight="5dp"
@@ -168,36 +162,33 @@
                         android:textAlignment="textStart"
                         android:paddingLeft="10dp"
                         android:background="#FFFFFF"></Button>
-                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/Menu_layoutQuanTri"
                 android:layout_width="match_parent"
-                android:layout_height="205dp"
-                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quản trị"
+                    android:text="QUẢN TRỊ"
                     android:textSize="20sp"
-                    android:fontFamily="@font/nunito_light"
+                    android:fontFamily="@font/nunito"
                     android:textColor="#2F80ED"
                     android:layout_marginLeft="10dp"
                     ></TextView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="13dp"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
+
                     <Button
                         android:id="@+id/Menu_btnQLTV"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
                         android:text="   Quản lý thành viên lớp"
                         android:fontFamily="@font/nunito_light"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:textAllCaps="false"
                         android:textColor="#000"
                         android:paddingRight="5dp"
                         android:drawableLeft="@drawable/ic_member"
@@ -205,19 +196,16 @@
                         android:textAlignment="textStart"
                         android:paddingLeft="10dp"
                         android:background="#FFFFFF"></Button>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
+
                     <Button
                         android:id="@+id/Menu_btnQLMH"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_marginTop="5dp"
                         android:text="   Quản lý môn học"
                         android:fontFamily="@font/nunito_light"
+                        android:textAllCaps="false"
                         android:textColor="#000"
                         android:paddingRight="5dp"
                         android:drawableLeft="@drawable/ic_subject"
@@ -225,19 +213,16 @@
                         android:textAlignment="textStart"
                         android:paddingLeft="10dp"
                         android:background="#FFFFFF"></Button>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="2dp">
+
                     <Button
                         android:id="@+id/Menu_btnDiemDanh"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_marginTop="5dp"
                         android:text="   Điểm danh"
                         android:fontFamily="@font/nunito_light"
+                        android:textAllCaps="false"
                         android:textColor="#000"
                         android:paddingRight="5dp"
                         android:drawableLeft="@drawable/ic_attendance"
@@ -245,7 +230,7 @@
                         android:textAlignment="textStart"
                         android:paddingLeft="10dp"
                         android:background="#FFFFFF"></Button>
-                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
             <Button
                 android:id="@+id/Menu_btnDangXuat"
