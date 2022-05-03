@@ -43,13 +43,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         }
         viewBinderHelper.bind(holder.swipeRevealLayout, user.getUsername());
         try {
-            Picasso.get().load(user.getAvt_link()).into(holder.imgAvt);
+            Picasso.get().load(user.getAvt_link()).resize(270, 270).centerCrop().into(holder.imgAvt);
         }catch (Exception e) {
             Log.d(TAG, "onBindViewHolder: "+e.getMessage());
             holder.imgAvt.setImageResource(R.drawable.ic_student);
         }
         holder.tvName.setText(user.getName());
-        holder.tvID.setText("MSV: "+user.getUsername());
+        holder.tvID.setText(user.getUsername());
     }
 
     @Override

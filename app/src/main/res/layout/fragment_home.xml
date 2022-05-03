@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/Home_linear"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="112dp"
@@ -81,7 +82,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -150,6 +152,13 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="10dp"></TextView>
             </LinearLayout>
+
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E4D5D5"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -158,7 +167,7 @@
                 android:fontFamily="@font/nunito"
                 android:textStyle="bold"
                 android:textColor="#2F80ED"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"></TextView>
 
             <androidx.recyclerview.widget.RecyclerView

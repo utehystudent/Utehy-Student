@@ -23,6 +23,4 @@
         app:mbn_circleColor="@color/white"
         app:mbn_countBackgroundColor="#FF3D00"
         app:mbn_defaultIconColor="#FFFFFF"></com.etebarian.meowbottomnavigation.MeowBottomNavigation>
-
-
 </RelativeLayout>

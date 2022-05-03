@@ -46,6 +46,7 @@ public class ClassManagementViewModel extends AndroidViewModel {
     private void GetUsersInClass() {
         SharedPreferences preferences = application.getSharedPreferences("User", Context.MODE_PRIVATE);
         String classID = preferences.getString("class_ID", "");
+        String username = preferences.getString("username", "");
         usersList.clear();
         ArrayList<User> listUserInClass = new ArrayList<>();
         db.collection("User")
@@ -56,6 +57,9 @@ public class ClassManagementViewModel extends AndroidViewModel {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.toObject(User.class).getUsername().equals(username)) {
+                                    continue;
+                                }
                                 listUserInClass.add(document.toObject(User.class));
                                 Log.d(TAG, "onComplete: "+document.toObject(User.class));
                             }

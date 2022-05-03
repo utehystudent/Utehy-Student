@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="18dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="15dp">
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="180dp"
+            android:background="@drawable/rounded_subject"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/book"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                ></ImageView>
+            <TextView
+                android:id="@+id/rowSubject_tvSubjectName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lập trình cơ bản"
+                android:textAlignment="center"
+                android:textColor="#2F80ED"
+                android:layout_gravity="center"
+                android:maxLines="2"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito"></TextView>
+            <TextView
+                android:id="@+id/rowSubject_tvSubjectNumCred"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số TC: 4"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/nunito"></TextView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

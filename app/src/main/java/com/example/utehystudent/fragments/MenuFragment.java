@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.MenuViewModel;
 import com.example.utehystudent.activity.ClassManagementActivity;
+import com.example.utehystudent.activity.SubjectManagementActivity;
 import com.example.utehystudent.model.User;
 import com.squareup.picasso.Picasso;
 
@@ -24,7 +25,7 @@ public class MenuFragment extends Fragment {
     ImageView imgAvt;
     TextView tvName, tvClass;
     MenuViewModel menuViewModel;
-    Button btnClassManagement;
+    Button btnClassManagement, btnSubjectManagement;
 
     public MenuFragment() {
 
@@ -52,6 +53,13 @@ public class MenuFragment extends Fragment {
                 startActivity(it);
             }
         });
+        btnSubjectManagement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(requireActivity(), SubjectManagementActivity.class);
+                startActivity(it);
+            }
+        });
     }
 
     private void InitView(View view) {
@@ -60,6 +68,7 @@ public class MenuFragment extends Fragment {
         imgAvt = view.findViewById(R.id.Menu_imgAvt);
         linearQT = view.findViewById(R.id.Menu_layoutQuanTri);
         btnClassManagement = view.findViewById(R.id.Menu_btnQLTV);
+        btnSubjectManagement = view.findViewById(R.id.Menu_btnQLMH);
 
         menuViewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
         menuViewModel.getCurrentUser().observe(requireActivity(), new Observer<User>() {
@@ -67,13 +76,13 @@ public class MenuFragment extends Fragment {
             public void onChanged(User user) {
                 if (user.getRegency().equals("lt")) {
                     linearQT.setVisibility(View.VISIBLE);
-                    tvClass.setText("LỚP: "+user.getClass_ID()+" - Lớp trưởng");
+                    tvClass.setText("Mã sinh viên: "+user.getUsername()+"\nLớp: "+user.getClass_ID()+" - LỚP TRƯỞNG");
                 }else {
                     linearQT.setVisibility(View.GONE);
-                    tvClass.setText("LỚP: "+user.getClass_ID()+" - Thành viên");
+                    tvClass.setText("Mã sinh viên: "+user.getUsername()+"\nLớp: "+user.getClass_ID()+" - THÀNH VIÊN");
                 }
-                tvName.setText(user.getName().toUpperCase()+" ("+user.getUsername()+")");
-                Picasso.get().load(user.getAvt_link()).into(imgAvt);
+                tvName.setText(user.getName().toUpperCase());
+                Picasso.get().load(user.getAvt_link()).resize(300, 300).centerCrop().into(imgAvt);
             }
         });
     }

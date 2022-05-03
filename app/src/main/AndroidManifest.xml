@@ -17,9 +17,11 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.ClassManagementActivity"
+            android:name=".activity.SubjectManagementActivity"
             android:exported="false" />
-        <!-- ADD THIS -->
+        <activity
+            android:name=".activity.ClassManagementActivity"
+            android:exported="false" /> <!-- ADD THIS -->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

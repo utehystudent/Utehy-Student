@@ -74,7 +74,6 @@ public class HomeFragment extends Fragment {
                 if (schedule_detail != null) {
                     tvMorning.setText(schedule_detail.getMorning());
                     tvAfternoon.setText(schedule_detail.getAfternoon());
-
                     //dismiss loading dialog
                     dialog.dismiss();
                 }

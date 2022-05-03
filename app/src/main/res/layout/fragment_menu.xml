@@ -33,12 +33,13 @@
                 android:layout_centerInParent="true"
                 android:layout_alignParentStart="true"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 app:cardCornerRadius="40dp"
                 android:layout_marginTop="10dp"
                 android:innerRadius="0dp"
                 android:shape="ring"
-                android:thicknessRatio="1.9">
+                android:thicknessRatio="1.9"
+                app:cardPreventCornerOverlap="false">
                 <ImageView
                     android:id="@+id/Menu_imgAvt"
                     android:padding="10dp"
@@ -55,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_toRightOf="@+id/Home_cardAvt"
                 android:fontFamily="@font/nunito"
                 android:text="HOÀNG VIỆT (10118456)"
@@ -72,9 +73,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/Home_cardAvt"
                 android:fontFamily="@font/nunito_light"
-                android:maxLines="1"
+                android:lineSpacingExtra="5dp"
                 android:text="Lớp: 101185 - Lớp trưởng"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textColor="#000000"
                 android:textSize="15sp"></TextView>
         </RelativeLayout>
@@ -119,7 +120,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:fontFamily="@font/nunito_light"
                         android:textColor="#000"
-                        android:drawableLeft="@drawable/ic_account"
+                        android:drawableLeft="@drawable/ic_account2"
                         android:drawableRight="@drawable/ic_right_arrow"
                         android:paddingRight="5dp"
                         android:textAllCaps="false"
@@ -240,7 +241,7 @@
                 android:text="Đăng xuất"
                 android:textColor="#fff"
                 android:textSize="15sp"
-                android:layout_marginTop="60dp"></Button>
+                android:layout_marginTop="30dp"></Button>
         </LinearLayout>
     </ScrollView>
 
