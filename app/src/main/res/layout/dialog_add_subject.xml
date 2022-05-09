@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="THÊM MÔN HỌC"
+                android:fontFamily="@font/nunito"
+                android:textSize="25sp"
+                android:textColor="#F50057"
+                android:layout_gravity="center"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_tvDN"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/nunito"
+                android:text="Chọn môn học"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cardElevation="5dp"
+                android:layout_marginTop="5dp"
+                app:strokeColor ="#2F80ED"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="10dp">
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/DialogAddSubject_edtTenMH"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rounded2"></androidx.appcompat.widget.AppCompatAutoCompleteTextView>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/DialogAddSubject_tvSoTC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_tvDN"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/nunito"
+                android:visibility="gone"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#2F80ED"
+                app:cardElevation="10dp"
+                android:layout_marginTop="60dp">
+                <Button
+                    android:id="@+id/DialogAddSubject_btnThem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2F80ED"
+                    android:text="thêm"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/nunito"
+                    ></Button>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -2,8 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/SubjectOptionMenu_iconEdit"
-        android:icon="@drawable/ic_edit2"
+        android:id="@+id/SubjectOptionMenu_iconAdd"
+        android:icon="@drawable/ic_add2"
         app:showAsAction="ifRoom"
         android:title="Edit"/>
+    <item
+        android:id="@+id/SubjectOptionMenu_TaoMoi"
+        app:showAsAction="withText"
+        android:title="Tạo mới"/>
+    <item
+        android:id="@+id/SubjectOptionMenu_Xoa"
+        app:showAsAction="withText"
+        android:title="Xóa"/>
 </menu>

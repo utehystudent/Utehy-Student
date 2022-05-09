@@ -21,21 +21,24 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class SubjectManagementViewModel extends AndroidViewModel {
+public class SubjectInTermManagementViewModel extends AndroidViewModel {
     final String TAG = "SubjectManagementViewModel";
     String classID = "";
     Application application;
-    public MutableLiveData<ArrayList<Subject>> listSubjectLiveData = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<Subject>> listSubjectInTermLiveData = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<Subject>> listAllSubjectLiveData = new MutableLiveData<>();
     MutableLiveData<SubjectsOfSemester> subjectOfSemesterLiveData = new MutableLiveData<>();
-    ArrayList<Subject> listSubject;
+    ArrayList<Subject> listSubjectInTerm, listAllSubject;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public SubjectManagementViewModel(@NonNull Application application) {
+    public SubjectInTermManagementViewModel(@NonNull Application application) {
         super(application);
         this.application = application;
-        listSubject = new ArrayList<>();
+        listSubjectInTerm = new ArrayList<>();
+        listAllSubject = new ArrayList<>();
         GetSemesterInfo();
         GetSubjectDetailList();
+        GetAllSubjects();
     }
 
     public void GetSemesterInfo() {
@@ -72,14 +75,14 @@ public class SubjectManagementViewModel extends AndroidViewModel {
                                 listDetail.add(document.toObject(SubjectsOfSemester_Detail.class));
                             }
 
-                            listSubject = GetSubject(listDetail);
+                            listSubjectInTerm = GetSubject(listDetail);
 
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (listSubjectLiveData.getValue() != null) {
-                                        listSubjectLiveData.setValue(listSubject);
+                                    if (listSubjectInTermLiveData.getValue() != null) {
+                                        listSubjectInTermLiveData.setValue(listSubjectInTerm);
                                         handler.removeCallbacks(this::run);
                                     }else {
                                         handler.postDelayed(this, 500);
@@ -92,15 +95,19 @@ public class SubjectManagementViewModel extends AndroidViewModel {
                         }
                     }
                 });
-        listSubjectLiveData.setValue(listSubject);
+        listSubjectInTermLiveData.setValue(listSubjectInTerm);
     }
 
-    public MutableLiveData<ArrayList<Subject>> getListSubjectLiveData() {
-        return listSubjectLiveData;
+    public MutableLiveData<ArrayList<Subject>> getListSubjectInTermLiveData() {
+        return listSubjectInTermLiveData;
     }
 
     public MutableLiveData<SubjectsOfSemester> getSubjectOfSemesterLiveData() {
         return subjectOfSemesterLiveData;
+    }
+
+    public MutableLiveData<ArrayList<Subject>> getListAllSubjectLiveData() {
+        return listAllSubjectLiveData;
     }
 
     private ArrayList<Subject> GetSubject(ArrayList<SubjectsOfSemester_Detail> listDetail) {
@@ -124,5 +131,36 @@ public class SubjectManagementViewModel extends AndroidViewModel {
                     });
         }
         return subjects;
+    }
+
+
+    private void GetAllSubjects() {
+        db.collection("Subject")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                listAllSubject.add(document.toObject(Subject.class));
+                            }
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (listAllSubjectLiveData.getValue() != null) {
+                                        listAllSubjectLiveData.setValue(listAllSubject);
+                                        handler.removeCallbacks(this::run);
+                                    }else {
+                                        handler.postDelayed(this, 500);
+                                    }
+                                }
+                            }, 500);
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        listAllSubjectLiveData.setValue(listAllSubject);
     }
 }

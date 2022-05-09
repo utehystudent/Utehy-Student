@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@drawable/bg_subject_manage"
     android:orientation="vertical"
     tools:context=".activity.ClassManagementActivity">
 
@@ -22,9 +22,10 @@
 
     <TextView
         android:id="@+id/SubjectManagement_tvSchoolYear"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
+        android:text="Năm học: 2021 - 2022"
         android:fontFamily="@font/nunito"
         android:textColor="#EC4343"
         android:layout_marginLeft="20dp"
@@ -32,8 +33,9 @@
 
     <TextView
         android:id="@+id/SubjectManagement_tvSemester"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Học kì: 1"
         android:textSize="22sp"
         android:fontFamily="@font/nunito"
         android:textColor="#EC4343"
@@ -48,9 +50,5 @@
         android:layout_gravity="center"
         android:padding="10dp"
         ></androidx.recyclerview.widget.RecyclerView>
-
-
-
-
 
 </LinearLayout>

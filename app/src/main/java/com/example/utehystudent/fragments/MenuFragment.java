@@ -10,25 +10,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.MenuViewModel;
 import com.example.utehystudent.activity.ClassManagementActivity;
-import com.example.utehystudent.activity.SubjectManagementActivity;
-import com.example.utehystudent.model.User;
+import com.example.utehystudent.activity.LoginActivity;
+import com.example.utehystudent.activity.SubjectInTermManagementActivity;
 import com.squareup.picasso.Picasso;
 
 public class MenuFragment extends Fragment {
-
     LinearLayout linearQT;
     ImageView imgAvt;
     TextView tvName, tvClass;
     MenuViewModel menuViewModel;
-    Button btnClassManagement, btnSubjectManagement;
+    Button btnClassManagement, btnSubjectManagement, btnDangXuat;
 
     public MenuFragment() {
-
     }
 
     @Override
@@ -37,8 +34,7 @@ public class MenuFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         InitView(view);
         EventClick();
@@ -46,20 +42,22 @@ public class MenuFragment extends Fragment {
     }
 
     private void EventClick() {
-        btnClassManagement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(requireActivity(), ClassManagementActivity.class);
-                startActivity(it);
-            }
+        btnClassManagement.setOnClickListener(view -> {
+            Intent it = new Intent(requireActivity(), ClassManagementActivity.class);
+            startActivity(it);
         });
-        btnSubjectManagement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(requireActivity(), SubjectManagementActivity.class);
-                startActivity(it);
-            }
+        btnSubjectManagement.setOnClickListener(view -> {
+            Intent it = new Intent(requireActivity(), SubjectInTermManagementActivity.class);
+            startActivity(it);
         });
+        btnDangXuat.setOnClickListener(view -> DangXuatTaiKhoan());
+    }
+
+    private void DangXuatTaiKhoan() {
+        menuViewModel.SignOut();
+        Intent it = new Intent(requireActivity(), LoginActivity.class);
+        startActivity(it);
+        requireActivity().finish();
     }
 
     private void InitView(View view) {
@@ -69,21 +67,21 @@ public class MenuFragment extends Fragment {
         linearQT = view.findViewById(R.id.Menu_layoutQuanTri);
         btnClassManagement = view.findViewById(R.id.Menu_btnQLTV);
         btnSubjectManagement = view.findViewById(R.id.Menu_btnQLMH);
+        btnDangXuat = view.findViewById(R.id.Menu_btnDangXuat);
 
         menuViewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
-        menuViewModel.getCurrentUser().observe(requireActivity(), new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                if (user.getRegency().equals("lt")) {
-                    linearQT.setVisibility(View.VISIBLE);
-                    tvClass.setText("Mã sinh viên: "+user.getUsername()+"\nLớp: "+user.getClass_ID()+" - LỚP TRƯỞNG");
-                }else {
-                    linearQT.setVisibility(View.GONE);
-                    tvClass.setText("Mã sinh viên: "+user.getUsername()+"\nLớp: "+user.getClass_ID()+" - THÀNH VIÊN");
-                }
-                tvName.setText(user.getName().toUpperCase());
-                Picasso.get().load(user.getAvt_link()).resize(300, 300).centerCrop().into(imgAvt);
+        menuViewModel.getCurrentUser().observe(requireActivity(), user -> {
+            String textInfo = "";
+            if (user.getRegency().equals("lt")) {
+                linearQT.setVisibility(View.VISIBLE);
+                textInfo = "Mã sinh viên: " + user.getUsername() + "\nLớp: " + user.getClass_ID() + " - LỚP TRƯỞNG";
+            } else {
+                linearQT.setVisibility(View.GONE);
+                textInfo = "Mã sinh viên: " + user.getUsername() + "\nLớp: " + user.getClass_ID() + " - THÀNH VIÊN";
             }
+            tvClass.setText(textInfo);
+            tvName.setText(user.getName().toUpperCase());
+            Picasso.get().load(user.getAvt_link()).resize(300, 300).centerCrop().into(imgAvt);
         });
     }
 }

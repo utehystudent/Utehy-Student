@@ -1,6 +1,8 @@
 package com.example.utehystudent.ViewModel;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -34,5 +36,13 @@ public class MenuViewModel extends AndroidViewModel {
         userRepo = new UserRepo(context);
         User user = userRepo.GetUserFromSF();
         this.setCurrentUser(user);
+    }
+
+    public void SignOut () {
+        //Delete user data from SharedPreferences
+        SharedPreferences preferencesAccount = context.getSharedPreferences("Account", Context.MODE_PRIVATE);
+        SharedPreferences preferencesUser = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+        preferencesAccount.edit().clear().commit();
+        preferencesUser.edit().clear().commit();
     }
 }
