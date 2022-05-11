@@ -14,7 +14,9 @@ import com.example.utehystudent.model.Subject;
 import com.example.utehystudent.model.SubjectsOfSemester;
 import com.example.utehystudent.model.SubjectsOfSemester_Detail;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -84,7 +86,7 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
                                     if (listSubjectInTermLiveData.getValue() != null) {
                                         listSubjectInTermLiveData.setValue(listSubjectInTerm);
                                         handler.removeCallbacks(this::run);
-                                    }else {
+                                    } else {
                                         handler.postDelayed(this, 500);
                                     }
                                 }
@@ -133,7 +135,6 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
         return subjects;
     }
 
-
     private void GetAllSubjects() {
         db.collection("Subject")
                 .get()
@@ -151,7 +152,7 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
                                     if (listAllSubjectLiveData.getValue() != null) {
                                         listAllSubjectLiveData.setValue(listAllSubject);
                                         handler.removeCallbacks(this::run);
-                                    }else {
+                                    } else {
                                         handler.postDelayed(this, 500);
                                     }
                                 }
@@ -162,5 +163,47 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
                     }
                 });
         listAllSubjectLiveData.setValue(listAllSubject);
+    }
+
+    public Boolean CheckSubjectExistedInTerm(String subjectName, ArrayList<Subject> list) {
+        for (Subject sb : list) {
+            if (sb.getSubject_name().equals(subjectName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean CheckSubjectExistInListAll(String subjectName) {
+        ArrayList<Subject> list = listAllSubjectLiveData.getValue();
+        for (Subject sb : list) {
+            if (sb.getSubject_name().equals(subjectName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Subject GetSubjectInfo(String subjectName) {
+        Subject subject = new Subject();
+        ArrayList<Subject> list = listAllSubjectLiveData.getValue();
+        for (Subject sb : list) {
+            if (sb.getSubject_name().equals(subjectName)) {
+                subject = sb;
+            }
+        }
+        return subject;
+    }
+
+    public void AddSubjectToTerm(Subject subject) {
+        SubjectsOfSemester_Detail detail = new SubjectsOfSemester_Detail(classID, subject.getSubject_ID());
+        db.collection("SubjectsOfSemester_Detail")
+                .add(detail)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        GetSubjectDetailList();
+                    }
+                });
     }
 }
