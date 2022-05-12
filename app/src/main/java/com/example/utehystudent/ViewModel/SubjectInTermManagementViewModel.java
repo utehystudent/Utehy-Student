@@ -29,6 +29,7 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
     Application application;
     public MutableLiveData<ArrayList<Subject>> listSubjectInTermLiveData = new MutableLiveData<>();
     public MutableLiveData<ArrayList<Subject>> listAllSubjectLiveData = new MutableLiveData<>();
+    public MutableLiveData<Subject> subjectLongClickLiveData = new MutableLiveData<>();
     MutableLiveData<SubjectsOfSemester> subjectOfSemesterLiveData = new MutableLiveData<>();
     ArrayList<Subject> listSubjectInTerm, listAllSubject;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -112,6 +113,10 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
         return listAllSubjectLiveData;
     }
 
+    public MutableLiveData<Subject> getSubjectLongClickLiveData() {
+        return subjectLongClickLiveData;
+    }
+
     private ArrayList<Subject> GetSubject(ArrayList<SubjectsOfSemester_Detail> listDetail) {
         ArrayList<Subject> subjects = new ArrayList<>();
         for (SubjectsOfSemester_Detail detail : listDetail) {
@@ -188,7 +193,7 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
         Subject subject = new Subject();
         ArrayList<Subject> list = listAllSubjectLiveData.getValue();
         for (Subject sb : list) {
-            if (sb.getSubject_name().equals(subjectName)) {
+            if (sb.getSubject_name().equalsIgnoreCase(subjectName)) {
                 subject = sb;
             }
         }

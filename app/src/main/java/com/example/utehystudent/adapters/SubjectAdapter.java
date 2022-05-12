@@ -1,5 +1,6 @@
 package com.example.utehystudent.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utehystudent.R;
+import com.example.utehystudent.activity.SubjectInTermManagementActivity;
 import com.example.utehystudent.model.Subject;
 
 import java.util.ArrayList;
 
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder>{
     private ArrayList<Subject> listSubject;
-
-    public SubjectAdapter(ArrayList<Subject> listSubject) {
+    Activity activity;
+    public SubjectAdapter(Activity activity, ArrayList<Subject> listSubject) {
         this.listSubject = listSubject;
+        this.activity = activity;
     }
 
     @NonNull
@@ -35,6 +38,13 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         }
         holder.tvSubjectName.setText(subject.getSubject_name()+"");
         holder.tvSubjectNumCred.setText("Số TC: "+subject.getNum_cred());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //SubjectInTermManagementActivity.LongClickItemSubject(subject);
+                ((SubjectInTermManagementActivity) activity).LongClickItemSubject(subject);
+            }
+        });
     }
 
     @Override
@@ -45,7 +55,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         return 0;
     }
 
-    public class SubjectViewHolder extends RecyclerView.ViewHolder {
+    public class SubjectViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvSubjectName, tvSubjectNumCred;
 
@@ -53,6 +63,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
             super(itemView);
             tvSubjectName = itemView.findViewById(R.id.rowSubject_tvSubjectName);
             tvSubjectNumCred = itemView.findViewById(R.id.rowSubject_tvSubjectNumCred);
-        };
+        }
     }
 }

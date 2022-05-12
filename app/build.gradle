@@ -65,7 +65,7 @@ dependencies {
     //Shimmer effect
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-    //Lottiefiles animation
+    //Lottie files animation
     implementation 'com.airbnb.android:lottie:3.4.0'
 
     //swipe list view
