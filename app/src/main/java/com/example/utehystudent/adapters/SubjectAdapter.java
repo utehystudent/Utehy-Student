@@ -41,7 +41,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //SubjectInTermManagementActivity.LongClickItemSubject(subject);
                 ((SubjectInTermManagementActivity) activity).LongClickItemSubject(subject);
             }
         });

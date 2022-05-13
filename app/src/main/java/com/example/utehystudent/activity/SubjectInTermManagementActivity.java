@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class SubjectInTermManagementActivity extends AppCompatActivity {
     TextView tvSchoolYear, tvSemester;
-    Dialog dialog;
+    Dialog loadingDialog, dialog_add_subject;
     Toolbar toolbar;
     RecyclerView rcv;
     SubjectAdapter subjectAdapter;
@@ -64,7 +64,6 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
         gridLayoutManager = new GridLayoutManager(SubjectInTermManagementActivity.this, 2);
         rcv.setLayoutManager(gridLayoutManager);
 
-        ShowLoadingDialog();
 
         bottomSheetDialog = new BottomSheetDialog(SubjectInTermManagementActivity.this);
 
@@ -74,9 +73,12 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
             tvSemester.setText("Học kì: " + subjectsOfSemester.getSemester());
         });
 
+        CreateLoadingDialog();
+
         subjectInTermManagementViewModel.listSubjectInTermLiveData.observe(this, new Observer<ArrayList<Subject>>() {
             @Override
             public void onChanged(ArrayList<Subject> subjects) {
+                loadingDialog.show();
                 subjectsList.clear();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -87,7 +89,7 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
                             subjectAdapter = new SubjectAdapter(SubjectInTermManagementActivity.this,subjectsList);
                             rcv.setAdapter(subjectAdapter);
                             subjectAdapter.notifyDataSetChanged();
-                            dialog.dismiss();
+                            loadingDialog.dismiss();
                             handler.removeCallbacks(this::run);
                         }else {
                             handler.postDelayed(this, 500);
@@ -98,13 +100,12 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
         });
     }
 
-    private void ShowLoadingDialog() {
-        dialog = new Dialog(this);
-        dialog.setContentView(R.layout.loading_layout1);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.create();
-        dialog.show();
+    private void CreateLoadingDialog() {
+        loadingDialog = new Dialog(this);
+        loadingDialog.setContentView(R.layout.loading_layout1);
+        loadingDialog.setCanceledOnTouchOutside(false);
+        loadingDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        loadingDialog.create();
     }
 
     @Override
@@ -124,7 +125,7 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
     }
 
     private void AddSubjectDialog() {
-        Dialog dialog_add_subject = new Dialog(this);
+        dialog_add_subject = new Dialog(this);
         dialog_add_subject.setContentView(R.layout.dialog_add_subject);
         dialog_add_subject.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
@@ -142,9 +143,10 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
             for (Subject sj : listSubject) {
                 listSubjectName.add(sj.getSubject_name() + " - Số TC: " + sj.getNum_cred());
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(dialog.getContext(), android.R.layout.simple_dropdown_item_1line, listSubjectName);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(loadingDialog.getContext(), android.R.layout.simple_dropdown_item_1line, listSubjectName);
             edtSubjectName.setAdapter(adapter);
         });
+
 
         edtSubjectName.setOnItemClickListener((adapterView, view, i, l) -> {
             String s = edtSubjectName.getText().toString();
@@ -159,7 +161,7 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
             }
             String subjectName = edtSubjectName.getText().toString();
             AddSubject(subjectName);
-            dialog.dismiss();
+            loadingDialog.dismiss();
         });
 
         edtSubjectName.addTextChangedListener(new TextWatcher() {
@@ -208,17 +210,18 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
         alert.setPositiveButton("CÓ", (dialogInterface, i) -> {
             subjectInTermManagementViewModel.AddSubjectToTerm(subject);
             dialogInterface.dismiss();
+            CloseDialog(dialog_add_subject);
             Toast.makeText(SubjectInTermManagementActivity.this, "Thêm môn học thành công!", Toast.LENGTH_SHORT).show();
         });
         alert.create();
         alert.show();
     }
 
-    public static void LongClickItemSubject(Subject subject) {
+    public void LongClickItemSubject(Subject subject) {
         showBottomSheetDialog(subject);
     }
 
-    public static void showBottomSheetDialog(Subject subject) {
+    public void showBottomSheetDialog(Subject subject) {
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_subject_management);
         Button btnXoa = bottomSheetDialog.findViewById(R.id.bottomSheetSubject_btnXoa);
         Button btnXemLS = bottomSheetDialog.findViewById(R.id.bottomSheetSubject_btnXemLS);
@@ -240,12 +243,18 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
                     dialogInterface.dismiss();
                 });
                 alert.setPositiveButton("CÓ", (dialogInterface, i) -> {
-                    //Todo: Set sự kiện xóa môn học
+                    subjectInTermManagementViewModel.DeleteSubjectFromTerm(subject.getSubject_ID());
+                    dialogInterface.dismiss();
+                    CloseDialog(bottomSheetDialog);
                 });
                 alert.create();
                 alert.show();
             }
         });
         bottomSheetDialog.show();
+    }
+
+    public void CloseDialog(Dialog dialog) {
+        dialog.dismiss();
     }
 }

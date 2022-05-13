@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -16,8 +17,11 @@ import com.example.utehystudent.model.SubjectsOfSemester_Detail;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -29,7 +33,6 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
     Application application;
     public MutableLiveData<ArrayList<Subject>> listSubjectInTermLiveData = new MutableLiveData<>();
     public MutableLiveData<ArrayList<Subject>> listAllSubjectLiveData = new MutableLiveData<>();
-    public MutableLiveData<Subject> subjectLongClickLiveData = new MutableLiveData<>();
     MutableLiveData<SubjectsOfSemester> subjectOfSemesterLiveData = new MutableLiveData<>();
     ArrayList<Subject> listSubjectInTerm, listAllSubject;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -43,6 +46,7 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
         GetSubjectDetailList();
         GetAllSubjects();
     }
+
 
     public void GetSemesterInfo() {
         SharedPreferences preferences = application.getSharedPreferences("User", Context.MODE_PRIVATE);
@@ -84,7 +88,7 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (listSubjectInTermLiveData.getValue() != null) {
+                                    if (listSubjectInTermLiveData.getValue() != null || listSubjectInTermLiveData.getValue().size() != listSubjectInTerm.size()) {
                                         listSubjectInTermLiveData.setValue(listSubjectInTerm);
                                         handler.removeCallbacks(this::run);
                                     } else {
@@ -92,7 +96,6 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
                                     }
                                 }
                             }, 500);
-
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -101,9 +104,6 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
         listSubjectInTermLiveData.setValue(listSubjectInTerm);
     }
 
-    public MutableLiveData<ArrayList<Subject>> getListSubjectInTermLiveData() {
-        return listSubjectInTermLiveData;
-    }
 
     public MutableLiveData<SubjectsOfSemester> getSubjectOfSemesterLiveData() {
         return subjectOfSemesterLiveData;
@@ -113,9 +113,6 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
         return listAllSubjectLiveData;
     }
 
-    public MutableLiveData<Subject> getSubjectLongClickLiveData() {
-        return subjectLongClickLiveData;
-    }
 
     private ArrayList<Subject> GetSubject(ArrayList<SubjectsOfSemester_Detail> listDetail) {
         ArrayList<Subject> subjects = new ArrayList<>();
@@ -211,4 +208,25 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
                     }
                 });
     }
+
+    public void DeleteSubjectFromTerm(String subject_ID) {
+        CollectionReference itemsRef = db.collection("SubjectsOfSemester_Detail");
+        Query query = itemsRef.whereEqualTo("class_ID", classID).whereEqualTo("subject_ID", subject_ID);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        itemsRef.document(document.getId()).delete();
+                    }
+                    GetSubjectDetailList();
+                    Toast.makeText(application.getApplicationContext(), "Xóa thành công!", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
 }
