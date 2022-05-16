@@ -15,7 +15,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,16 +22,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.SubjectInTermManagementViewModel;
 import com.example.utehystudent.adapters.SubjectAdapter;
 import com.example.utehystudent.model.Subject;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
 import java.util.ArrayList;
 
 public class SubjectInTermManagementActivity extends AppCompatActivity {
+    static BottomSheetDialog bottomSheetDialog;
     TextView tvSchoolYear, tvSemester;
     Dialog loadingDialog, dialog_add_subject;
     Toolbar toolbar;
@@ -41,7 +39,6 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
     ArrayList<Subject> subjectsList;
     SubjectInTermManagementViewModel subjectInTermManagementViewModel;
     GridLayoutManager gridLayoutManager;
-    static BottomSheetDialog bottomSheetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +61,6 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
         gridLayoutManager = new GridLayoutManager(SubjectInTermManagementActivity.this, 2);
         rcv.setLayoutManager(gridLayoutManager);
 
-
         bottomSheetDialog = new BottomSheetDialog(SubjectInTermManagementActivity.this);
 
         subjectInTermManagementViewModel = new ViewModelProvider(SubjectInTermManagementActivity.this).get(SubjectInTermManagementViewModel.class);
@@ -86,12 +82,12 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
                     public void run() {
                         if (subjectsList.size() == 0) {
                             subjectsList = subjects;
-                            subjectAdapter = new SubjectAdapter(SubjectInTermManagementActivity.this,subjectsList);
+                            subjectAdapter = new SubjectAdapter(SubjectInTermManagementActivity.this, subjectsList);
                             rcv.setAdapter(subjectAdapter);
                             subjectAdapter.notifyDataSetChanged();
                             loadingDialog.dismiss();
                             handler.removeCallbacks(this::run);
-                        }else {
+                        } else {
                             handler.postDelayed(this, 500);
                         }
                     }
@@ -166,28 +162,21 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
 
         edtSubjectName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Subject subject = subjectInTermManagementViewModel.GetSubjectInfo(edtSubjectName.getText().toString());
                 if (subject.getSubject_ID() != null) {
-                    tvSoTC.setText("Số TC: "+subject.getNum_cred()+"");
-                    tvMaMH.setText("Mã MH: "+subject.getSubject_ID()+" ("+subject.getFaculty_ID()+")");
-                }else {
+                    tvSoTC.setText("Số TC: " + subject.getNum_cred() + "");
+                    tvMaMH.setText("Mã MH: " + subject.getSubject_ID() + " (" + subject.getFaculty_ID() + ")");
+                } else {
                     tvSoTC.setText("Số TC: N/A");
                     tvMaMH.setText("Mã môn học: N/A");
                 }
             }
-
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) { }
         });
-
         dialog_add_subject.create();
         dialog_add_subject.show();
     }
@@ -197,12 +186,10 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
             Toast.makeText(SubjectInTermManagementActivity.this, "Môn học đã có trong kì học hiện tại !", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (!subjectInTermManagementViewModel.CheckSubjectExistInListAll(subjectName)) {
             Toast.makeText(SubjectInTermManagementActivity.this, "Môn học không tồn tại !", Toast.LENGTH_SHORT).show();
             return;
         }
-
         Subject subject = subjectInTermManagementViewModel.GetSubjectInfo(subjectName);
         AlertDialog.Builder alert = new AlertDialog.Builder(SubjectInTermManagementActivity.this);
         alert.setMessage("Bạn có chắc muốn thêm môn học này không?");
@@ -227,8 +214,8 @@ public class SubjectInTermManagementActivity extends AppCompatActivity {
         Button btnXemLS = bottomSheetDialog.findViewById(R.id.bottomSheetSubject_btnXemLS);
         TextView tvTenMH = bottomSheetDialog.findViewById(R.id.bottomSheetSubject_tvTenMH);
         TextView tvSoTC = bottomSheetDialog.findViewById(R.id.bottomSheetSubject_tvSoTC);
-        tvTenMH.setText(subject.getSubject_name()+"");
-        tvSoTC.setText("Số TC: "+subject.getNum_cred()+"");
+        tvTenMH.setText(subject.getSubject_name() + "");
+        tvSoTC.setText("Số TC: " + subject.getNum_cred() + "");
 
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override

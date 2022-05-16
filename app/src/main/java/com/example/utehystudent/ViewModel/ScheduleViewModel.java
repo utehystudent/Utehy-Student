@@ -55,30 +55,44 @@ public class ScheduleViewModel extends AndroidViewModel {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.isSuccessful()) {
+                                        String morning = "";
+                                        String afternoon = "";
+                                        String evening = "";
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
-                                            String morning = document.getString("morning");
-                                            String afternoon = document.getString("afternoon");
-                                            scheduleDetail.setMorning(morning);
+                                            morning = document.getString("morning");
+                                            afternoon = document.getString("afternoon");
+                                            evening = document.getString("evening");
+                                            /*scheduleDetail.setMorning(morning);
                                             scheduleDetail.setAfternoon(afternoon);
-                                            scheduleLiveData.setValue(scheduleDetail);
-                                        }else {
-                                            String morning = "N/A";
-                                            String afternoon = "N/A";
-                                            scheduleDetail.setMorning(morning);
-                                            scheduleDetail.setAfternoon(afternoon);
-                                            scheduleLiveData.setValue(scheduleDetail);
+                                            scheduleDetail.setSubject_ID(subject_ID);
+                                            scheduleLiveData.setValue(scheduleDetail);*/
+                                        } else {
+                                            morning = "N/A";
+                                            afternoon = "N/A";
+                                            evening = "N/A";
                                         }
+                                        scheduleDetail.setMorning(morning);
+                                        scheduleDetail.setAfternoon(afternoon);
+                                        scheduleDetail.setEvening(evening);
+                                        scheduleLiveData.setValue(scheduleDetail);
+
+                                        SharedPreferences prefSchedule = context.getSharedPreferences("Schedule", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = prefSchedule.edit();
+                                        editor.putString("morning", morning);
+                                        editor.putString("afternoon", afternoon);
+                                        editor.putString("evening", evening);
+                                        editor.commit();
                                     } else {
                                         Log.d(TAG, "get failed with ", task.getException());
                                     }
                                 }
                             });
                     handler.removeCallbacks(this::run);
-                }else {
-                    handler.postDelayed(this,500);
+                } else {
+                    handler.postDelayed(this, 500);
                 }
             }
-        },500);
+        }, 500);
     }
 }

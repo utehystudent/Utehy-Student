@@ -17,6 +17,9 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.AttendanceActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SubjectInTermManagementActivity"
             android:exported="false" />
         <activity

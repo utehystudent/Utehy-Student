@@ -153,6 +153,35 @@
                     android:layout_marginLeft="10dp"></TextView>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/Home_linearEvening"
+                android:layout_marginTop="-5dp"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Tối: "
+                    android:fontFamily="@font/nunito"
+                    android:textStyle="bold"
+                    android:textColor="#FF0000"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"></TextView>
+                <TextView
+                    android:id="@+id/Home_tvEvening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/nunito_light"
+                    android:textStyle="normal"
+                    android:textColor="#000"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"></TextView>
+            </LinearLayout>
+
             <View
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"

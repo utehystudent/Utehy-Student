@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/AttendanceMenu_icXong"
+        android:icon="@drawable/ic_done"
+        app:showAsAction="ifRoom"
+        android:title="Lịch sử điểm danh"/>
+    <item
+        android:id="@+id/AttendanceMenu_icXemLSDiemDanh"
+        android:icon="@drawable/ic_history2"
+        android:title="Lịch sử điểm danh"/>
+</menu>

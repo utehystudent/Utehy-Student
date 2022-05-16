@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -20,10 +21,11 @@ import com.squareup.picasso.Picasso;
 public class HomeFragment extends Fragment {
     final String TAG = "Home";
     ImageView imgAvt;
-    TextView tvName, tvClass, tvXinChao, tvMorning, tvAfternoon;
+    TextView tvName, tvClass, tvXinChao, tvMorning, tvAfternoon, tvEvening;
     UserViewModel userViewModel;
     ScheduleViewModel scheduleViewModel;
     Dialog dialog;
+    LinearLayout linearEvening;
 
     public HomeFragment() {
 
@@ -43,6 +45,8 @@ public class HomeFragment extends Fragment {
         tvXinChao = view.findViewById(R.id.Home_tvXinChao);
         tvMorning = view.findViewById(R.id.Home_tvMorning);
         tvAfternoon = view.findViewById(R.id.Home_tvAfternoon);
+        tvEvening = view.findViewById(R.id.Home_tvEvening);
+        linearEvening = view.findViewById(R.id.Home_linearEvening);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
@@ -74,6 +78,12 @@ public class HomeFragment extends Fragment {
                 if (schedule_detail != null) {
                     tvMorning.setText(schedule_detail.getMorning());
                     tvAfternoon.setText(schedule_detail.getAfternoon());
+                    if (schedule_detail.getEvening().equals("N/A") || schedule_detail.getEvening().equals("Nghỉ")) {
+                        linearEvening.setVisibility(View.GONE);
+                    }else {
+                        linearEvening.setVisibility(View.VISIBLE);
+                        tvEvening.setText(schedule_detail.getEvening());
+                    }
                     //dismiss loading dialog
                     dialog.dismiss();
                 }
