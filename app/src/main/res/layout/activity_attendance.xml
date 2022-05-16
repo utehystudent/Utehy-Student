@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.AttendanceActivity">
+    tools:context=".activity.AttendanceActivity"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,11 +48,13 @@
                     android:textStyle="bold"></TextView>
 
                 <Spinner
-                    android:id="@+id/Home_tvMorning"
+                    android:id="@+id/Attendance_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
+                    android:scrollbars="none"
+                    android:spinnerMode="dropdown"
                     android:fontFamily="@font/nunito_light"
                     android:textSize="20sp"
                     android:textStyle="normal"></Spinner>
@@ -75,14 +79,15 @@
                     android:textStyle="bold"></TextView>
 
                 <TextView
+                    android:id="@+id/Attendance_tvSoTC"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/nunito_light"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dp"
-                    android:text="4"
+                    android:paddingLeft="10dp"
+                    android:text="---"
                     android:textColor="#000"
                     android:textSize="20sp"></TextView>
             </LinearLayout>
@@ -106,19 +111,30 @@
                     android:textStyle="bold"></TextView>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/Attendance_tvDate"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/nunito_light"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dp"
+                    android:textAlignment="viewStart"
+                    android:paddingLeft="10dp"
                     android:text="16/05/2022"
                     android:textColor="#000"
                     android:textSize="20sp"></TextView>
+
+                <ImageView
+                    android:id="@+id/Attendance_imgChooseDate"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_edit"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"></ImageView>
             </LinearLayout>
 
             <RadioGroup
+                android:id="@+id/Attendance_radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -171,22 +187,22 @@
                 app:strokeWidth="1dp">
 
                 <EditText
-                    android:id="@+id/Login_edtTK"
+                    android:id="@+id/Attendance_edtTenGV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bo_edt"
                     android:padding="10dp"
-                    android:text="Nguyễn Hoàng Điệp"></EditText>
+                    android:hint="Nhập tên giảng viên"></EditText>
             </com.google.android.material.card.MaterialCardView>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Attendance_rcv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
+                android:padding="5dp"
                 android:scrollbars="none"
-                android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
-
+                tools:listitem="@layout/row_student_attendance"></androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
-
     </ScrollView>
 </LinearLayout>
