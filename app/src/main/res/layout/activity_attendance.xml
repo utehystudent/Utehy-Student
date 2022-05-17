@@ -118,7 +118,6 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/nunito_light"
                     android:gravity="center_vertical"
-                    android:textAlignment="viewStart"
                     android:paddingLeft="10dp"
                     android:text="16/05/2022"
                     android:textColor="#000"

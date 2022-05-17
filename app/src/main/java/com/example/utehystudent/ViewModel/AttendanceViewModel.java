@@ -19,7 +19,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AttendanceViewModel extends AndroidViewModel {
     final String TAG = "AttendanceViewModel";
@@ -105,6 +108,12 @@ public class AttendanceViewModel extends AndroidViewModel {
     public Subject GetSubjectInfo(int position) {
         Subject sj = listSubjectInTermLiveData.getValue().get(position-1);
         return sj;
+    }
+
+    public String GetCurrentDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
     public MutableLiveData<ArrayList<Subject>> getListSubjectInTermLiveData() {
