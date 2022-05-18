@@ -142,22 +142,25 @@
                 android:weightSum="3">
 
                 <RadioButton
+                    android:id="@+id/Attendance_radioSang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sáng" />
+                    android:text="SÁNG" />
 
                 <RadioButton
+                    android:id="@+id/Attendance_radioChieu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Chiều" />
+                    android:text="CHIỀU" />
 
                 <RadioButton
+                    android:id="@+id/Attendance_radioToi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tối" />
+                    android:text="TỐI" />
             </RadioGroup>
 
             <TextView
@@ -197,11 +200,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Attendance_rcv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:padding="5dp"
                 android:scrollbars="none"
-                tools:listitem="@layout/row_student_attendance"></androidx.recyclerview.widget.RecyclerView>
+                ></androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

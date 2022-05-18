@@ -1,5 +1,6 @@
 package com.example.utehystudent.adapters;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,10 +33,12 @@ public class StudentAttendanceAdapter extends RecyclerView.Adapter<StudentAttend
         return new StudentAttendanceViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull StudentAttendanceViewHolder holder, int position) {
         StudentAttendance student = studentList.get(position);
         if(student == null) {
+            Log.d(TAG, "onBindViewHolder: NULL");
             return;
         }
         try {
@@ -45,7 +48,7 @@ public class StudentAttendanceAdapter extends RecyclerView.Adapter<StudentAttend
             holder.imgAvt.setImageResource(R.drawable.ic_student);
         }
         holder.tvName.setText(student.getName());
-        holder.tvID.setText("MSV: "+student.getUsername());
+        holder.tvID.setText("MSV: " + student.getUsername());
         holder.ckb.setChecked(true);
     }
 
@@ -64,8 +67,8 @@ public class StudentAttendanceAdapter extends RecyclerView.Adapter<StudentAttend
         public StudentAttendanceViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.rowStudentAttendance_tvName);
-            tvID = itemView.findViewById(R.id.rowStudentAttendance_tvName);
-            imgAvt = itemView.findViewById(R.id.rowStudentAttendance_tvName);
+            tvID = itemView.findViewById(R.id.rowStudentAttendance_tvID);
+            imgAvt = itemView.findViewById(R.id.rowStudentAttendance_imgAvt);
             ckb = itemView.findViewById(R.id.rowStudentAttendance_ckb);
         }
     }
