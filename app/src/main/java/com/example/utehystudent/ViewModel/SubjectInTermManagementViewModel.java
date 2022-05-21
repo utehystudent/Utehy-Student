@@ -29,10 +29,10 @@ import java.util.ArrayList;
 
 public class SubjectInTermManagementViewModel extends AndroidViewModel {
     final String TAG = "SubjectManagementViewModel";
-    String classID = "";
-    Application application;
     public MutableLiveData<ArrayList<Subject>> listSubjectInTermLiveData = new MutableLiveData<>();
     public MutableLiveData<ArrayList<Subject>> listAllSubjectLiveData = new MutableLiveData<>();
+    String classID = "";
+    Application application;
     MutableLiveData<SubjectsOfSemester> subjectOfSemesterLiveData = new MutableLiveData<>();
     ArrayList<Subject> listSubjectInTerm, listAllSubject;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -46,7 +46,6 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
         GetSubjectDetailList();
         GetAllSubjects();
     }
-
 
     public void GetSemesterInfo() {
         SharedPreferences preferences = application.getSharedPreferences("User", Context.MODE_PRIVATE);
@@ -103,7 +102,6 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
                 });
         listSubjectInTermLiveData.setValue(listSubjectInTerm);
     }
-
 
     public MutableLiveData<SubjectsOfSemester> getSubjectOfSemesterLiveData() {
         return subjectOfSemesterLiveData;
@@ -228,5 +226,4 @@ public class SubjectInTermManagementViewModel extends AndroidViewModel {
             }
         });
     }
-
 }

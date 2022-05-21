@@ -72,4 +72,17 @@ public class StudentAttendance {
     public void setChosen(Boolean chosen) {
         isChosen = chosen;
     }
+
+    @Override
+    public String toString() {
+        return "StudentAttendance{" +
+                "username='" + username + '\'' +
+                ", faculty_ID='" + faculty_ID + '\'' +
+                ", class_ID='" + class_ID + '\'' +
+                ", name='" + name + '\'' +
+                ", regency='" + regency + '\'' +
+                ", avt_link='" + avt_link + '\'' +
+                ", isChosen=" + isChosen +
+                '}';
+    }
 }

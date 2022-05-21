@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#fe4441</color>
     <color name="menu_button_pressed">#fe4441</color>
+    <color name="snack_bar_background">#01AA01</color>
+    <color name="snack_bar_text">#FFFFFF</color>
 </resources>

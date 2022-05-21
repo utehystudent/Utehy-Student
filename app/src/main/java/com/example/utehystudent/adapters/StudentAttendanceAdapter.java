@@ -1,6 +1,7 @@
 package com.example.utehystudent.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utehystudent.R;
+import com.example.utehystudent.activity.AttendanceActivity;
 import com.example.utehystudent.model.StudentAttendance;
 import com.squareup.picasso.Picasso;
 
@@ -21,8 +23,10 @@ import java.util.ArrayList;
 public class StudentAttendanceAdapter extends RecyclerView.Adapter<StudentAttendanceAdapter.StudentAttendanceViewHolder>{
     final String TAG = "StudentAttendanceAdapter";
     ArrayList<StudentAttendance> studentList;
+    Activity activity;
 
-    public StudentAttendanceAdapter(ArrayList<StudentAttendance> studentList) {
+    public StudentAttendanceAdapter(Activity activity, ArrayList<StudentAttendance> studentList) {
+        this.activity = activity;
         this.studentList = studentList;
     }
 
@@ -50,6 +54,10 @@ public class StudentAttendanceAdapter extends RecyclerView.Adapter<StudentAttend
         holder.tvName.setText(student.getName());
         holder.tvID.setText("MSV: " + student.getUsername());
         holder.ckb.setChecked(true);
+        holder.ckb.setOnCheckedChangeListener((compoundButton, b) -> {
+            String studentID = student.getUsername()+"";
+            ((AttendanceActivity) this.activity).SetCheckedStudent(studentID, b);
+        });
     }
 
     @Override
