@@ -1,22 +1,44 @@
 package com.example.utehystudent.fragments;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.ScheduleViewModel;
 import com.example.utehystudent.ViewModel.UserViewModel;
+import com.example.utehystudent.adapters.SubjectAbsentAdapter;
+import com.example.utehystudent.model.Attendance;
 import com.example.utehystudent.model.Schedule_detail;
+import com.example.utehystudent.model.Subject;
+import com.example.utehystudent.model.SubjectAbsent;
+import com.example.utehystudent.model.SubjectsOfSemester_Detail;
 import com.example.utehystudent.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     final String TAG = "Home";
@@ -26,6 +48,17 @@ public class HomeFragment extends Fragment {
     ScheduleViewModel scheduleViewModel;
     Dialog dialog;
     LinearLayout linearEvening;
+    ArrayList<Attendance> listAttendance = new ArrayList<>();
+    FirebaseFirestore db;
+    ArrayList<Subject> listSubjectInTerm;
+    ArrayList<SubjectAbsent> listSubjectAbsent;
+    ArrayList<SubjectsOfSemester_Detail> listDetail;
+    String classID;
+    SharedPreferences pref;
+    SubjectAbsentAdapter subjectAbsentAdapter;
+    RecyclerView rcvSubjectAbsent;
+    LinearLayoutManager linearLayoutManager;
+    RecyclerView.ItemDecoration itemDecoration;
 
     public HomeFragment() {
 
@@ -48,25 +81,87 @@ public class HomeFragment extends Fragment {
         tvEvening = view.findViewById(R.id.Home_tvEvening);
         linearEvening = view.findViewById(R.id.Home_linearEvening);
 
+        listSubjectInTerm = new ArrayList<>();
+        listSubjectAbsent = new ArrayList<>();
+        listDetail = new ArrayList<>();
+
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
-        
+
+        db = FirebaseFirestore.getInstance();
+
+        rcvSubjectAbsent = view.findViewById(R.id.Home_rcvSubjectAbsent);
+
+
+        linearLayoutManager = new LinearLayoutManager(requireActivity());
+        rcvSubjectAbsent.setLayoutManager(linearLayoutManager);
+        itemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
+        rcvSubjectAbsent.addItemDecoration(itemDecoration);
+
         BindData();
+
+        GetListAttendance();
+        GetListSubjectDetailInTerm();
+        GetListSubjectAbsent();
+
         return view;
+    }
+
+    private void GetListSubjectAbsent() {
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String maSV = pref.getString("username", "");
+
+                if (listSubjectInTerm.size()>0){
+                    ArrayList<SubjectAbsent> dsMonHocVang = new ArrayList<>();
+                    for(Subject mh: listSubjectInTerm){
+                        String maMH=mh.getSubject_ID();
+                        String tenMH=mh.getSubject_name();
+                        int soTC=mh.getNum_cred();
+                        int soBuoiVang=0;
+                        for (Attendance dd : listAttendance){
+                            if(maMH.equals(dd.getSubject_ID())){
+                                if(dd.getList_Absent().contains(maSV)) {
+                                    soBuoiVang++;
+                                }
+                            }
+                        }
+                        SubjectAbsent subjectAbsent = new SubjectAbsent(maMH,tenMH,soBuoiVang, soTC);
+                        dsMonHocVang.add(subjectAbsent);
+                    }
+
+                    ArrayList<SubjectAbsent> tmp = new ArrayList<>();
+                    for(SubjectAbsent mhv : dsMonHocVang){
+                        if (mhv.getNum_Absent()>0){
+                            tmp.add(mhv);
+                        }
+                    }
+                    subjectAbsentAdapter = new SubjectAbsentAdapter(tmp);
+                    rcvSubjectAbsent.setAdapter(subjectAbsentAdapter);
+                    handler.removeCallbacks(this);
+                }
+                else {
+                    handler.postDelayed(this,500);}
+            }
+        },500);
+
     }
 
     private void BindData() {
         ShowLoadingDialog();
+
         userViewModel.getUserLiveData().observe(requireActivity(), new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                try{
+                try {
                     Picasso.get().load(user.getAvt_link()).resize(300, 300).centerCrop().into(imgAvt);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     imgAvt.setImageResource(R.drawable.utehy_logo);
                 }
-                tvName.setText(user.getName()+"");
-                tvClass.setText("Mã SV: "+user.getUsername()+"  |  "+"Lớp: "+user.getClass_ID());
+                tvName.setText(user.getName() + "");
+                tvClass.setText("Mã SV: " + user.getUsername() + "  |  " + "Lớp: " + user.getClass_ID());
                 tvXinChao.setText("XIN CHÀO");
             }
         });
@@ -80,7 +175,7 @@ public class HomeFragment extends Fragment {
                     tvAfternoon.setText(schedule_detail.getAfternoon());
                     if (schedule_detail.getEvening().equals("N/A") || schedule_detail.getEvening().equals("Nghỉ")) {
                         linearEvening.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         linearEvening.setVisibility(View.VISIBLE);
                         tvEvening.setText(schedule_detail.getEvening());
                     }
@@ -89,6 +184,12 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+        pref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+
+
+
+
     }
 
     private void ShowLoadingDialog() {
@@ -98,5 +199,65 @@ public class HomeFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.create();
         dialog.show();
+    }
+
+    private void GetListAttendance() {
+        String classID = pref.getString("class_ID", "");
+        db.collection("Attendance")
+                .whereEqualTo("class_ID", classID)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            listAttendance.add(document.toObject(Attendance.class));
+                            Log.d("attendance", "GetListAttendance: " + document.toObject(Attendance.class));
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
+    private void GetSubjectInTerm() {
+        for (SubjectsOfSemester_Detail detail : listDetail) {
+            db.collection("Subject")
+                    .whereEqualTo("subject_ID", detail.getSubject_ID())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    listSubjectInTerm.add(document.toObject(Subject.class));
+                                }
+                                Log.d("subject", "onComplete: "+listSubjectInTerm.size());
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+        }
+    }
+
+    private void GetListSubjectDetailInTerm() {
+        classID = pref.getString("class_ID", "");
+
+        db.collection("SubjectsOfSemester_Detail")
+                .whereEqualTo("class_ID", classID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                listDetail.add(document.toObject(SubjectsOfSemester_Detail.class));
+                                Log.d("detail", "onComplete: "+document.toObject(SubjectsOfSemester_Detail.class));
+                            }
+                            GetSubjectInTerm();
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 }

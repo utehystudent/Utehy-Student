@@ -227,7 +227,6 @@ public class AttendanceViewModel extends AndroidViewModel {
                     }
                 });
     }
-
     public void ResetListStudentAttendance() {
         this.GetListStudentAttendance();
     }

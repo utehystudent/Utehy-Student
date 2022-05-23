@@ -192,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="MÔN HỌC ĐÃ VẮNG"
+                android:text="MÔN HỌC ĐÃ NGHỈ"
                 android:fontFamily="@font/nunito"
                 android:textStyle="bold"
                 android:textColor="#2F80ED"
@@ -200,9 +200,10 @@
                 android:layout_marginLeft="10dp"></TextView>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Home_rcvSubjectAbsent"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+
                 android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
 
             <TextView
@@ -213,7 +214,7 @@
                 android:fontFamily="@font/nunito"
                 android:textStyle="bold"
                 android:textColor="#2F80ED"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"></TextView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -224,6 +225,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

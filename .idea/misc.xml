@@ -6,6 +6,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/background_login.xml" value="0.16597222222222222" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/bo_edt.xml" value="0.170446735395189" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/circle.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/gradient1.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/gradient2.xml" value="0.1701388888888889" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/ic_add.xml" value="0.170446735395189" />
@@ -37,6 +38,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_student.xml" value="0.152" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_student_attendance.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_subject.xml" value="0.176" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_subject_absent.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/menu/attendance_menu.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/menu/attendance_option_menu.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/menu/subject_management_option_menu.xml" value="0.16145833333333334" />
