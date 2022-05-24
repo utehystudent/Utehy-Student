@@ -203,8 +203,30 @@
                 android:id="@+id/Home_rcvSubjectAbsent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
+
+            <ImageView
+                android:id="@+id/Home_imgGood"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:src="@drawable/good"></ImageView>
+
+            <TextView
+                android:id="@+id/Home_tvChuaNghi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="Bạn chưa nghỉ buổi học nào !"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nunito_light"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:textColor="#A1A5AA"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"></TextView>
+
 
             <TextView
                 android:layout_width="wrap_content"

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/row_attendance_detail_tvInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/nunito"
+        android:text="Sáng 15-05-2022"
+        android:textColor="#651FFF"
+        android:textSize="20sp"></TextView>
+
+    <TextView
+        android:id="@+id/row_attendance_detail_tvTinhTrang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/nunito"
+        android:text="NGHỈ"
+        android:textColor="#FF3D00"></TextView>
+
+</RelativeLayout>

@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utehystudent.R;
+import com.example.utehystudent.ViewModel.HomeFragmentViewModel;
 import com.example.utehystudent.ViewModel.ScheduleViewModel;
 import com.example.utehystudent.ViewModel.UserViewModel;
 import com.example.utehystudent.adapters.SubjectAbsentAdapter;
@@ -59,6 +60,9 @@ public class HomeFragment extends Fragment {
     RecyclerView rcvSubjectAbsent;
     LinearLayoutManager linearLayoutManager;
     RecyclerView.ItemDecoration itemDecoration;
+    HomeFragmentViewModel homeFragmentViewModel;
+    ImageView imgGood;
+    TextView tvChuaNghi;
 
     public HomeFragment() {
 
@@ -80,6 +84,8 @@ public class HomeFragment extends Fragment {
         tvAfternoon = view.findViewById(R.id.Home_tvAfternoon);
         tvEvening = view.findViewById(R.id.Home_tvEvening);
         linearEvening = view.findViewById(R.id.Home_linearEvening);
+        imgGood = view.findViewById(R.id.Home_imgGood);
+        tvChuaNghi = view.findViewById(R.id.Home_tvChuaNghi);
 
         listSubjectInTerm = new ArrayList<>();
         listSubjectAbsent = new ArrayList<>();
@@ -88,10 +94,11 @@ public class HomeFragment extends Fragment {
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
 
+        homeFragmentViewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
+
         db = FirebaseFirestore.getInstance();
 
         rcvSubjectAbsent = view.findViewById(R.id.Home_rcvSubjectAbsent);
-
 
         linearLayoutManager = new LinearLayoutManager(requireActivity());
         rcvSubjectAbsent.setLayoutManager(linearLayoutManager);
@@ -100,52 +107,55 @@ public class HomeFragment extends Fragment {
 
         BindData();
 
-        GetListAttendance();
-        GetListSubjectDetailInTerm();
-        GetListSubjectAbsent();
-
         return view;
     }
 
     private void GetListSubjectAbsent() {
-        Handler handler=new Handler();
+        Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 String maSV = pref.getString("username", "");
 
-                if (listSubjectInTerm.size()>0){
+                if (listSubjectInTerm.size() > 0) {
                     ArrayList<SubjectAbsent> dsMonHocVang = new ArrayList<>();
-                    for(Subject mh: listSubjectInTerm){
-                        String maMH=mh.getSubject_ID();
-                        String tenMH=mh.getSubject_name();
-                        int soTC=mh.getNum_cred();
-                        int soBuoiVang=0;
-                        for (Attendance dd : listAttendance){
-                            if(maMH.equals(dd.getSubject_ID())){
-                                if(dd.getList_Absent().contains(maSV)) {
+                    for (Subject mh : listSubjectInTerm) {
+                        String maMH = mh.getSubject_ID();
+                        String tenMH = mh.getSubject_name();
+                        int soTC = mh.getNum_cred();
+                        int soBuoiVang = 0;
+                        for (Attendance dd : listAttendance) {
+                            if (maMH.equals(dd.getSubject_ID())) {
+                                if (dd.getList_Absent().contains(maSV)) {
                                     soBuoiVang++;
                                 }
                             }
                         }
-                        SubjectAbsent subjectAbsent = new SubjectAbsent(maMH,tenMH,soBuoiVang, soTC);
+                        SubjectAbsent subjectAbsent = new SubjectAbsent(maMH, tenMH, soBuoiVang, soTC);
                         dsMonHocVang.add(subjectAbsent);
                     }
 
                     ArrayList<SubjectAbsent> tmp = new ArrayList<>();
-                    for(SubjectAbsent mhv : dsMonHocVang){
-                        if (mhv.getNum_Absent()>0){
+                    for (SubjectAbsent mhv : dsMonHocVang) {
+                        if (mhv.getNum_Absent() > 0) {
                             tmp.add(mhv);
                         }
                     }
                     subjectAbsentAdapter = new SubjectAbsentAdapter(tmp);
                     rcvSubjectAbsent.setAdapter(subjectAbsentAdapter);
+                    if (tmp.size() == 0) {
+                        rcvSubjectAbsent.setVisibility(View.GONE);
+                        imgGood.setVisibility(View.VISIBLE);
+                        tvChuaNghi.setVisibility(View.VISIBLE);
+                    }
                     handler.removeCallbacks(this);
+                    //dismiss loading dialog
+                    dialog.dismiss();
+                } else {
+                    handler.postDelayed(this, 500);
                 }
-                else {
-                    handler.postDelayed(this,500);}
             }
-        },500);
+        }, 500);
 
     }
 
@@ -179,16 +189,14 @@ public class HomeFragment extends Fragment {
                         linearEvening.setVisibility(View.VISIBLE);
                         tvEvening.setText(schedule_detail.getEvening());
                     }
-                    //dismiss loading dialog
-                    dialog.dismiss();
                 }
             }
         });
-
         pref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
 
-
-
+        GetListAttendance();
+        GetListSubjectDetailInTerm();
+        GetListSubjectAbsent();
 
     }
 
@@ -230,7 +238,7 @@ public class HomeFragment extends Fragment {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     listSubjectInTerm.add(document.toObject(Subject.class));
                                 }
-                                Log.d("subject", "onComplete: "+listSubjectInTerm.size());
+                                Log.d("subject", "onComplete: " + listSubjectInTerm.size());
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());
                             }
@@ -251,7 +259,7 @@ public class HomeFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 listDetail.add(document.toObject(SubjectsOfSemester_Detail.class));
-                                Log.d("detail", "onComplete: "+document.toObject(SubjectsOfSemester_Detail.class));
+                                Log.d("detail", "onComplete: " + document.toObject(SubjectsOfSemester_Detail.class));
                             }
                             GetSubjectInTerm();
                         } else {
@@ -259,5 +267,9 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    public void ClickSubjectAbsent(int position) {
+
     }
 }

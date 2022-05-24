@@ -21,6 +21,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/rounded_subject.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/utehy_logo.xml" value="0.16597222222222222" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_attendance.xml" value="0.176" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_attendance_detail.xml" value="0.152" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_class_management.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_home.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_login.xml" value="0.16799999999999998" />
@@ -34,7 +35,11 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_lich_hoat_dong.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_menu.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_thong_bao.xml" value="0.16" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/layout_item_attendance_detail.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/loading_layout1.xml" value="0.16145833333333334" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_attendance_collapse.xml" value="0.16145833333333334" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_attendance_detail.xml" value="0.152" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_attendance_expand.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_student.xml" value="0.152" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_student_attendance.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_subject.xml" value="0.176" />
