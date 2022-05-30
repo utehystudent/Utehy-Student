@@ -21,7 +21,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/rounded_subject.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/utehy_logo.xml" value="0.16597222222222222" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_attendance.xml" value="0.176" />
-        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_attendance_detail.xml" value="0.152" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_attendance_detail.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_class_management.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_home.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_login.xml" value="0.16799999999999998" />
@@ -44,6 +44,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_student_attendance.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_subject.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/row_subject_absent.xml" value="0.16145833333333334" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/shimmer_row_subject_absent.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/menu/attendance_menu.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/menu/attendance_option_menu.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/menu/subject_management_option_menu.xml" value="0.16145833333333334" />

@@ -14,10 +14,16 @@ import com.example.utehystudent.fragments.HomeFragment;
 import com.example.utehystudent.fragments.LichHoatDongFragment;
 import com.example.utehystudent.fragments.MenuFragment;
 import com.example.utehystudent.fragments.ThongBaoFragment;
+import com.example.utehystudent.model.Attendance;
+import com.example.utehystudent.model.SubjectAbsent;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     MeowBottomNavigation bottomNavigation;
+    public static ArrayList<SubjectAbsent> listSubjectAbsent = new ArrayList<>();
+    public static ArrayList<Attendance> listAttendance = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         new RegisterForPushNotificationsAsync(this).execute();
         Init();
-
     }
     private void Init() {
         bottomNavigation = findViewById(R.id.Main_bottomNavigation);
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_noti));
         bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.ic_menu));
+
 
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
@@ -100,5 +106,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    public static void DeleteDataAttendance() {
+        listAttendance.clear();
+        listSubjectAbsent.clear();
     }
 }

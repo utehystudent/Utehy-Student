@@ -1,7 +1,16 @@
 package com.example.utehystudent.model;
-import java.util.ArrayList;
 
-public class Attendance {
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+public class Attendance implements Serializable, Comparable<Attendance>{
 
     private String attendance_ID, class_ID, subject_ID, student_Made, attendance_Date, teacher_Name, time;
     private ArrayList<String> list_Absent;
@@ -97,4 +106,19 @@ public class Attendance {
                 ", list_Absent=" + list_Absent +
                 '}';
     }
+
+    @Override
+    public int compareTo(Attendance attendance) {
+        Date date1 = new Date();
+        Date date2 = new Date();
+        try {
+            date1 = new SimpleDateFormat("dd-MM-yyyy").parse(this.getAttendance_Date());
+            date2 = new SimpleDateFormat("dd-MM-yyyy").parse(attendance.getAttendance_Date());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date2.compareTo(date1);
+    }
+
+
 }

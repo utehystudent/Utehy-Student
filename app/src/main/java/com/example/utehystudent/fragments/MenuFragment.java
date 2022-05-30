@@ -9,13 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.MenuViewModel;
 import com.example.utehystudent.activity.AttendanceActivity;
 import com.example.utehystudent.activity.ClassManagementActivity;
 import com.example.utehystudent.activity.LoginActivity;
+import com.example.utehystudent.activity.MainActivity;
 import com.example.utehystudent.activity.SubjectInTermManagementActivity;
 import com.squareup.picasso.Picasso;
 
@@ -60,9 +63,11 @@ public class MenuFragment extends Fragment {
 
     private void DangXuatTaiKhoan() {
         menuViewModel.SignOut();
+        requireActivity().finish();
+        MainActivity.DeleteDataAttendance();
         Intent it = new Intent(requireActivity(), LoginActivity.class);
         startActivity(it);
-        requireActivity().finish();
+
     }
 
     private void InitView(View view) {

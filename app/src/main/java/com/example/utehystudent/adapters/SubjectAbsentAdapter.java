@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,12 +16,17 @@ import com.example.utehystudent.model.SubjectAbsent;
 
 import java.util.ArrayList;
 
-public class SubjectAbsentAdapter extends RecyclerView.Adapter<SubjectAbsentAdapter.SubjectAbsentViewHolder>{
+public class SubjectAbsentAdapter extends RecyclerView.Adapter<SubjectAbsentAdapter.SubjectAbsentViewHolder> {
     private ArrayList<SubjectAbsent> listSubjectAbsent;
+    EventListener listener;
 
-
-    public SubjectAbsentAdapter(ArrayList<SubjectAbsent> listSubjectAbsent) {
+    public SubjectAbsentAdapter(ArrayList<SubjectAbsent> listSubjectAbsent, EventListener listener) {
         this.listSubjectAbsent = listSubjectAbsent;
+        this.listener = listener;
+    }
+
+    public interface EventListener {
+        void onEvent(String subjectID);
     }
 
     @NonNull
@@ -37,25 +43,28 @@ public class SubjectAbsentAdapter extends RecyclerView.Adapter<SubjectAbsentAdap
             return;
         }
 
-        holder.tvSubjectName.setText(subject.getSubject_Name()+"");
+        holder.tvSubjectName.setText(subject.getSubject_Name() + "");
         int numCred = subject.getNum_Cred();
         int numAbsent = subject.getNum_Absent();
-        Double progr = numAbsent/Double.parseDouble(String.valueOf(numCred)) * 100;
-        holder.tvNumAbsent.setText(""+numAbsent+"/"+numCred);
+        Double progr = numAbsent / Double.parseDouble(String.valueOf(numCred)) * 100;
+        holder.tvNumAbsent.setText("" + numAbsent + "/" + numCred);
         if (numAbsent == numCred) {
             holder.imgInfo.setImageResource(R.drawable.ic_warning);
         }
         if (numCred >= 5) {
-            holder.tvNumAbsent.setText(""+numAbsent+"/4");
-            progr = numAbsent/Double.parseDouble(String.valueOf(4)) * 100;
-            if (numAbsent >= 4){
+            holder.tvNumAbsent.setText("" + numAbsent + "/4");
+            progr = numAbsent / Double.parseDouble(String.valueOf(4)) * 100;
+            if (numAbsent >= 4) {
                 holder.imgInfo.setImageResource(R.drawable.ic_cancel);
             }
         }
-        holder.prg.setProgress((int)Math.round(progr));
+        holder.prg.setProgress((int) Math.round(progr));
+
+        holder.layout.setOnClickListener(view -> {
+            listener.onEvent(subject.getSubject_ID());
+        });
 
     }
-
 
     @Override
     public int getItemCount() {
@@ -65,11 +74,12 @@ public class SubjectAbsentAdapter extends RecyclerView.Adapter<SubjectAbsentAdap
         return 0;
     }
 
-    public class SubjectAbsentViewHolder extends RecyclerView.ViewHolder{
+    public class SubjectAbsentViewHolder extends RecyclerView.ViewHolder {
 
         ProgressBar prg;
         TextView tvNumAbsent, tvSubjectName;
         ImageView imgInfo;
+        RelativeLayout layout;
 
         public SubjectAbsentViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +87,7 @@ public class SubjectAbsentAdapter extends RecyclerView.Adapter<SubjectAbsentAdap
             tvNumAbsent = itemView.findViewById(R.id.row_subject_absent_tvProgress);
             prg = itemView.findViewById(R.id.row_subject_absent_progressBar);
             imgInfo = itemView.findViewById(R.id.row_subject_absent_imgInfo);
+            layout = itemView.findViewById(R.id.row_subject_absent);
         }
     }
 

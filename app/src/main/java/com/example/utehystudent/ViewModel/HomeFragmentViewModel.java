@@ -18,14 +18,14 @@ public class HomeFragmentViewModel extends AndroidViewModel {
     public HomeFragmentViewModel(@NonNull Application application) {
         super(application);
         this.application = application;
-        listSubjectAbsentLiveData = new MutableLiveData<>();
+
     }
 
     public MutableLiveData<ArrayList<SubjectAbsent>> getListSubjectAbsentLiveData() {
         return listSubjectAbsentLiveData;
     }
 
-    public void setListSubjectAbsentLiveData(ArrayList<SubjectAbsent> listSubjectAbsentLiveData) {
-        this.listSubjectAbsentLiveData.setValue(listSubjectAbsentLiveData);
+    public void setListSubjectAbsentLiveData(ArrayList<SubjectAbsent> listSubjectAbsent) {
+        this.listSubjectAbsentLiveData.setValue(listSubjectAbsent);
     }
 }

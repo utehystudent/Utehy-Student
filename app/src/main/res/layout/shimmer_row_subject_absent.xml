@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:textColor="#FF3D00"
+            android:background="#DFD9D9"
             android:fontFamily="@font/nunito"
             app:layout_constraintBottom_toBottomOf="@+id/row_subject_absent_progressBar"
             app:layout_constraintEnd_toEndOf="@+id/row_subject_absent_progressBar"
@@ -39,15 +40,14 @@
 
     <TextView
         android:id="@+id/row_subject_absent_tvSubjectName"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:maxLines="1"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/row_subject_absent_constraint"
+        android:background="#DFD9D9"
         android:fontFamily="@font/roboto_regular"
-        android:text="Lập trình cơ bản"
-        android:textColor="#651FFF"
+        android:maxLines="1"
         android:textSize="20sp" />
 
     <ImageView
