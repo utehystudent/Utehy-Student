@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.utehystudent.activity.MainActivity;
 import com.example.utehystudent.model.User;
 import com.example.utehystudent.repository.UserRepo;
 
@@ -44,5 +45,6 @@ public class MenuViewModel extends AndroidViewModel {
         SharedPreferences preferencesUser = context.getSharedPreferences("User", Context.MODE_PRIVATE);
         preferencesAccount.edit().clear().commit();
         preferencesUser.edit().clear().commit();
+        MainActivity.DeleteDataAttendance();
     }
 }

@@ -14,16 +14,18 @@ import com.example.utehystudent.fragments.HomeFragment;
 import com.example.utehystudent.fragments.LichHoatDongFragment;
 import com.example.utehystudent.fragments.MenuFragment;
 import com.example.utehystudent.fragments.ThongBaoFragment;
+import com.example.utehystudent.model.Activity;
 import com.example.utehystudent.model.Attendance;
 import com.example.utehystudent.model.SubjectAbsent;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final int CONTENT_VIEW_ID = 10101010;
     MeowBottomNavigation bottomNavigation;
     public static ArrayList<SubjectAbsent> listSubjectAbsent = new ArrayList<>();
     public static ArrayList<Attendance> listAttendance = new ArrayList<>();
+    public static ArrayList<Activity> listActivitySchedule = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +33,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         new RegisterForPushNotificationsAsync(this).execute();
+
         Init();
+
     }
     private void Init() {
         bottomNavigation = findViewById(R.id.Main_bottomNavigation);
+
         //set up bottom navigation
         SetUpBottomNavigation();
     }
@@ -47,13 +52,14 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.ic_menu));
 
 
+
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
             public void onShowItem(MeowBottomNavigation.Model item) {
                 Fragment fragment = new Fragment();
                 switch (item.getId()) {
                     case 1 :
-                        fragment = new LichHoatDongFragment();
+                        fragment = new LichHoatDongFragment(MainActivity.this);
                         break;
                     case 2 :
                         fragment = new BangTinFragment();
@@ -111,5 +117,7 @@ public class MainActivity extends AppCompatActivity {
     public static void DeleteDataAttendance() {
         listAttendance.clear();
         listSubjectAbsent.clear();
+        listActivitySchedule.clear();
     }
+
 }

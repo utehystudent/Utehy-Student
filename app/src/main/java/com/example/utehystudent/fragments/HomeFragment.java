@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
 
         pref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
 
-        if (MainActivity.listSubjectAbsent.size() == 0 && MainActivity.listAttendance.size() == 0) {
+        if ((MainActivity.listSubjectAbsent.size() == 0 && MainActivity.listAttendance.size() == 0) || MainActivity.listSubjectAbsent == null || MainActivity.listAttendance == null) {
             GetListAttendance();
             GetListSubjectDetailInTerm();
             GetListSubjectAbsent();
@@ -118,7 +118,6 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
             subjectAbsentAdapter = new SubjectAbsentAdapter(MainActivity.listSubjectAbsent, HomeFragment.this);
             rcvSubjectAbsent.setAdapter(subjectAbsentAdapter);
             rcvSubjectAbsent.setVisibility(View.VISIBLE);
-            shimmerSubjectAbsent.hideShimmer();
             shimmerSubjectAbsent.setVisibility(View.GONE);
             if (MainActivity.listSubjectAbsent.size() == 0) {
                 rcvSubjectAbsent.setVisibility(View.GONE);

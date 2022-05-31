@@ -71,4 +71,7 @@ dependencies {
     //swipe list view
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 
+    //calendar
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
+
 }
