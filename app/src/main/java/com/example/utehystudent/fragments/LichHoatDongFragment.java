@@ -15,10 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.CalendarWeekDay;
 import com.applandeo.materialcalendarview.EventDay;
@@ -31,7 +29,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -268,13 +265,15 @@ public class LichHoatDongFragment extends Fragment {
         tvDate.setText("Ngày: "+dateChose);
 
         btnXong.setOnClickListener(view -> {
+            SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+            String cID = pref.getString("class_ID", "");
             if (edtContent.getText().toString().equals("")) {
                 edtContent.setError("Nội dung còn trống");
                 edtContent.requestFocus();
                 return;
             }
             Activity activity = new Activity();
-            activity.setClass_ID(classID);
+            activity.setClass_ID(cID);
             activity.setDate(dateChose);
             activity.setContent(edtContent.getText().toString().trim());
             //add activity to firestore
@@ -286,14 +285,19 @@ public class LichHoatDongFragment extends Fragment {
     }
 
     private void addActivity(Activity activity, Dialog dialog) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Activity")
                 .add(activity)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        MainActivity.listActivitySchedule.add(activity);
+                        reloadData();
                         dialog.dismiss();
                         Toast.makeText(context, "Thêm hoạt động thành công", Toast.LENGTH_SHORT).show();
-                        MainActivity.listActivitySchedule.add(activity);
+                        linearNgay.setVisibility(View.GONE);
+                        tvContent.setVisibility(View.GONE);
+                        btnThemTbao.setVisibility(View.GONE);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -303,7 +307,5 @@ public class LichHoatDongFragment extends Fragment {
                         return;
                     }
                 });
-        reloadData();
     }
-
 }
