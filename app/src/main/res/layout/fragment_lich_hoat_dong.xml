@@ -1,52 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/fragment_lichHoatDong"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:tag="lichhoatdong"
     android:orientation="vertical"
+    android:tag="lichhoatdong"
     tools:context=".fragments.LichHoatDongFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lịch hoạt động"
-        android:textSize="30sp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/nunito"
+        android:text="Lịch hoạt động"
         android:textColor="#2F80ED"
-        android:textStyle="bold"
-        ></TextView>
+        android:textSize="30sp"
+        android:textStyle="bold"></TextView>
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/ActivitySchedule_calendar"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/ActivitySchedule_tvNgay"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20dp" />
+
+    <LinearLayout
+        android:id="@+id/ActivitySchedule_linearNgay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:fontFamily="@font/nunito"
+        android:layout_marginTop="20dp"
         android:visibility="invisible"
-        android:textColor="#3D5AFE"
-        android:text="Nội dung:"
-        android:textSize="20sp"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ActivitySchedule_tvNgay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:text="Nội dung: 01/06/2022"
+            android:textColor="#3D5AFE"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:id="@+id/ActivitySchedule_imgEdit"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/ic_edit3"></ImageView>
+
+        <ImageView
+            android:id="@+id/ActivitySchedule_imgUnpin"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/ic_unpin"></ImageView>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/ActivitySchedule_tvContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/nunito_light"
         android:autoLink="all"
+        android:fontFamily="@font/nunito_light"
         android:textColor="#2E2E2E"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/ActivitySchedule_btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_create"
+        android:background="@null"
+        android:textColor="#FF3D00"
+        android:textAllCaps="false"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:text="    Thêm thông báo  "></Button>
+
 </LinearLayout>

@@ -308,4 +308,6 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
     public void onResume() {
         super.onResume();
     }
+
+
 }
