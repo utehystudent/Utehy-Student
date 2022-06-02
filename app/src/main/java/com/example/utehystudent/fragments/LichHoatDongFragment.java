@@ -1,8 +1,10 @@
 package com.example.utehystudent.fragments;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +17,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.CalendarWeekDay;
 import com.applandeo.materialcalendarview.EventDay;
@@ -23,8 +28,11 @@ import com.example.utehystudent.R;
 import com.example.utehystudent.activity.MainActivity;
 import com.example.utehystudent.calendar_setup.DrawableUtils;
 import com.example.utehystudent.model.Activity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,7 +54,6 @@ public class LichHoatDongFragment extends Fragment {
     String classID = "";
     FirebaseFirestore db;
     Activity activity_chose = new Activity();
-    String documentID = "";
 
     public LichHoatDongFragment(Context context) {
         // Required empty public constructor
@@ -145,6 +152,78 @@ public class LichHoatDongFragment extends Fragment {
         imgEdit.setOnClickListener(view -> {
             DialogSuaThongBao();
         });
+
+        imgUnpin.setOnClickListener(view -> {
+            AlertDialog.Builder alert = new AlertDialog.Builder(context);
+            alert.setMessage("Bạn có chắc muốn gỡ thông báo ngày "+activity_chose.getDate()+" không ?");
+            alert.setNegativeButton("HỦY", (dialogInterface, i) -> {
+                dialogInterface.dismiss();
+                return;
+            });
+            alert.setPositiveButton("CÓ", (dialogInterface, i) -> {
+                unpinActivity(dialogInterface);
+            });
+            alert.create();
+            alert.show();
+        });
+
+    }
+
+    private void unpinActivity(DialogInterface dialogInterface) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Activity")
+                .whereEqualTo("class_ID", activity_chose.getClass_ID())
+                .whereEqualTo("date", activity_chose.getDate())
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        return;
+                    }
+                    if (value != null) {
+                        value.forEach(it -> {
+                            String docID = it.getId();
+                            unpin(docID, activity_chose.getDate(), dialogInterface);
+                        });
+                    }
+                });
+    }
+
+    private void unpin(String docID, String date, DialogInterface dialogInterface) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Activity")
+                .document(docID)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(context, "Gỡ hoạt động thành công !", Toast.LENGTH_SHORT).show();
+                        dialogInterface.dismiss();
+                        deleteActivityFromList();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Gỡ hoạt động thất bại", Toast.LENGTH_SHORT).show();
+                        dialogInterface.dismiss();
+                    }
+                });
+    }
+
+    private void deleteActivityFromList() {
+        for (int i = 0; i< MainActivity.listActivitySchedule.size(); ++i) {
+            if (MainActivity.listActivitySchedule.get(i).getDate().equals(activity_chose.getDate())) {
+                MainActivity.listActivitySchedule.remove(i);
+                break;
+            }
+        }
+        activity_chose = new Activity();
+
+        setUpCalendar();
+
+        linearNgay.setVisibility(View.GONE);
+        tvContent.setVisibility(View.GONE);
+        btnThemTbao.setVisibility(View.GONE);
     }
 
     private void DialogSuaThongBao() {
@@ -197,14 +276,18 @@ public class LichHoatDongFragment extends Fragment {
                 .update("content", activity.getContent())
                 .addOnSuccessListener(aVoid -> {
                     dialog.dismiss();
-                    Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Cập nhật động thành công !", Toast.LENGTH_SHORT).show();
                     linearNgay.setVisibility(View.GONE);
                     tvContent.setVisibility(View.GONE);
                     btnThemTbao.setVisibility(View.GONE);
+
+                    setUpCalendar();
+
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(context, "Cập nhật thất bại :" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    Toast.makeText(context, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                    Log.e("UPDATE ACTIVITY", "updateActivity: "+e.getMessage() );
                     return;
                 });
     }
@@ -272,6 +355,7 @@ public class LichHoatDongFragment extends Fragment {
     private void reloadData() {
         listActivity.clear();
         listActivity = MainActivity.listActivitySchedule;
+        Log.d("qqq", "reloadData: "+MainActivity.listActivitySchedule.size());
         List<EventDay> events = new ArrayList<>();
         for (Activity activity : listActivity) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -345,7 +429,10 @@ public class LichHoatDongFragment extends Fragment {
                 .add(activity)
                 .addOnSuccessListener(documentReference -> {
                     MainActivity.listActivitySchedule.add(activity);
-                    reloadData();
+                    //reloadData();
+
+                    setUpCalendar();
+
                     dialog.dismiss();
                     Toast.makeText(context, "Thêm hoạt động thành công", Toast.LENGTH_SHORT).show();
                     linearNgay.setVisibility(View.GONE);
