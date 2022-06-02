@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.CalendarWeekDay;
@@ -24,9 +23,6 @@ import com.example.utehystudent.R;
 import com.example.utehystudent.activity.MainActivity;
 import com.example.utehystudent.calendar_setup.DrawableUtils;
 import com.example.utehystudent.model.Activity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.text.ParseException;
@@ -49,7 +45,8 @@ public class LichHoatDongFragment extends Fragment {
     String dateChose = "";
     String classID = "";
     FirebaseFirestore db;
-    View rootView;
+    Activity activity_chose = new Activity();
+    String documentID = "";
 
     public LichHoatDongFragment(Context context) {
         // Required empty public constructor
@@ -66,11 +63,6 @@ public class LichHoatDongFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lich_hoat_dong, container, false);
-        //snackbar
-        View mView = view.findViewById(R.id.fragment_lichHoatDong);
-        View v = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
-        rootView = mView.getRootView();
-        //
         tvDay = view.findViewById(R.id.ActivitySchedule_tvNgay);
         tvContent = view.findViewById(R.id.ActivitySchedule_tvContent);
         linearNgay = view.findViewById(R.id.ActivitySchedule_linearNgay);
@@ -101,7 +93,6 @@ public class LichHoatDongFragment extends Fragment {
 
         Events();
 
-
         // Inflate the layout for this fragment
         return view;
     }
@@ -115,6 +106,7 @@ public class LichHoatDongFragment extends Fragment {
             dateChose = ngayClick;
             for (Activity sk : listActivity) {
                 if (sk.getDate().equals(ngayClick)) {
+                    activity_chose = sk;
                     isHasEvent = true;
                     linearNgay.setVisibility(View.VISIBLE);
                     tvDay.setText("Nội dung: " + sk.getDate());
@@ -124,7 +116,7 @@ public class LichHoatDongFragment extends Fragment {
                     if (regency.equals("lt")) {
                         imgEdit.setVisibility(View.VISIBLE);
                         imgUnpin.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         imgEdit.setVisibility(View.GONE);
                         imgUnpin.setVisibility(View.GONE);
                     }
@@ -140,7 +132,7 @@ public class LichHoatDongFragment extends Fragment {
                 if (regency.equals("lt")) {
                     btnThemTbao.setVisibility(View.VISIBLE);
                     tvContent.setVisibility(View.GONE);
-                }else {
+                } else {
                     tvContent.setText("Không có hoạt động nào !");
                 }
             }
@@ -149,6 +141,72 @@ public class LichHoatDongFragment extends Fragment {
         btnThemTbao.setOnClickListener(view -> {
             DialogThemHoatDong();
         });
+
+        imgEdit.setOnClickListener(view -> {
+            DialogSuaThongBao();
+        });
+    }
+
+    private void DialogSuaThongBao() {
+        Dialog dialog = new Dialog(requireActivity());
+        dialog.setContentView(R.layout.edit_activity_schedule);
+        TextView tvDate = dialog.findViewById(R.id.dialogSuaHoatDong_tvNgay);
+        EditText edtContent = dialog.findViewById(R.id.dialogSuaHoatDong_edtND);
+        Button btnXong = dialog.findViewById(R.id.dialogSuaHoatDong_btnXong);
+
+        tvDate.setText("Ngày: " + activity_chose.getDate());
+        edtContent.setText(activity_chose.getContent());
+
+        btnXong.setOnClickListener(view -> {
+            if (edtContent.getText().toString().equals("")) {
+                edtContent.setError("Nội dung còn trống");
+                edtContent.requestFocus();
+                return;
+            }
+            activity_chose.setContent(edtContent.getText().toString().trim());
+            //update activity to firestore
+            getDocumentID(activity_chose, dialog);
+        });
+
+        dialog.create();
+        dialog.show();
+    }
+
+    private void getDocumentID(Activity activity, Dialog dialog) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Activity")
+                .whereEqualTo("class_ID", activity.getClass_ID())
+                .whereEqualTo("date", activity.getDate())
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        return;
+                    }
+                    if (value != null) {
+                        value.forEach(it -> {
+                            String docID = it.getId();
+                            updateActivity(activity, dialog, docID);
+                        });
+                    }
+                });
+    }
+
+    private void updateActivity(Activity activity, Dialog dialog, String docID) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Activity")
+                .document(docID)
+                .update("content", activity.getContent())
+                .addOnSuccessListener(aVoid -> {
+                    dialog.dismiss();
+                    Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    linearNgay.setVisibility(View.GONE);
+                    tvContent.setVisibility(View.GONE);
+                    btnThemTbao.setVisibility(View.GONE);
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(context, "Cập nhật thất bại :" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    return;
+                });
     }
 
     public int daysBetween(Date d1, Date d2) {
@@ -161,9 +219,7 @@ public class LichHoatDongFragment extends Fragment {
         progressDialog.show();
         List<EventDay> events = new ArrayList<>();
         SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
-
         classID = pref.getString("class_ID", "");
-
         db = FirebaseFirestore.getInstance();
         MainActivity.listActivitySchedule.clear();
         db.collection("Activity")
@@ -249,7 +305,6 @@ public class LichHoatDongFragment extends Fragment {
         }
     }
 
-
     private void DialogThemHoatDong() {
         if (dateChose.equals("")) {
             Toast.makeText(context, "Vui lòng chọn ngày", Toast.LENGTH_SHORT).show();
@@ -262,7 +317,7 @@ public class LichHoatDongFragment extends Fragment {
         EditText edtContent = dialog.findViewById(R.id.dialogThemHoatDong_edtND);
         Button btnXong = dialog.findViewById(R.id.dialogThemHoatDong_btnXong);
 
-        tvDate.setText("Ngày: "+dateChose);
+        tvDate.setText("Ngày: " + dateChose);
 
         btnXong.setOnClickListener(view -> {
             SharedPreferences pref = context.getSharedPreferences("User", Context.MODE_PRIVATE);
@@ -288,24 +343,18 @@ public class LichHoatDongFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Activity")
                 .add(activity)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        MainActivity.listActivitySchedule.add(activity);
-                        reloadData();
-                        dialog.dismiss();
-                        Toast.makeText(context, "Thêm hoạt động thành công", Toast.LENGTH_SHORT).show();
-                        linearNgay.setVisibility(View.GONE);
-                        tvContent.setVisibility(View.GONE);
-                        btnThemTbao.setVisibility(View.GONE);
-                    }
+                .addOnSuccessListener(documentReference -> {
+                    MainActivity.listActivitySchedule.add(activity);
+                    reloadData();
+                    dialog.dismiss();
+                    Toast.makeText(context, "Thêm hoạt động thành công", Toast.LENGTH_SHORT).show();
+                    linearNgay.setVisibility(View.GONE);
+                    tvContent.setVisibility(View.GONE);
+                    btnThemTbao.setVisibility(View.GONE);
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Thêm hoạt động thất bại", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+                .addOnFailureListener(e -> {
+                    Toast.makeText(context, "Thêm hoạt động thất bại", Toast.LENGTH_SHORT).show();
+                    return;
                 });
     }
 }

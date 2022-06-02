@@ -24,10 +24,10 @@ public final class DrawableUtils {
     }
 
     public static Drawable getThreeDots(Context context) {
-        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.sample_three_icons);
+        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_circle);
 
         //Add padding to too large icon
-        return new InsetDrawable(drawable, 100, 0, 100, 0);
+        return new InsetDrawable(drawable, 150, 0, 150, 0);
     }
 
     public static Drawable getDayCircle(Context context, @ColorRes int borderColor, @ColorRes int fillColor) {
