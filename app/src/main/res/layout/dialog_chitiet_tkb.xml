@@ -1,10 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="380dp"
-    android:layout_height="400dp"
+    android:layout_height="530dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/dialogCTTKB_tvThu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="THỨ NĂM"
+                android:fontFamily="@font/nunito"
+                android:textAllCaps="true"
+                android:layout_marginTop="10dp"
+                android:textSize="25sp"
+                android:textColor="#F50057"
+                android:layout_gravity="center"></TextView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_tvDN"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito"
+                android:text="BUỔI SÁNG"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                android:layout_marginTop="10dp"
+                app:strokeColor ="#2F80ED"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="10dp">
+                <EditText
+                    android:id="@+id/dialogCTTKB_edtTenMHSang"
+                    android:padding="10dp"
+                    android:lineSpacingExtra="5dp"
+                    android:drawablePadding="10dp"
+                    android:minHeight="55dp"
+                    android:maxHeight="70dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_sun"
+                    android:hint="Môn học sáng"
+                    android:background="@drawable/rounded2"></EditText>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+<!--            Chiều-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_tvDN"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/nunito"
+                android:text="BUỔI CHIỀU"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                android:layout_marginTop="10dp"
+                app:strokeColor ="#2F80ED"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="10dp">
+                <EditText
+                    android:id="@+id/dialogCTTKB_edtTenMHChieu"
+                    android:padding="10dp"
+                    android:drawablePadding="10dp"
+                    android:minHeight="55dp"
+                    android:lineSpacingExtra="5dp"
+                    android:maxHeight="70dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_sunset"
+                    android:hint="Môn học chiều"
+                    android:background="@drawable/rounded2"></EditText>
+            </com.google.android.material.card.MaterialCardView>
+
+<!--            Tối-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_tvDN"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/nunito"
+                android:text="BUỔI TỐI"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                android:layout_marginTop="10dp"
+                app:strokeColor ="#2F80ED"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="10dp">
+                <EditText
+                    android:id="@+id/dialogCTTKB_edtTenMHToi"
+                    android:padding="10dp"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:minHeight="55dp"
+                    android:lineSpacingExtra="5dp"
+                    android:maxHeight="70dp"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_moon"
+                    android:hint="Môn học tối"
+                    android:background="@drawable/rounded2"></EditText>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:cardCornerRadius="10dp"
+                android:background="@drawable/gradient1"
+                app:cardElevation="10dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="40dp">
+                <Button
+                    android:id="@+id/dialogCTTKB_btnLuu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient1"
+                    android:text="lưu"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/nunito"
+                    android:longClickable="false"
+                    ></Button>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

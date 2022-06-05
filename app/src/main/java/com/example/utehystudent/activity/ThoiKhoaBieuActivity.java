@@ -7,12 +7,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.utehystudent.R;
 import com.example.utehystudent.adapters.ThoiKhoaBieuAdapter;
 import com.example.utehystudent.model.Schedule_detail;
@@ -20,6 +22,7 @@ import com.example.utehystudent.model.ThoiKhoaBieu;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class ThoiKhoaBieuActivity extends AppCompatActivity {
@@ -102,10 +105,50 @@ public class ThoiKhoaBieuActivity extends AppCompatActivity {
     }
     
     public void clickItemTKB(ThoiKhoaBieu tkb) {
-        Toast.makeText(this, "Click :"+tkb.getThu(), Toast.LENGTH_SHORT).show();
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_chitiet_tkb);
+        TextView tvThu = dialog.findViewById(R.id.dialogCTTKB_tvThu);
+        EditText edtSang = dialog.findViewById(R.id.dialogCTTKB_edtTenMHSang);
+        EditText edtChieu = dialog.findViewById(R.id.dialogCTTKB_edtTenMHChieu);
+        EditText edtToi = dialog.findViewById(R.id.dialogCTTKB_edtTenMHToi);
+
+        tvThu.setText(getThu(tkb.getThu()));
+        edtSang.setText(tkb.getSang());
+        edtChieu.setText(tkb.getChieu());
+        edtToi.setText(tkb.getToi());
+
+
         dialog.create();
         dialog.show();
+
+    }
+
+    private String getThu(String s) {
+        String rs = "";
+        switch (s) {
+            case "Monday":
+                rs = "Thứ hai";
+                break;
+            case "Tuesday":
+                rs = "Thứ ba";
+                break;
+            case "Wednesday":
+                rs = "Thứ tư";
+                break;
+            case "Thursday":
+                rs = "Thứ năm";
+                break;
+            case "Friday":
+                rs = "Thứ sáu";
+                break;
+            case "Saturday":
+                rs = "Thứ bảy";
+                break;
+            case "Sunday":
+                rs = "Chủ nhật";
+                break;
+            default: rs = ""; break;
+        }
+        return rs;
     }
 }
