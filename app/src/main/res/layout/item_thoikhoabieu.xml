@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/itemTKB_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/itemTKB_tvThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="2"
+            android:textSize="50sp"></TextView>
+
+        <!-- <View
+             android:layout_width="1dp"
+             android:layout_height="match_parent"
+             android:background="#E1EAE8"
+             android:layout_marginLeft="25dp"></View>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/itemTKB_tvSang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="SÁNG: Nghỉ"
+                android:textColor="#000"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/itemTKB_tvChieu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="CHIỀU: Lập trình nâng cao với C#"
+                android:textColor="#000"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/itemTKB_tvToi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="TỐI: Nghỉ"
+                android:textColor="#000"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

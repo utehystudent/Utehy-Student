@@ -17,8 +17,10 @@ import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.MenuViewModel;
 import com.example.utehystudent.activity.AttendanceActivity;
 import com.example.utehystudent.activity.ClassManagementActivity;
+import com.example.utehystudent.activity.CongThongTinActivity;
 import com.example.utehystudent.activity.LoginActivity;
 import com.example.utehystudent.activity.SubjectInTermManagementActivity;
+import com.example.utehystudent.activity.ThoiKhoaBieuActivity;
 import com.squareup.picasso.Picasso;
 
 public class MenuFragment extends Fragment {
@@ -26,9 +28,10 @@ public class MenuFragment extends Fragment {
     ImageView imgAvt;
     TextView tvName, tvClass;
     MenuViewModel menuViewModel;
-    Button btnClassManagement, btnSubjectManagement, btnDangXuat, btnDiemDanh;
+    Button btnClassManagement, btnSubjectManagement, btnDangXuat, btnDiemDanh, btnCongTT, btnTKB;
 
     public MenuFragment() {
+
     }
 
     @Override
@@ -58,6 +61,14 @@ public class MenuFragment extends Fragment {
             Intent it = new Intent(requireActivity(), AttendanceActivity.class);
             startActivity(it);
         });
+        btnCongTT.setOnClickListener(view -> {
+            Intent it = new Intent(requireActivity(), CongThongTinActivity.class);
+            startActivity(it);
+        });
+        btnTKB.setOnClickListener(view -> {
+            Intent it = new Intent(requireActivity(), ThoiKhoaBieuActivity.class);
+            startActivity(it);
+        });
     }
 
     private void DangXuatTaiKhoan() {
@@ -76,6 +87,8 @@ public class MenuFragment extends Fragment {
         btnSubjectManagement = view.findViewById(R.id.Menu_btnQLMH);
         btnDangXuat = view.findViewById(R.id.Menu_btnDangXuat);
         btnDiemDanh = view.findViewById(R.id.Menu_btnDiemDanh);
+        btnCongTT = view.findViewById(R.id.Menu_btnCongThongTin);
+        btnTKB = view.findViewById(R.id.Menu_btnTKB);
 
         menuViewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
         menuViewModel.getCurrentUser().observe(requireActivity(), user -> {

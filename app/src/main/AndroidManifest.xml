@@ -17,6 +17,12 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.ThoiKhoaBieuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CongThongTinActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AttendanceDetailActivity"
             android:exported="false" />
         <activity

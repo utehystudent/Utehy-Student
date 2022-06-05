@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/MenuFragment"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:tag="menu"
+    android:id="@+id/MenuFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:tag="menu"
     tools:context=".fragments.MenuFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menu"
-        android:textSize="30sp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/nunito"
+        android:text="Menu"
         android:textColor="#2F80ED"
-        android:textStyle="bold"
-        ></TextView>
+        android:textSize="30sp"
+        android:textStyle="bold"></TextView>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="112dp">
+        android:layout_height="112dp"
+        android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/Home_cardAvt"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_centerInParent="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                app:cardCornerRadius="40dp"
                 android:layout_marginTop="10dp"
                 android:innerRadius="0dp"
                 android:shape="ring"
                 android:thicknessRatio="1.9"
+                app:cardCornerRadius="40dp"
                 app:cardPreventCornerOverlap="false">
+
                 <ImageView
                     android:id="@+id/Menu_imgAvt"
-                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:scaleType="center"
-                    ></ImageView>
+                    android:padding="10dp"
+                    android:scaleType="center"></ImageView>
             </androidx.cardview.widget.CardView>
 
 
@@ -85,88 +85,152 @@
     </LinearLayout>
 
     <View
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#E4D5D5"/>
+        android:layout_marginTop="5dp"
+        android:background="#E4D5D5" />
 
     <ScrollView
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CHUNG"
-                android:textSize="20sp"
-                android:fontFamily="@font/nunito"
-                android:textColor="#2F80ED"
                 android:layout_marginLeft="10dp"
-                ></TextView>
+                android:fontFamily="@font/nunito"
+                android:text="CHUNG"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+
             <LinearLayout
                 android:id="@+id/Menu_layoutChung"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingBottom="10dp"
-                android:orientation="vertical">
-                    <Button
-                        android:id="@+id/Menu_btnTaiKhoan"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="5dp"
-                        android:text="   Tài khoản"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:fontFamily="@font/nunito_light"
-                        android:textColor="#000"
-                        android:drawableLeft="@drawable/ic_account2"
-                        android:drawableRight="@drawable/ic_right_arrow"
-                        android:paddingRight="5dp"
-                        android:textAllCaps="false"
-                        android:textAlignment="textStart"
-                        android:paddingLeft="10dp"
-                        android:background="#FFFFFF"></Button>
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
 
-                    <Button
-                        android:id="@+id/Menu_btnBangDiem"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_marginTop="5dp"
-                        android:padding="5dp"
-                        android:text="   Bảng điểm"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/nunito_light"
-                        android:textColor="#000"
-                        android:paddingRight="5dp"
-                        android:drawableLeft="@drawable/ic_mark_sheet"
-                        android:drawableRight="@drawable/ic_right_arrow"
-                        android:textAlignment="textStart"
-                        android:paddingLeft="10dp"
-                        android:background="#FFFFFF"></Button>
+                <Button
+                    android:id="@+id/Menu_btnTaiKhoan"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_account2"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:padding="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Tài khoản"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
 
-                    <Button
-                        android:id="@+id/Menu_btnLienHe"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_marginTop="5dp"
-                        android:padding="5dp"
-                        android:text="   Liên hệ"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/nunito_light"
-                        android:textColor="#000"
-                        android:paddingRight="5dp"
-                        android:drawableLeft="@drawable/ic_contact"
-                        android:drawableRight="@drawable/ic_right_arrow"
-                        android:textAlignment="textStart"
-                        android:paddingLeft="10dp"
-                        android:background="#FFFFFF"></Button>
+                <Button
+                    android:id="@+id/Menu_btnCongThongTin"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_information_gate"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:padding="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Cổng thông tin sinh viên"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
+
+
+                <Button
+                    android:id="@+id/Menu_btnLienHe"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_contact"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:padding="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Liên hệ"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
             </LinearLayout>
+
+            //
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito"
+                android:text="HỌC TẬP"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+            <LinearLayout
+                android:id="@+id/Menu_layoutHocTap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <Button
+                    android:id="@+id/Menu_btnBangDiem"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_mark_sheet"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:padding="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Bảng điểm"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
+
+                <Button
+                    android:id="@+id/Menu_btnTKB"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_tkb"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:padding="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Thời khóa biểu"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/Menu_layoutQuanTri"
@@ -174,77 +238,96 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="QUẢN TRỊ"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/nunito"
-                    android:textColor="#2F80ED"
                     android:layout_marginLeft="10dp"
-                    ></TextView>
+                    android:fontFamily="@font/nunito"
+                    android:text="QUẢN TRỊ"
+                    android:textColor="#2F80ED"
+                    android:textSize="20sp"></TextView>
 
-                    <Button
-                        android:id="@+id/Menu_btnQLTV"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:text="   Quản lý thành viên lớp"
-                        android:fontFamily="@font/nunito_light"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:textAllCaps="false"
-                        android:textColor="#000"
-                        android:paddingRight="5dp"
-                        android:drawableLeft="@drawable/ic_member"
-                        android:drawableRight="@drawable/ic_right_arrow"
-                        android:textAlignment="textStart"
-                        android:paddingLeft="10dp"
-                        android:background="#FFFFFF"></Button>
+                <Button
+                    android:id="@+id/Menu_btnDiemDanh"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_attendance"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Điểm danh"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
 
-                    <Button
-                        android:id="@+id/Menu_btnQLMH"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_marginTop="5dp"
-                        android:text="   Quản lý môn học"
-                        android:fontFamily="@font/nunito_light"
-                        android:textAllCaps="false"
-                        android:textColor="#000"
-                        android:paddingRight="5dp"
-                        android:drawableLeft="@drawable/ic_subject"
-                        android:drawableRight="@drawable/ic_right_arrow"
-                        android:textAlignment="textStart"
-                        android:paddingLeft="10dp"
-                        android:background="#FFFFFF"></Button>
+                <Button
+                    android:id="@+id/Menu_btnQLTV"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_member"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Quản lý thành viên lớp"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
 
-                    <Button
-                        android:id="@+id/Menu_btnDiemDanh"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_marginTop="5dp"
-                        android:text="   Điểm danh"
-                        android:fontFamily="@font/nunito_light"
-                        android:textAllCaps="false"
-                        android:textColor="#000"
-                        android:paddingRight="5dp"
-                        android:drawableLeft="@drawable/ic_attendance"
-                        android:drawableRight="@drawable/ic_right_arrow"
-                        android:textAlignment="textStart"
-                        android:paddingLeft="10dp"
-                        android:background="#FFFFFF"></Button>
+                <Button
+                    android:id="@+id/Menu_btnQLMH"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_subject"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Quản lý môn học"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
+
+                <Button
+                    android:id="@+id/Menu_btnGuiDiem"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_guidiem"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Gửi điểm"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
+
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/Menu_btnDangXuat"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="40dp"
                 android:background="#EA5C30"
                 android:text="Đăng xuất"
                 android:textColor="#fff"
-                android:textSize="15sp"
-                android:layout_marginTop="30dp"></Button>
+                android:textSize="15sp"></Button>
         </LinearLayout>
     </ScrollView>
 
