@@ -1,10 +1,13 @@
 package com.example.utehystudent.activity;
 
 import android.app.ProgressDialog;
+import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,30 +18,36 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.utehystudent.R;
 
-public class CongThongTinActivity extends AppCompatActivity {
-    Toolbar toolbar;
+public class ThuVienSoActivity extends AppCompatActivity {
     WebView webView;
     ProgressDialog progressDialog;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_cong_thong_tin);
+        setContentView(R.layout.activity_thu_vien_so);
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Đang tải dữ liệu...");
 
-        toolbar = findViewById(R.id.CongTT_toolbar);
+        toolbar = findViewById(R.id.TVS_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("CỔNG THÔNG TIN SINH VIÊN");
+        getSupportActionBar().setTitle("THƯ VIỆN SỐ");
         toolbar.setNavigationOnClickListener(v -> finish());
         //
-        webView = findViewById(R.id.CongTT_webView);
+        webView = findViewById(R.id.TVS_webView);
 
-        webView.getSettings().setAppCacheEnabled(true);
+        String url = "http://thuvienso.utehy.edu.vn/";
+        webView.loadUrl(url);
+
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setSupportZoom(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             webView.getSettings().setSafeBrowsingEnabled(false);
@@ -52,14 +61,17 @@ public class CongThongTinActivity extends AppCompatActivity {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
-        String url = "http://qldaotao.utehy.edu.vn:81/DangNhap/Login";
-        webView.loadUrl(url);
-
         webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                Log.d("xxxx", "onReceivedSslError: "+error.toString());
+                handler.proceed();
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
-                return true;
+                return false;
             }
         });
 
@@ -95,7 +107,6 @@ public class CongThongTinActivity extends AppCompatActivity {
         } else {
             finish();
         }
-
         super.onBackPressed();
     }
 }

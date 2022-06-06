@@ -194,6 +194,24 @@
                 android:paddingBottom="10dp">
 
                 <Button
+                    android:id="@+id/Menu_btnTKB"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_tkb"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:padding="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Thời khóa biểu"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
+
+                <Button
                     android:id="@+id/Menu_btnBangDiem"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
@@ -212,25 +230,24 @@
                     android:textColor="#000"></Button>
 
                 <Button
-                    android:id="@+id/Menu_btnTKB"
+                    android:id="@+id/Menu_btnThuVienSo"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
                     android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/ic_tkb"
+                    android:drawableLeft="@drawable/ic_digital_library"
                     android:drawableRight="@drawable/ic_right_arrow"
                     android:fontFamily="@font/nunito_light"
                     android:padding="5dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
-                    android:text="   Thời khóa biểu"
+                    android:text="   Thư viện số"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="#000"></Button>
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/Menu_layoutQuanTri"

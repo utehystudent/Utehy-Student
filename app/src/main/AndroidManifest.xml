@@ -17,6 +17,9 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.ThuVienSoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ThoiKhoaBieuActivity"
             android:exported="false" />
         <activity

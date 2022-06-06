@@ -242,7 +242,8 @@ public class LichHoatDongFragment extends Fragment {
                 edtContent.requestFocus();
                 return;
             }
-            activity_chose.setContent(edtContent.getText().toString().trim());
+
+            activity_chose.setContent(edtContent.getText().toString());
             //update activity to firestore
             getDocumentID(activity_chose, dialog);
         });
@@ -414,7 +415,8 @@ public class LichHoatDongFragment extends Fragment {
             Activity activity = new Activity();
             activity.setClass_ID(cID);
             activity.setDate(dateChose);
-            activity.setContent(edtContent.getText().toString().trim());
+
+            activity.setContent(edtContent.getText().toString());
             //add activity to firestore
             addActivity(activity, dialog);
         });

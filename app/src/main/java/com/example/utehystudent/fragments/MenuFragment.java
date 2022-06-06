@@ -21,6 +21,7 @@ import com.example.utehystudent.activity.CongThongTinActivity;
 import com.example.utehystudent.activity.LoginActivity;
 import com.example.utehystudent.activity.SubjectInTermManagementActivity;
 import com.example.utehystudent.activity.ThoiKhoaBieuActivity;
+import com.example.utehystudent.activity.ThuVienSoActivity;
 import com.squareup.picasso.Picasso;
 
 public class MenuFragment extends Fragment {
@@ -28,7 +29,7 @@ public class MenuFragment extends Fragment {
     ImageView imgAvt;
     TextView tvName, tvClass;
     MenuViewModel menuViewModel;
-    Button btnClassManagement, btnSubjectManagement, btnDangXuat, btnDiemDanh, btnCongTT, btnTKB;
+    Button btnClassManagement, btnSubjectManagement, btnDangXuat, btnDiemDanh, btnCongTT, btnTKB, btnThuVienSo;
 
     public MenuFragment() {
 
@@ -69,6 +70,10 @@ public class MenuFragment extends Fragment {
             Intent it = new Intent(requireActivity(), ThoiKhoaBieuActivity.class);
             startActivity(it);
         });
+        btnThuVienSo.setOnClickListener(view -> {
+            Intent it = new Intent(requireActivity(), ThuVienSoActivity.class);
+            startActivity(it);
+        });
     }
 
     private void DangXuatTaiKhoan() {
@@ -89,6 +94,7 @@ public class MenuFragment extends Fragment {
         btnDiemDanh = view.findViewById(R.id.Menu_btnDiemDanh);
         btnCongTT = view.findViewById(R.id.Menu_btnCongThongTin);
         btnTKB = view.findViewById(R.id.Menu_btnTKB);
+        btnThuVienSo = view.findViewById(R.id.Menu_btnThuVienSo);
 
         menuViewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
         menuViewModel.getCurrentUser().observe(requireActivity(), user -> {
