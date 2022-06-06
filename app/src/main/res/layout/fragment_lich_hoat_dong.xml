@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:tag="lichhoatdong"
-    tools:context=".fragments.LichHoatDongFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".fragments.LichHoatDongFragment">
 
     <TextView
         android:layout_width="wrap_content"

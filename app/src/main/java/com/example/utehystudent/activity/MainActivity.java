@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.utehystudent.Pushy.RegisterForPushNotificationsAsync;
 import com.example.utehystudent.R;
+import com.example.utehystudent.async.DeviceTokenAsyncTask;
 import com.example.utehystudent.fragments.BangTinFragment;
 import com.example.utehystudent.fragments.HomeFragment;
 import com.example.utehystudent.fragments.LichHoatDongFragment;
@@ -22,10 +23,16 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private static final int CONTENT_VIEW_ID = 10101010;
-    MeowBottomNavigation bottomNavigation;
     public static ArrayList<SubjectAbsent> listSubjectAbsent = new ArrayList<>();
     public static ArrayList<Attendance> listAttendance = new ArrayList<>();
     public static ArrayList<Activity> listActivitySchedule = new ArrayList<>();
+    MeowBottomNavigation bottomNavigation;
+
+    public static void DeleteDataAttendance() {
+        listAttendance.clear();
+        listSubjectAbsent.clear();
+        listActivitySchedule.clear();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         new RegisterForPushNotificationsAsync(this).execute();
 
         Init();
+        new DeviceTokenAsyncTask(this).execute();
 
     }
+
     private void Init() {
         bottomNavigation = findViewById(R.id.Main_bottomNavigation);
 
@@ -51,26 +60,24 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_noti));
         bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.ic_menu));
 
-
-
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
             public void onShowItem(MeowBottomNavigation.Model item) {
                 Fragment fragment = new Fragment();
                 switch (item.getId()) {
-                    case 1 :
+                    case 1:
                         fragment = new LichHoatDongFragment(MainActivity.this);
                         break;
-                    case 2 :
+                    case 2:
                         fragment = new BangTinFragment();
                         break;
-                    case 3 :
+                    case 3:
                         fragment = new HomeFragment();
                         break;
-                    case 4 :
+                    case 4:
                         fragment = new ThongBaoFragment();
                         break;
-                    case 5 :
+                    case 5:
                         fragment = new MenuFragment();
                         break;
                 }
@@ -90,11 +97,10 @@ public class MainActivity extends AppCompatActivity {
         //set home fragment is default
         bottomNavigation.show(3, true);
 
-
         bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
             @Override
             public void onReselectItem(MeowBottomNavigation.Model item) {
-                if(item.getId() == 3) {
+                if (item.getId() == 3) {
                     loadFragment(new HomeFragment());
                 }
             }
@@ -112,12 +118,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-    }
-
-    public static void DeleteDataAttendance() {
-        listAttendance.clear();
-        listSubjectAbsent.clear();
-        listActivitySchedule.clear();
     }
 
 }

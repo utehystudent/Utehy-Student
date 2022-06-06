@@ -111,6 +111,12 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
         pref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
 
         if ((MainActivity.listSubjectAbsent.size() == 0 && MainActivity.listAttendance.size() == 0) || MainActivity.listSubjectAbsent == null || MainActivity.listAttendance == null) {
+
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                return;
+            }, 1000);
+
             GetListAttendance();
             GetListSubjectDetailInTerm();
             GetListSubjectAbsent();

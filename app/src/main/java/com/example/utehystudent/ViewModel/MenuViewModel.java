@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.utehystudent.activity.MainActivity;
 import com.example.utehystudent.model.User;
 import com.example.utehystudent.repository.UserRepo;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MenuViewModel extends AndroidViewModel {
     Application context;
@@ -43,8 +44,15 @@ public class MenuViewModel extends AndroidViewModel {
         //Delete user data from SharedPreferences
         SharedPreferences preferencesAccount = context.getSharedPreferences("Account", Context.MODE_PRIVATE);
         SharedPreferences preferencesUser = context.getSharedPreferences("User", Context.MODE_PRIVATE);
+        String username = preferencesAccount.getString("username", "");
         preferencesAccount.edit().clear().commit();
         preferencesUser.edit().clear().commit();
         MainActivity.DeleteDataAttendance();
+
+        //delete device_token
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Account")
+                .document(username)
+                .update("device_token", "");
     }
 }
