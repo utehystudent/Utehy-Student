@@ -17,6 +17,12 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.PostViewer_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ImageViewerActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.ThuVienSoActivity"
             android:exported="false" />
         <activity

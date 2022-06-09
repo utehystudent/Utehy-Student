@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/itemBV_cardView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="5dp"
+    android:layout_marginTop="10dp"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewPost_card"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardPreventCornerOverlap="false">
+
+            <ImageView
+                android:id="@+id/viewPost_imgAvt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/utehy_logo"
+                android:layout_gravity="center"
+                android:scaleType="center"></ImageView>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/viewPost_tvTen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/viewPost_card"
+            android:text="Nguyễn Thị Linh"
+            android:fontFamily="@font/nunito"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/viewPost_tvNgay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewPost_tvTen"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/viewPost_card"
+            android:text="20:05 ngày 25/05/2022"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/viewPost_tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewPost_tvNgay"
+            android:layout_marginTop="10dp"
+            android:autoLink="all"
+            android:ellipsize="end"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="3dp"
+            android:maxLines="5"
+            android:padding="5dp"
+            android:textColor="#000" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewPost_tvContent"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:id="@+id/viewPost_imgAnhBV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="200dp"
+                android:maxHeight="300dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                app:cardCornerRadius="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/viewPost_imgAnhBV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/viewPost_imgAnhBV"
+                app:layout_constraintTop_toTopOf="@+id/viewPost_imgAnhBV"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintVertical_bias="1.0">
+
+                <TextView
+                    android:id="@+id/itemBV_numMoreImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:background="#EFE7E7"
+                    android:drawableLeft="@drawable/ic_image"
+                    android:drawablePadding="2dp"
+                    android:text="5+"
+                    android:textColor="#651FFF"
+                    android:textSize="20sp"></TextView>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/constraint"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/viewPost_imb_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:background="@null"
+                android:src="@drawable/ic_like_fill" />
+
+            <TextView
+                android:id="@+id/viewPost_tvNumLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:text="25"
+                android:textSize="18dp"></TextView>
+
+            <ImageButton
+                android:id="@+id/itemBV_imb_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:background="@null"
+                android:src="@drawable/ic_comment" />
+
+            <TextView
+                android:id="@+id/itemBV_tvNumCmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:text="10"
+                android:textSize="18dp"></TextView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_below="@+id/linear"
+            ></View>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
