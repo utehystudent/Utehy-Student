@@ -74,8 +74,6 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcvCmt.setLayoutManager(linearLayoutManager);
 
-
-
         sliderView.setAutoCycle(false);
 
         Intent it = getIntent();
