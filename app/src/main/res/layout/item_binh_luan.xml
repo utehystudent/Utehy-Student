@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:padding="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/viewPost_imgBack"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9"
+        app:cardPreventCornerOverlap="false">
+
+        <ImageView
+            android:id="@+id/itemCmt_imgAvt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/utehy_logo"
+            android:layout_gravity="center"
+            android:scaleType="center"></ImageView>
+
+    </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/itemCmt_linearCmt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:background="@drawable/rounded3"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/itemCmt_tvTenNguoiCmt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hoàng Việt"
+                    android:fontFamily="@font/nunito"
+                    android:textSize="18sp"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/itemCmt_noiDung"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:text="Ok chốt đi còn đóng tiền nào"
+                    android:fontFamily="@font/nunito"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/itemCmt_tvGio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20:15"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="2dp"></TextView>
+        </LinearLayout>
+
+
+</LinearLayout>

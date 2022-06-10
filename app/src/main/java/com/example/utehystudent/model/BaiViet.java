@@ -2,7 +2,9 @@ package com.example.utehystudent.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BaiViet implements Comparable<BaiViet>, Serializable {
     private String idBaiViet;
@@ -11,7 +13,6 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
     private String linkAnhNguoiDang;
     private String maLop;
     private String noiDung;
-    private String ngayDang;
     private String timeStamp;
     private ArrayList<String> listLike;
     private int soBinhLuan;
@@ -21,28 +22,26 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
 
     }
 
-    public BaiViet(String idBaiViet, String idNguoiDang, String tenNguoiDang, String linkAnhNguoiDang, String maLop, String noiDung, String ngayDang, ArrayList<String> listLike, int soBinhLuan, ArrayList<String> linkAnh) {
+    public BaiViet(String idBaiViet, String idNguoiDang, String tenNguoiDang, String linkAnhNguoiDang, String maLop, String noiDung, ArrayList<String> listLike, int soBinhLuan, ArrayList<String> linkAnh) {
         this.idBaiViet = idBaiViet;
         this.idNguoiDang = idNguoiDang;
         this.tenNguoiDang = tenNguoiDang;
         this.linkAnhNguoiDang = linkAnhNguoiDang;
         this.maLop = maLop;
         this.noiDung = noiDung;
-        this.ngayDang = ngayDang;
         this.timeStamp = getCurrentTimeStamp();
         this.listLike = listLike;
         this.soBinhLuan = soBinhLuan;
         this.linkAnh = linkAnh;
     }
 
-    public BaiViet(String idBaiViet, String idNguoiDang, String tenNguoiDang, String linkAnhNguoiDang, String maLop, String noiDung, String ngayDang, String timeStamp, ArrayList<String> listLike, int soBinhLuan, ArrayList<String> linkAnh) {
+    public BaiViet(String idBaiViet, String idNguoiDang, String tenNguoiDang, String linkAnhNguoiDang, String maLop, String noiDung, String timeStamp, ArrayList<String> listLike, int soBinhLuan, ArrayList<String> linkAnh) {
         this.idBaiViet = idBaiViet;
         this.idNguoiDang = idNguoiDang;
         this.tenNguoiDang = tenNguoiDang;
         this.linkAnhNguoiDang = linkAnhNguoiDang;
         this.maLop = maLop;
         this.noiDung = noiDung;
-        this.ngayDang = ngayDang;
         this.timeStamp = timeStamp;
         this.listLike = listLike;
         this.soBinhLuan = soBinhLuan;
@@ -97,14 +96,6 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
         this.noiDung = noiDung;
     }
 
-    public String getNgayDang() {
-        return ngayDang;
-    }
-
-    public void setNgayDang(String ngayDang) {
-        this.ngayDang = ngayDang;
-    }
-
     public String getTimeStamp() {
         return timeStamp;
     }
@@ -151,7 +142,6 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
                 ", linkAnhNguoiDang='" + linkAnhNguoiDang + '\'' +
                 ", maLop='" + maLop + '\'' +
                 ", noiDung='" + noiDung + '\'' +
-                ", ngayDang='" + ngayDang + '\'' +
                 ", timeStamp='" + timeStamp + '\'' +
                 ", listLike=" + listLike +
                 ", soBinhLuan=" + soBinhLuan +
@@ -162,5 +152,13 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
     @Override
     public int compareTo(BaiViet baiViet) {
         return baiViet.getTimeStamp().compareTo(this.getTimeStamp());
+    }
+
+    public String getNgayDang() {
+        Timestamp ts=new Timestamp(Long.parseLong(this.getTimeStamp()));
+        Date date=new Date(ts.getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
+        String strDate = formatter.format(date);
+        return strDate;
     }
 }

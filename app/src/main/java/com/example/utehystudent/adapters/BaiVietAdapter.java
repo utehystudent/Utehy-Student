@@ -71,6 +71,8 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
             holder.imgAvt.setImageResource(R.drawable.ic_student);
         }
         holder.tenNguoiDang.setText(bv[0].getTenNguoiDang());
+
+
         holder.tvNgay.setText(bv[0].getNgayDang());
 
         if (bv[0].getNoiDung().equals("")) {

@@ -1,31 +1,41 @@
 package com.example.utehystudent.model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Comment implements Comparable<Comment>{
-    private String idBaiViet, idNguoiCmt, linkAnhNguoiCmt, noiDung, tenNguoiCmt, thoiGian, timeStamp;
+    private String idBaiViet, idComment, idNguoiCmt, linkAnhNguoiCmt, noiDung, tenNguoiCmt, timeStamp;
 
-    public Comment(String idBaiViet, String idNguoiCmt, String linkAnhNguoiCmt, String noiDung, String tenNguoiCmt, String thoiGian) {
+    public Comment(String idBaiViet, String idComment, String idNguoiCmt, String linkAnhNguoiCmt, String noiDung, String tenNguoiCmt) {
         this.idBaiViet = idBaiViet;
+        this.idComment = idComment;
         this.idNguoiCmt = idNguoiCmt;
         this.linkAnhNguoiCmt = linkAnhNguoiCmt;
         this.noiDung = noiDung;
         this.tenNguoiCmt = tenNguoiCmt;
-        this.thoiGian = thoiGian;
         this.timeStamp = getCurrentTimeStamp();
     }
 
-    public Comment(String idBaiViet, String idNguoiCmt, String linkAnhNguoiCmt, String noiDung, String tenNguoiCmt, String thoiGian, String timeStamp) {
+    public Comment(String idBaiViet, String idComment, String idNguoiCmt, String linkAnhNguoiCmt, String noiDung, String tenNguoiCmt, String timeStamp) {
         this.idBaiViet = idBaiViet;
+        this.idComment = idComment;
         this.idNguoiCmt = idNguoiCmt;
         this.linkAnhNguoiCmt = linkAnhNguoiCmt;
         this.noiDung = noiDung;
         this.tenNguoiCmt = tenNguoiCmt;
-        this.thoiGian = thoiGian;
         this.timeStamp = timeStamp;
     }
 
     public Comment() {
+    }
+
+    public String getIdComment() {
+        return idComment;
+    }
+
+    public void setIdComment(String idComment) {
+        this.idComment = idComment;
     }
 
     public String getIdBaiViet() {
@@ -68,13 +78,6 @@ public class Comment implements Comparable<Comment>{
         this.tenNguoiCmt = tenNguoiCmt;
     }
 
-    public String getThoiGian() {
-        return thoiGian;
-    }
-
-    public void setThoiGian(String thoiGian) {
-        this.thoiGian = thoiGian;
-    }
 
     public String getTimeStamp() {
         return timeStamp;
@@ -88,11 +91,11 @@ public class Comment implements Comparable<Comment>{
     public String toString() {
         return "Comment{" +
                 "idBaiViet='" + idBaiViet + '\'' +
+                ", idComment='" + idComment + '\'' +
                 ", idNguoiCmt='" + idNguoiCmt + '\'' +
                 ", linkAnhNguoiCmt='" + linkAnhNguoiCmt + '\'' +
                 ", noiDung='" + noiDung + '\'' +
                 ", tenNguoiCmt='" + tenNguoiCmt + '\'' +
-                ", thoiGian='" + thoiGian + '\'' +
                 ", timeStamp='" + timeStamp + '\'' +
                 '}';
     }
@@ -105,5 +108,13 @@ public class Comment implements Comparable<Comment>{
     @Override
     public int compareTo(Comment comment) {
         return comment.getTimeStamp().compareTo(this.getTimeStamp());
+    }
+
+    public String getNgayCmt() {
+        Timestamp ts=new Timestamp(Long.parseLong(this.getTimeStamp()));
+        Date date=new Date(ts.getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
+        String strDate = formatter.format(date);
+        return strDate;
     }
 }

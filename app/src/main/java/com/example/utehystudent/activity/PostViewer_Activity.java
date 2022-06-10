@@ -10,17 +10,26 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utehystudent.R;
+import com.example.utehystudent.adapters.CommentAdapter;
 import com.example.utehystudent.adapters.SliderAdapter;
 import com.example.utehystudent.model.BaiViet;
+import com.example.utehystudent.model.Comment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
@@ -37,6 +46,9 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
     FirebaseFirestore db;
     BaiViet bv;
     Boolean isLiked;
+    RecyclerView rcvCmt;
+    CommentAdapter cmtAdapter;
+    ArrayList<Comment> listComment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +68,13 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
         tvNgay = findViewById(R.id.viewPost_tvNgay);
         tvContent = findViewById(R.id.viewPost_tvContent);
         tvNumLike = findViewById(R.id.viewPost_tvNumLike);
+
+        rcvCmt = findViewById(R.id.viewPost_rcvCmt);
+        listComment = new ArrayList<>();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rcvCmt.setLayoutManager(linearLayoutManager);
+
+
 
         sliderView.setAutoCycle(false);
 
@@ -120,7 +139,6 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
         tvNgay.setText(bv.getNgayDang());
         tvContent.setText(bv.getNoiDung());
         tvNumLike.setText(bv.getListLike().size()+"");
-
         imgLike.setImageResource(R.drawable.ic_like);
 
         isLiked = false;
@@ -155,6 +173,24 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
                         .update("listLike", FieldValue.arrayUnion(username));
             }
         });
+
+        db.collection("Comment")
+                .whereEqualTo("idBaiViet", bv.getIdBaiViet())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                listComment.add(document.toObject(Comment.class));
+                            }
+                            cmtAdapter = new CommentAdapter(PostViewer_Activity.this, listComment);
+                            rcvCmt.setAdapter(cmtAdapter);
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     private void postChangeListener(BaiViet baiViet) {
