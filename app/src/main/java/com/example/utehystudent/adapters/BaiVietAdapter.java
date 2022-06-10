@@ -85,13 +85,13 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
             try {
                 Picasso.get().load(bv[0].getLinkAnh().get(0)).into(holder.imgAnhBV);
             } catch (Exception e) {
-                holder.imgAnhBV.setVisibility(View.GONE);
+                holder.imgAnhBV.setImageResource(R.drawable.image_err);
             }
             if (bv[0].getLinkAnh().size() == 1) {
                 holder.tvSoAnhThem.setVisibility(View.GONE);
             }else {
                 holder.tvSoAnhThem.setText(bv[0].getLinkAnh().size()-1+"+");
-                holder.tvSoAnhThem.setVisibility(View.GONE);
+                holder.tvSoAnhThem.setVisibility(View.VISIBLE);
             }
         } else if (bv[0].getLinkAnh().size() == 0) {
             holder.imgAnhBV.setVisibility(View.GONE);
@@ -168,7 +168,6 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
                         }
                     }
                 });
-
     }
 
     @Override
@@ -186,17 +185,17 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
         public BaiVietViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imgAvt = itemView.findViewById(R.id.viewPost_imgAvt);
-            imgAnhBV = itemView.findViewById(R.id.viewPost_imgAnhBV);
+            imgAvt = itemView.findViewById(R.id.itemBV_imgAvt);
+            imgAnhBV = itemView.findViewById(R.id.itemBV_imgAnhBV);
 
-            tenNguoiDang = itemView.findViewById(R.id.viewPost_tvTen);
-            tvNgay = itemView.findViewById(R.id.viewPost_tvNgay);
-            tvND = itemView.findViewById(R.id.viewPost_tvContent);
-            tvSoLike = itemView.findViewById(R.id.viewPost_tvNumLike);
+            tenNguoiDang = itemView.findViewById(R.id.itemBV_tvTen);
+            tvNgay = itemView.findViewById(R.id.itemBV_tvNgay);
+            tvND = itemView.findViewById(R.id.itemBV_tvContent);
+            tvSoLike = itemView.findViewById(R.id.itemBV_tvNumLike);
             tvSoCmt = itemView.findViewById(R.id.itemBV_tvNumCmt);
             tvSoAnhThem = itemView.findViewById(R.id.itemBV_numMoreImg);
 
-            imbLike = itemView.findViewById(R.id.viewPost_imb_like);
+            imbLike = itemView.findViewById(R.id.itemBV_imb_like);
             imbCmt = itemView.findViewById(R.id.itemBV_imb_comment);
 
             cardView = itemView.findViewById(R.id.itemBV_cardView);

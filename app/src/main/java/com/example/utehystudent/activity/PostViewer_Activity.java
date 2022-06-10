@@ -60,14 +60,14 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
         listImage = new ArrayList<>();
         sliderView = findViewById(R.id.viewPost_slider);
 
-        imgAvt = findViewById(R.id.viewPost_imgAvt);
-        imgLike = findViewById(R.id.viewPost_imb_like);
+        imgAvt = findViewById(R.id.itemBV_imgAvt);
+        imgLike = findViewById(R.id.itemBV_imb_like);
         imgBack = findViewById(R.id.viewPost_imgBack);
 
-        tvTen = findViewById(R.id.viewPost_tvTen);
-        tvNgay = findViewById(R.id.viewPost_tvNgay);
-        tvContent = findViewById(R.id.viewPost_tvContent);
-        tvNumLike = findViewById(R.id.viewPost_tvNumLike);
+        tvTen = findViewById(R.id.itemBV_tvTen);
+        tvNgay = findViewById(R.id.itemBV_tvNgay);
+        tvContent = findViewById(R.id.itemBV_tvContent);
+        tvNumLike = findViewById(R.id.itemBV_tvNumLike);
 
         rcvCmt = findViewById(R.id.viewPost_rcvCmt);
         listComment = new ArrayList<>();
