@@ -2,6 +2,7 @@ package com.example.utehystudent.model;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -103,7 +104,11 @@ public class Comment implements Comparable<Comment> {
     }
 
     private String getCurrentTimeStamp() {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        /*Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return String.valueOf(timestamp.getTime());*/
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+        Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
         return String.valueOf(timestamp.getTime());
     }
 
@@ -113,11 +118,11 @@ public class Comment implements Comparable<Comment> {
     }
 
     public String getNgayCmt() {
-       Timestamp ts = new Timestamp(Long.parseLong(this.getTimeStamp()));
-       Date date = new Date(ts.getTime());
-       SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
-       formatter.setTimeZone(TimeZone.getDefault());
-       String strDate = formatter.format(date);
-       return strDate;
+        Timestamp ts = new Timestamp(Long.parseLong(this.getTimeStamp()));
+        Date date = new Date(ts.getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
+        formatter.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+        String strDate = formatter.format(date);
+        return strDate;
     }
 }

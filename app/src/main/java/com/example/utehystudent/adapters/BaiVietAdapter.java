@@ -116,8 +116,34 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
                             }
                             holder.tvSoCmt.setText(num+"");
                             bv[0].setSoBinhLuan(num);
+
                         } else {
                             Log.d("z", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+        db.collection("Comment")
+                .whereEqualTo("idBaiViet", bv[0].getIdBaiViet())
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w("BVAdapter", "listen:error", e);
+                            return;
+                        }
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+                            switch (dc.getType()) {
+                                case ADDED:
+                                    int num = bv[0].getSoBinhLuan() + 1;
+                                    listBV.get(pos).setSoBinhLuan(num);
+                                    break;
+                                case REMOVED:
+                                    int num2 = bv[0].getSoBinhLuan() - 1;
+                                    listBV.get(pos).setSoBinhLuan(num2);
+                                    break;
+                            }
                         }
                     }
                 });
@@ -129,8 +155,6 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
             holder.imbLike.setImageResource(R.drawable.ic_like);
             isLiked[0] = false;
         }
-
-        Log.d("boo", "Init: "+ isLiked[0]);
 
         holder.imbLike.setOnClickListener(view -> {
             int numLike = Integer.parseInt(holder.tvSoLike.getText().toString());

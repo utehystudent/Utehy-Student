@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -130,7 +131,11 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
     }
 
     private String getCurrentTimeStamp() {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        /*Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return String.valueOf(timestamp.getTime());*/
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+        Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
         return String.valueOf(timestamp.getTime());
     }
 
@@ -159,7 +164,7 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
         Timestamp ts = new Timestamp(Long.parseLong(this.getTimeStamp()));
         Date date = new Date(ts.getTime());
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
-        formatter.setTimeZone(TimeZone.getDefault());
+        formatter.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
         String strDate = formatter.format(date);
         return strDate;
     }

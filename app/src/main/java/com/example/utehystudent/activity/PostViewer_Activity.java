@@ -38,7 +38,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
