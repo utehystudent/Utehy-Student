@@ -104,8 +104,6 @@ public class Comment implements Comparable<Comment> {
     }
 
     private String getCurrentTimeStamp() {
-        /*Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        return String.valueOf(timestamp.getTime());*/
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
         Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());

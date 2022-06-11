@@ -173,6 +173,7 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
                     public void onSuccess(Void unused) {
                         edtCmt.setText("");
                         hideVirtualKeyboard();
+                        increaseNumberOfCmt(idBaiViet);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -183,28 +184,6 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
             }
         });
 
-        /*db.collection("Post")
-                .document(bv.getIdBaiViet())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document != null) {
-                                int num =  Integer.parseInt(document.get("soBinhLuan").toString());
-                                int n = num + 1;
-                                db.collection("Post")
-                                        .document(bv.getIdBaiViet())
-                                        .update("soBinhLuan", n);
-                            } else {
-                                Log.d("LOGGER", "No such document");
-                            }
-                        } else {
-                            Log.d("LOGGER", "get failed with ", task.getException());
-                        }
-                    }
-                });*/
     }
 
     private void SetData(BaiViet bv) {
@@ -346,6 +325,23 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    private void increaseNumberOfCmt(String idBV) {
+        db.collection("Post")
+                .document(idBV)
+                .update("soBinhLuan", FieldValue.increment(1))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                return;
+            }
+        });
     }
 
 }

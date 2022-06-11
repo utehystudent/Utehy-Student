@@ -19,6 +19,7 @@ import com.example.utehystudent.model.Comment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
@@ -89,6 +90,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         Button btnXoaCmt = bottomSheetDialog.findViewById(R.id.bottomSheetCmt_btnXoa);
         Button btnHuy = bottomSheetDialog.findViewById(R.id.bottomSheetCmt_btnHuy);
 
+        //XÓA CMT
         btnXoaCmt.setOnClickListener(view -> {
             db.collection("Comment")
                     .document(comment.getIdComment())
@@ -97,6 +99,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                         @Override
                         public void onSuccess(Void aVoid) {
                             bottomSheetDialog.dismiss();
+                            decreaseNumberOfCmt(comment.getIdBaiViet());
                             Log.d(TAG, "DocumentSnapshot comment successfully deleted!");
                         }
                     })
@@ -106,13 +109,32 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                             Log.d(TAG, "Error deleting document", e);
                         }
                     });
-
         });
+
         btnHuy.setOnClickListener(view -> {
             bottomSheetDialog.dismiss();
         });
         bottomSheetDialog.show();
     }
+
+    private void decreaseNumberOfCmt(String idBV) {
+        db.collection("Post")
+                .document(idBV)
+                .update("soBinhLuan", FieldValue.increment(-1))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                return;
+            }
+        });
+    }
+
+
 
 
     @Override
