@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
         //set notification count
         bottomNavigation.setCount(4, "2");
-        bottomNavigation.setCount(2, "3");
         //set home fragment is default
         bottomNavigation.show(3, true);
 

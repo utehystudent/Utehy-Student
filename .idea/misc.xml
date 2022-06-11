@@ -19,6 +19,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/ic_image.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/ic_news.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/menu_button_selector.xml" value="0.170446735395189" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/remove_underscore.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/rounded2.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/rounded3.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/rounded_bottom_corners.xml" value="0.170446735395189" />
@@ -34,6 +35,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_image_viewer.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_login.xml" value="0.16799999999999998" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_post_create.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_post_viewer.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_subject_management.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_thoi_khoa_bieu.xml" value="0.16" />

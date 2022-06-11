@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utehystudent.R;
 import com.example.utehystudent.activity.ImageViewerActivity;
+import com.example.utehystudent.activity.PostCreate_Activity;
 import com.example.utehystudent.activity.PostViewer_Activity;
 import com.example.utehystudent.adapters.BaiVietAdapter;
 import com.example.utehystudent.model.BaiViet;
@@ -81,6 +82,11 @@ public class BangTinFragment extends Fragment implements Serializable {
 
         GetCurrentUser();
         GetPostList();
+
+        tvDangBai.setOnClickListener(it -> {
+            Intent intent = new Intent(getActivity(), PostCreate_Activity.class);
+            startActivity(intent);
+        });
         // Inflate the layout for this fragment
         return view;
     }
