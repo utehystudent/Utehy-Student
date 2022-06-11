@@ -172,7 +172,7 @@
                     app:strokeWidth="1dp">
 
                     <EditText
-                        android:id="@+id/Login_edtTK"
+                        android:id="@+id/viewPost_edtCmt"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bo_edt"
@@ -182,7 +182,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <ImageView
-                    android:id="@+id/viewPót_imgSendCmt"
+                    android:id="@+id/viewPost_imgSendCmt"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:src="@drawable/ic_send"

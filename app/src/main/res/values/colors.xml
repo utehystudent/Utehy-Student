@@ -11,4 +11,7 @@
     <color name="menu_button_pressed">#fe4441</color>
     <color name="snack_bar_background">#01AA01</color>
     <color name="snack_bar_text">#FFFFFF</color>
+
+    <color name="colorTransparent">#00000000</color>
+    <color name="redTransparent">#00FD0101</color>
 </resources>

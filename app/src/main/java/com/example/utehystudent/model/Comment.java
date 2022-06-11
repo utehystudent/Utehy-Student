@@ -3,8 +3,9 @@ package com.example.utehystudent.model;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
-public class Comment implements Comparable<Comment>{
+public class Comment implements Comparable<Comment> {
     private String idBaiViet, idComment, idNguoiCmt, linkAnhNguoiCmt, noiDung, tenNguoiCmt, timeStamp;
 
     public Comment(String idBaiViet, String idComment, String idNguoiCmt, String linkAnhNguoiCmt, String noiDung, String tenNguoiCmt) {
@@ -26,6 +27,7 @@ public class Comment implements Comparable<Comment>{
         this.tenNguoiCmt = tenNguoiCmt;
         this.timeStamp = timeStamp;
     }
+
 
     public Comment() {
     }
@@ -111,10 +113,11 @@ public class Comment implements Comparable<Comment>{
     }
 
     public String getNgayCmt() {
-        Timestamp ts=new Timestamp(Long.parseLong(this.getTimeStamp()));
-        Date date=new Date(ts.getTime());
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
-        String strDate = formatter.format(date);
-        return strDate;
+       Timestamp ts = new Timestamp(Long.parseLong(this.getTimeStamp()));
+       Date date = new Date(ts.getTime());
+       SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
+       formatter.setTimeZone(TimeZone.getDefault());
+       String strDate = formatter.format(date);
+       return strDate;
     }
 }

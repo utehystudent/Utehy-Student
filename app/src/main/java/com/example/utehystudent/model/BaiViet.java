@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class BaiViet implements Comparable<BaiViet>, Serializable {
     private String idBaiViet;
@@ -155,9 +156,10 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
     }
 
     public String getNgayDang() {
-        Timestamp ts=new Timestamp(Long.parseLong(this.getTimeStamp()));
-        Date date=new Date(ts.getTime());
+        Timestamp ts = new Timestamp(Long.parseLong(this.getTimeStamp()));
+        Date date = new Date(ts.getTime());
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
+        formatter.setTimeZone(TimeZone.getDefault());
         String strDate = formatter.format(date);
         return strDate;
     }

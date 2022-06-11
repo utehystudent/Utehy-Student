@@ -77,7 +77,7 @@ public class BangTinFragment extends Fragment implements Serializable {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         rcv.setLayoutManager(linearLayoutManager);
         prgBar = view.findViewById(R.id.BangTin_prgBar);
-
+        baiVietAdapter = new BaiVietAdapter(this, postList);
 
         GetCurrentUser();
         GetPostList();
@@ -141,6 +141,7 @@ public class BangTinFragment extends Fragment implements Serializable {
     @Override
     public void onResume() {
         super.onResume();
+        baiVietAdapter.notifyDataSetChanged();
     }
 
     @Override

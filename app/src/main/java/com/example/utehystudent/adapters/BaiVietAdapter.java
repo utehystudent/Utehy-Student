@@ -19,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.utehystudent.R;
 import com.example.utehystudent.fragments.BangTinFragment;
 import com.example.utehystudent.model.BaiViet;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
@@ -100,6 +103,24 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
         holder.tvSoLike.setText(bv[0].getListLike().size()+"");
         holder.tvSoCmt.setText(bv[0].getSoBinhLuan()+"");
 
+        db.collection("Comment")
+                .whereEqualTo("idBaiViet", bv[0].getIdBaiViet())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int num = 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                num++;
+                            }
+                            holder.tvSoCmt.setText(num+"");
+                            bv[0].setSoBinhLuan(num);
+                        } else {
+                            Log.d("z", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
         if (bv[0].getListLike().contains(username)) {
             holder.imbLike.setImageResource(R.drawable.ic_like_fill);
@@ -157,8 +178,8 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
                                 case MODIFIED:
                                     BaiViet bai = dc.getDocument().toObject(BaiViet.class);
                                     bv[0] = bai;
-                                    listBV.set(pos, bai);
-                                    notifyDataSetChanged();
+                                    //listBV.set(pos, bai);
+                                    notifyItemChanged(pos);
                                     break;
                                 case REMOVED:
                                     listBV.remove(bv[0]);

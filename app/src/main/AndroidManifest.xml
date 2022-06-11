@@ -17,6 +17,7 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".activity.PostViewer_Activity"
             android:exported="false" />
         <activity
@@ -41,6 +42,7 @@
             android:name=".activity.SubjectInTermManagementActivity"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".activity.ClassManagementActivity"
             android:exported="false" /> <!-- ADD THIS -->
         <uses-library
@@ -51,6 +53,7 @@
             android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
