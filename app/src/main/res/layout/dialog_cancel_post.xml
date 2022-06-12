@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nếu bỏ bây giờ, bạn sẽ mất bài viết này."
+                    android:gravity="center"
+                    android:lineSpacingExtra="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="#423E3E"></TextView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="#D8D2D2"></View>
+
+                <Button
+                    android:id="@+id/dialogCancelPost_btnBo"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@null"
+                    android:text="Bỏ bài viết"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/nunito_light"
+                    android:textColor="#FF3D00"></Button>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#D8D2D2"></View>
+
+                <Button
+                    android:id="@+id/dialogCancelPost_btnHuy"
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:background="@null"
+                    android:text="Tiếp tục chỉnh sửa"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/nunito_light"
+                    android:textStyle="bold"
+                    android:textColor="#3D5AFE"></Button>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+</LinearLayout>

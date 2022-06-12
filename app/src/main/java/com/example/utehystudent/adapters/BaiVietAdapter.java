@@ -58,7 +58,7 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
         SharedPreferences pref = fragment.requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
         String username = pref.getString("username", "");
         final boolean[] isLiked = new boolean[1];
-        Log.d("vvv", "onBindViewHolder: "+listBV.get(position).toString());
+        Log.d("vvv", "onBindViewHolder: " + listBV.get(position).toString());
         final BaiViet[] bv = {listBV.get(position)};
 
         if (bv[0] == null) {
@@ -77,7 +77,7 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
 
         if (bv[0].getNoiDung().equals("")) {
             holder.tvND.setVisibility(View.GONE);
-        }else {
+        } else {
             holder.tvND.setText(bv[0].getNoiDung());
         }
 
@@ -89,22 +89,23 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
             }
             if (bv[0].getLinkAnh().size() == 1) {
                 holder.tvSoAnhThem.setVisibility(View.GONE);
-            }else {
-                holder.tvSoAnhThem.setText(bv[0].getLinkAnh().size()-1+"+");
+            } else {
+                holder.tvSoAnhThem.setText(bv[0].getLinkAnh().size() - 1 + "+");
                 holder.tvSoAnhThem.setVisibility(View.VISIBLE);
             }
         } else if (bv[0].getLinkAnh().size() == 0) {
             holder.imgAnhBV.setVisibility(View.GONE);
+            holder.tvSoAnhThem.setVisibility(View.GONE);
         }
 
-        holder.tvSoLike.setText(bv[0].getListLike().size()+"");
-        holder.tvSoCmt.setText(bv[0].getSoBinhLuan()+"");
+        holder.tvSoLike.setText(bv[0].getListLike().size() + "");
+        holder.tvSoCmt.setText(bv[0].getSoBinhLuan() + "");
 
 
         if (bv[0].getListLike().contains(username)) {
             holder.imbLike.setImageResource(R.drawable.ic_like_fill);
             isLiked[0] = true;
-        }else {
+        } else {
             holder.imbLike.setImageResource(R.drawable.ic_like);
             isLiked[0] = false;
         }
@@ -117,16 +118,16 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
                 holder.imbLike.setImageResource(R.drawable.ic_like);
                 bv[0].getListLike().remove(username);
                 numLike--;
-                holder.tvSoLike.setText(numLike+"");
+                holder.tvSoLike.setText(numLike + "");
                 db.collection("Post")
                         .document(bv[0].getIdBaiViet())
                         .update("listLike", FieldValue.arrayRemove(username));
-            }else {
+            } else {
                 isLiked[0] = true;
                 holder.imbLike.setImageResource(R.drawable.ic_like_fill);
                 bv[0].getListLike().add(username);
                 numLike++;
-                holder.tvSoLike.setText(numLike+"");
+                holder.tvSoLike.setText(numLike + "");
                 db.collection("Post")
                         .document(bv[0].getIdBaiViet())
                         .update("listLike", FieldValue.arrayUnion(username));
@@ -155,8 +156,7 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
                                 case MODIFIED:
                                     BaiViet bai = dc.getDocument().toObject(BaiViet.class);
                                     bv[0] = bai;
-                                   listBV.set(pos, bai);
-                                    //notifyItemChanged(pos);
+                                    listBV.set(pos, bai);
                                     notifyDataSetChanged();
                                     break;
                                 case REMOVED:
@@ -171,7 +171,7 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
 
     @Override
     public int getItemCount() {
-        Log.d("xxx", "getItemCount: "+listBV.size());
+        Log.d("xxx", "getItemCount: " + listBV.size());
         return listBV.size();
     }
 

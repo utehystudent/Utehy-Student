@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BangTinFragment extends Fragment implements Serializable {
     private static final String TAG = "BangTinFragment";
@@ -69,6 +70,7 @@ public class BangTinFragment extends Fragment implements Serializable {
         postList = new ArrayList<>();
 
         pref = activity.getSharedPreferences("User", Context.MODE_PRIVATE);
+        String clID = pref.getString("class_ID", "");
 
         db = FirebaseFirestore.getInstance();
 
@@ -87,6 +89,7 @@ public class BangTinFragment extends Fragment implements Serializable {
             Intent intent = new Intent(getActivity(), PostCreate_Activity.class);
             startActivity(intent);
         });
+
         // Inflate the layout for this fragment
         return view;
     }
@@ -126,6 +129,7 @@ public class BangTinFragment extends Fragment implements Serializable {
                                 postList.add(baiViet);
                                 Log.d("zzzz", "onComplete: "+baiViet.toString());
                             }
+                            Collections.sort(postList);
                             baiVietAdapter = new BaiVietAdapter(BangTinFragment.this, postList);
                             rcv.setAdapter(baiVietAdapter);
                             rcv.setVisibility(View.VISIBLE);

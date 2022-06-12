@@ -167,6 +167,7 @@ public class LichHoatDongFragment extends Fragment {
             alert.show();
         });
 
+
     }
 
     private void unpinActivity(DialogInterface dialogInterface) {

@@ -50,6 +50,19 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
         this.linkAnh = linkAnh;
     }
 
+    public BaiViet(String idNguoiDang, String tenNguoiDang, String linkAnhNguoiDang, String maLop, String noiDung, ArrayList<String> listLike, int soBinhLuan, ArrayList<String> linkAnh) {
+        this.idNguoiDang = idNguoiDang;
+        this.tenNguoiDang = tenNguoiDang;
+        this.linkAnhNguoiDang = linkAnhNguoiDang;
+        this.maLop = maLop;
+        this.noiDung = noiDung;
+        this.timeStamp = getCurrentTimeStamp();
+        this.listLike = listLike;
+        this.soBinhLuan = soBinhLuan;
+        this.linkAnh = linkAnh;
+        this.idBaiViet = this.maLop+""+this.timeStamp;
+    }
+
     public String getTenNguoiDang() {
         return tenNguoiDang;
     }
