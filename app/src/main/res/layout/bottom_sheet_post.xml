@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/bottomSheetCmt_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"></View>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp">
+            <Button
+                android:id="@+id/bottomSheetPost_btnXoa"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#4E4B4B"
+                android:text="Xóa bài viết"
+                android:textAllCaps="false"
+                android:textColor="#E4F3F4"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="20sp"></Button>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            app:cardCornerRadius="10dp">
+            <Button
+                android:id="@+id/bottomSheetPost_btnHuy"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#4E4B4B"
+                android:text="Hủy"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#E4F3F4"
+                android:fontFamily="@font/nunito_light"
+                android:textSize="20sp"></Button>
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"></View>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

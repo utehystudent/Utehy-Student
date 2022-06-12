@@ -142,6 +142,8 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
             ((BangTinFragment) this.fragment).viewImage(bv[0].getLinkAnh());
         });
 
+
+
         db.collection("Post")
                 .whereEqualTo("idBaiViet", bv[0].getIdBaiViet())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -176,7 +178,7 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
     }
 
     public class BaiVietViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgAvt, imgAnhBV;
+        ImageView imgAvt, imgAnhBV, imgXoa;
         TextView tenNguoiDang, tvNgay, tvND, tvSoLike, tvSoCmt, tvSoAnhThem;
         ImageButton imbLike, imbCmt;
         CardView cardView;

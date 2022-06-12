@@ -1,5 +1,6 @@
 package com.example.utehystudent.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,21 +25,23 @@ import com.example.utehystudent.adapters.CommentAdapter;
 import com.example.utehystudent.adapters.SliderAdapter;
 import com.example.utehystudent.model.BaiViet;
 import com.example.utehystudent.model.Comment;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -50,7 +54,7 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
     SliderView sliderView;
     SliderAdapter adapter;
     ArrayList<String> listImage;
-    ImageView imgAvt, imgLike, imgBack, imgCmt;
+    ImageView imgAvt, imgLike, imgBack, imgCmt, imgMore;
     TextView tvTen, tvNgay, tvContent, tvNumLike;
     EditText edtCmt;
     FirebaseFirestore db;
@@ -59,6 +63,9 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
     RecyclerView rcvCmt;
     CommentAdapter cmtAdapter;
     ArrayList<Comment> listComment;
+    BottomSheetDialog bottomSheetDialog;
+    String classID = "";
+    ProgressDialog dialog;
 
 
     @Override
@@ -76,8 +83,12 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
         imgLike = findViewById(R.id.itemBV_imb_like);
         imgBack = findViewById(R.id.viewPost_imgBack);
         imgCmt = findViewById(R.id.viewPost_imgSendCmt);
+        imgMore = findViewById(R.id.viewPost_imgMore);
 
         edtCmt = findViewById(R.id.viewPost_edtCmt);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Đang xử lý...");
 
 
         tvTen = findViewById(R.id.itemBV_tvTen);
@@ -85,6 +96,7 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
         tvContent = findViewById(R.id.itemBV_tvContent);
         tvNumLike = findViewById(R.id.itemBV_tvNumLike);
 
+        bottomSheetDialog = new BottomSheetDialog(this);
 
         rcvCmt = findViewById(R.id.viewPost_rcvCmt);
         listComment = new ArrayList<>();
@@ -116,6 +128,13 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
 
         imgBack.setOnClickListener(view -> {
             finish();
+        });
+
+        imgMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openBottomSheetDialog(bv);
+            }
         });
 
         db.collection("Post")
@@ -189,6 +208,12 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
     private void SetData(BaiViet bv) {
         SharedPreferences pref = getSharedPreferences("User", Context.MODE_PRIVATE);
         String username = pref.getString("username", "");
+        classID = pref.getString("class_ID", "");
+
+        if (!bv.getIdNguoiDang().equals(username)) {
+            imgMore.setVisibility(View.GONE);
+        }
+
         if (bv.getLinkAnh().size() > 0) {
             listImage = bv.getLinkAnh();
             adapter = new SliderAdapter(this, listImage);
@@ -267,7 +292,7 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
                                 //decreaseCommentNumber();
                                 Comment comment = dc.getDocument().toObject(Comment.class);
                                 int pos = 0;
-                                for (int i =0; i < listComment.size(); i++) {
+                                for (int i = 0; i < listComment.size(); i++) {
                                     if (comment.getIdComment().equals(listComment.get(i).getIdComment())) {
                                         pos = i;
                                         break;
@@ -275,7 +300,7 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
                                 }
                                 listComment.remove(pos);
                                 Collections.sort(listComment);
-                                Log.d("hehehe", "SetData: "+listComment.size());
+                                Log.d("hehehe", "SetData: " + listComment.size());
                                 cmtAdapter.notifyDataSetChanged();
                                 break;
                         }
@@ -283,27 +308,6 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
                 });
     }
 
-    private void GetListComment() {
-        listComment.clear();
-        db.collection("Comment")
-                .whereEqualTo("idBaiViet", bv.getIdBaiViet())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                listComment.add(document.toObject(Comment.class));
-                            }
-                            Collections.sort(listComment);
-                            cmtAdapter = new CommentAdapter(PostViewer_Activity.this, listComment);
-                            rcvCmt.setAdapter(cmtAdapter);
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-    }
 
     private void postChangeListener(BaiViet baiViet) {
         if (baiViet.getNoiDung().equals(bv.getNoiDung())) {
@@ -342,6 +346,66 @@ public class PostViewer_Activity extends AppCompatActivity implements Serializab
                 return;
             }
         });
+    }
+
+    private void openBottomSheetDialog(BaiViet baiViet) {
+        BaiViet post = baiViet;
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_post);
+
+        Button btnXoaBV = bottomSheetDialog.findViewById(R.id.bottomSheetPost_btnXoa);
+        Button btnHuy = bottomSheetDialog.findViewById(R.id.bottomSheetPost_btnHuy);
+
+        btnHuy.setOnClickListener(view -> {
+            bottomSheetDialog.dismiss();
+            return;
+        });
+
+        btnXoaBV.setOnClickListener(view -> {
+            bottomSheetDialog.dismiss();
+            dialog.show();
+            //delete image
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            for (String s : post.getLinkAnh()) {
+                String childName = s.substring(s.indexOf("%") + 3, s.indexOf("?alt"));
+                StorageReference desertRef = storageRef.child(classID + "/" + childName);
+                desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // File deleted successfully
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Uh-oh, an error occurred!
+                        return;
+                    }
+                });
+            }
+
+            //delete comment
+            CollectionReference itemsRef = db.collection("Comment");
+            Query query = itemsRef.whereEqualTo("idBaiViet", post.getIdBaiViet());
+            query.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        itemsRef.document(document.getId()).delete();
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            });
+
+            //delete post
+            db.collection("Post").document(post.getIdBaiViet()).delete();
+
+            dialog.dismiss();
+            PostViewer_Activity.this.finish();
+        });
+
+
+        bottomSheetDialog.create();
+        bottomSheetDialog.show();
+
     }
 
 }
