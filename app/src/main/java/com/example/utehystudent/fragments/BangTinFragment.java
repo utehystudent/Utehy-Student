@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,11 +22,8 @@ import com.example.utehystudent.activity.PostCreate_Activity;
 import com.example.utehystudent.activity.PostViewer_Activity;
 import com.example.utehystudent.adapters.BaiVietAdapter;
 import com.example.utehystudent.model.BaiViet;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -70,7 +66,6 @@ public class BangTinFragment extends Fragment implements Serializable {
         postList = new ArrayList<>();
 
         pref = activity.getSharedPreferences("User", Context.MODE_PRIVATE);
-        String clID = pref.getString("class_ID", "");
 
         db = FirebaseFirestore.getInstance();
 
@@ -83,7 +78,7 @@ public class BangTinFragment extends Fragment implements Serializable {
         baiVietAdapter = new BaiVietAdapter(this, postList);
 
         GetCurrentUser();
-        GetPostList();
+        //GetPostList();
 
         tvDangBai.setOnClickListener(it -> {
             Intent intent = new Intent(getActivity(), PostCreate_Activity.class);
@@ -93,7 +88,6 @@ public class BangTinFragment extends Fragment implements Serializable {
         // Inflate the layout for this fragment
         return view;
     }
-
 
     public void viewImage(ArrayList<String> imgLink) {
         Intent it = new Intent(getActivity(), ImageViewerActivity.class);
@@ -117,7 +111,8 @@ public class BangTinFragment extends Fragment implements Serializable {
         rcv.setVisibility(View.GONE);
         prgBar.setVisibility(View.VISIBLE);
         postList.clear();
-        db.collection("Post")
+
+        /*db.collection("Post")
                 .whereEqualTo("maLop", classID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -138,6 +133,31 @@ public class BangTinFragment extends Fragment implements Serializable {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
+                });*/
+
+
+        db.collection("Post")
+                .whereEqualTo("maLop", "101185")
+                .addSnapshotListener((value, e) -> {
+                    if (e != null) {
+                        Log.w(TAG, "listen:error", e);
+                        return;
+                    }
+
+                    for (DocumentChange dc : value.getDocumentChanges()) {
+                        switch (dc.getType()) {
+                            case ADDED:
+                                Log.d(TAG, "New post: " + dc.getDocument().getData());
+                                postList.add(dc.getDocument().toObject(BaiViet.class));
+                                Collections.sort(postList);
+                                baiVietAdapter.notifyDataSetChanged();
+                                break;
+                        }
+                    }
+                    baiVietAdapter = new BaiVietAdapter(BangTinFragment.this, postList);
+                    rcv.setAdapter(baiVietAdapter);
+                    rcv.setVisibility(View.VISIBLE);
+                    prgBar.setVisibility(View.GONE);
                 });
 
     }
@@ -151,7 +171,9 @@ public class BangTinFragment extends Fragment implements Serializable {
     @Override
     public void onResume() {
         super.onResume();
-        baiVietAdapter.notifyDataSetChanged();
+        postList.clear();
+        GetPostList();
+//        baiVietAdapter.notifyDataSetChanged();
     }
 
     @Override

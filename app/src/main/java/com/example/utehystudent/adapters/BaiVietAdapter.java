@@ -155,8 +155,8 @@ public class BaiVietAdapter extends RecyclerView.Adapter<BaiVietAdapter.BaiVietV
                             switch (dc.getType()) {
                                 case MODIFIED:
                                     BaiViet bai = dc.getDocument().toObject(BaiViet.class);
-                                    bv[0] = bai;
                                     listBV.set(pos, bai);
+                                    bv[0] = bai;
                                     notifyDataSetChanged();
                                     break;
                                 case REMOVED:

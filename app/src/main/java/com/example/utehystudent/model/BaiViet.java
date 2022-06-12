@@ -179,6 +179,7 @@ public class BaiViet implements Comparable<BaiViet>, Serializable {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm 'ngày' dd/MM, yyyy");
         formatter.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
         String strDate = formatter.format(date);
+
         return strDate;
     }
 }
