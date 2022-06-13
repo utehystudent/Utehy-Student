@@ -26,4 +26,12 @@ public class Faculty {
     public void setFaculty_name(String faculty_name) {
         this.faculty_name = faculty_name;
     }
+
+    @Override
+    public String toString() {
+        if (this.getFaculty_ID().equals("khoa")) {
+            return this.getFaculty_name();
+        }
+        return this.getFaculty_name()+" ("+this.faculty_ID+")";
+    }
 }

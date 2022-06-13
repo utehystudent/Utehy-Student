@@ -25,6 +25,7 @@ public class PushReceiver extends BroadcastReceiver {
         String notificationText = intent.getStringExtra("message") != null ? intent.getStringExtra("message") : "Test notification";
 
         // Prepare a notification with vibration, sound and lights
+        
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.utehy_logo)

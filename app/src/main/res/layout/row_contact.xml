@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:paddingBottom="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/rowContact_imgAvt"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_student" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="15dp">
+
+            <TextView
+                android:id="@+id/rowContact_tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="TS. Nguyễn Văn Quyết"
+                android:textAllCaps="false"
+                android:textColor="#2F80ED"
+                android:textSize="23sp"></TextView>
+
+            <TextView
+                android:id="@+id/rowContact_tvPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Trưởng bộ môn"
+                android:textAllCaps="true"
+                android:textColor="#000"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/rowContact_tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:autoLink="email"
+                android:fontFamily="@font/roboto_regular"
+                android:text="quyetict@gmail.com"
+                android:drawableLeft="@drawable/ic_email"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:drawablePadding="10dp"
+                android:paddingLeft="5dp"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/rowContact_tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:autoLink="phone"
+                android:fontFamily="@font/roboto_regular"
+                android:drawableLeft="@drawable/ic_phone"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:drawablePadding="10dp"
+                android:text="0912.188.636"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

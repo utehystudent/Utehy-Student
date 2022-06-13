@@ -77,6 +77,7 @@ public class ClassManagementViewModel extends AndroidViewModel {
     }
 
     public void searchStudent(String s) {
+
         if (s.equals("")) {
             usersList = usersList_clone;
             this.setListUserLiveData(usersList);
