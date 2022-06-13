@@ -29,48 +29,64 @@
             android:background="#fff"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/AccountSetting_cardAvt"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                app:cardCornerRadius="60dp"
-                android:layout_marginTop="20dp"
-                android:shape="ring"
-                android:thicknessRatio="1.9">
-                <ImageView
-                    android:id="@+id/AccountSetting_imgAvt"
-                    android:padding="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
 
-                    ></ImageView>
-            </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/AccountSetting_cardAvt"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:innerRadius="0dp"
+                    android:shape="ring"
+                    android:thicknessRatio="1.9"
+                    app:cardCornerRadius="40dp"
+                    app:cardPreventCornerOverlap="false">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/AccountSetting_imgAvt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:scaleType="center"></ImageView>
+                </androidx.cardview.widget.CardView>
+
+
                 <TextView
                     android:id="@+id/AccountSetting_tvName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hoàng Việt"
-                    android:textSize="25sp"
-                    android:maxLines="1"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textColor="#000"
-                    android:textAllCaps="true"></TextView>
-                <ImageView
-                    android:id="@+id/AccountSetting_imgSuaTen"
-                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/AccountSetting_cardAvt"
+                    android:fontFamily="@font/nunito"
+                    android:text="HOÀNG VIỆT (10118456)"
+                    android:textAllCaps="true"
+                    android:textColor="#050505"
+                    android:textSize="18sp"></TextView>
+
+                <TextView
+                    android:id="@+id/AccountSetting_tvLop"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_edit"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"></ImageView>
-            </LinearLayout>
+                    android:layout_below="@+id/AccountSetting_tvName"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/AccountSetting_cardAvt"
+                    android:fontFamily="@font/nunito_light"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Lớp: 101185 - Lớp trưởng"
+                    android:textAllCaps="false"
+                    android:textColor="#000000"
+                    android:textSize="15sp"></TextView>
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/AccountSetting_btnDoiMK"

@@ -18,11 +18,12 @@ import com.example.utehystudent.ViewModel.MenuViewModel;
 import com.example.utehystudent.activity.AccountSetting_Activity;
 import com.example.utehystudent.activity.AttendanceActivity;
 import com.example.utehystudent.activity.ClassManagementActivity;
-import com.example.utehystudent.activity.CongThongTinActivity;
+import com.example.utehystudent.activity.TinTucKhoaActivity;
 import com.example.utehystudent.activity.LoginActivity;
 import com.example.utehystudent.activity.SubjectInTermManagementActivity;
 import com.example.utehystudent.activity.ThoiKhoaBieuActivity;
 import com.example.utehystudent.activity.ThuVienSoActivity;
+import com.example.utehystudent.activity.TraCuuDiemActivity;
 import com.squareup.picasso.Picasso;
 
 public class MenuFragment extends Fragment {
@@ -30,7 +31,7 @@ public class MenuFragment extends Fragment {
     ImageView imgAvt;
     TextView tvName, tvClass;
     MenuViewModel menuViewModel;
-    Button btnClassManagement, btnSubjectManagement, btnDangXuat, btnDiemDanh, btnCongTT, btnTKB, btnThuVienSo, btnTaiKhoan;
+    Button btnClassManagement, btnSubjectManagement, btnDangXuat, btnDiemDanh, btnTinTuc, btnTKB, btnThuVienSo, btnTaiKhoan, btnTraCuuDiem;
 
     public MenuFragment() {
 
@@ -63,8 +64,8 @@ public class MenuFragment extends Fragment {
             Intent it = new Intent(requireActivity(), AttendanceActivity.class);
             startActivity(it);
         });
-        btnCongTT.setOnClickListener(view -> {
-            Intent it = new Intent(requireActivity(), CongThongTinActivity.class);
+        btnTinTuc.setOnClickListener(view -> {
+            Intent it = new Intent(requireActivity(), TinTucKhoaActivity.class);
             startActivity(it);
         });
         btnTKB.setOnClickListener(view -> {
@@ -79,6 +80,10 @@ public class MenuFragment extends Fragment {
             Intent it = new Intent(requireActivity(), AccountSetting_Activity.class);
             startActivity(it);
         });
+        btnTraCuuDiem.setOnClickListener(view -> {
+            Intent it = new Intent(requireActivity(), TraCuuDiemActivity.class);
+            startActivity(it);
+        });
     }
 
     private void DangXuatTaiKhoan() {
@@ -89,18 +94,19 @@ public class MenuFragment extends Fragment {
     }
 
     private void InitView(View view) {
-        tvName = view.findViewById(R.id.Menu_tvTenSV);
-        tvClass = view.findViewById(R.id.Menu_tvLop);
-        imgAvt = view.findViewById(R.id.Menu_imgAvt);
+        tvName = view.findViewById(R.id.AccountSetting_tvName);
+        tvClass = view.findViewById(R.id.AccountSetting_tvLop);
+        imgAvt = view.findViewById(R.id.AccountSetting_imgAvt);
         linearQT = view.findViewById(R.id.Menu_layoutQuanTri);
         btnClassManagement = view.findViewById(R.id.Menu_btnQLTV);
         btnSubjectManagement = view.findViewById(R.id.Menu_btnQLMH);
         btnDangXuat = view.findViewById(R.id.Menu_btnDangXuat);
         btnDiemDanh = view.findViewById(R.id.Menu_btnDiemDanh);
-        btnCongTT = view.findViewById(R.id.Menu_btnCongThongTin);
+        btnTinTuc = view.findViewById(R.id.Menu_btnCongThongTin);
         btnTKB = view.findViewById(R.id.Menu_btnTKB);
         btnThuVienSo = view.findViewById(R.id.Menu_btnThuVienSo);
         btnTaiKhoan = view.findViewById(R.id.Menu_btnTaiKhoan);
+        btnTraCuuDiem = view.findViewById(R.id.Menu_btnTraCuuDiem);
 
         menuViewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
         menuViewModel.getCurrentUser().observe(requireActivity(), user -> {

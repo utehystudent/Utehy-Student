@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/Home_cardAvt"
+                    android:id="@+id/AccountSetting_cardAvt"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_centerInParent="true"
@@ -46,7 +46,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="15dp"
                     android:textColor="#FFEA00"
-                    android:layout_toRightOf="@+id/Home_cardAvt"
+                    android:layout_toRightOf="@+id/AccountSetting_cardAvt"
                     android:fontFamily="@font/nunito"
                     android:textAllCaps="true"
                     android:textSize="18sp"></TextView>
@@ -58,7 +58,7 @@
                     android:layout_below="@+id/Home_tvXinChao"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@+id/Home_cardAvt"
+                    android:layout_toRightOf="@+id/AccountSetting_cardAvt"
                     android:fontFamily="@font/nunito"
                     android:textAllCaps="true"
                     android:textColor="#fff"
@@ -71,7 +71,7 @@
                     android:layout_below="@+id/Home_tvTenSV"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@+id/Home_cardAvt"
+                    android:layout_toRightOf="@+id/AccountSetting_cardAvt"
                     android:fontFamily="@font/nunito"
                     android:maxLines="1"
                     android:textAllCaps="true"

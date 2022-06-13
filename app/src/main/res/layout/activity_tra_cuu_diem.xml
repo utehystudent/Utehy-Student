@@ -9,7 +9,7 @@
     tools:context=".activity.TinTucKhoaActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/CongTT_toolbar"
+        android:id="@+id/TraCuuDiem_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleTextColor="#2F80ED" />
@@ -20,7 +20,7 @@
         android:background="#E3DDDD"></View>
 
     <WebView
-        android:id="@+id/CongTT_webView"
+        android:id="@+id/TraCuuDiem_webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"></WebView>

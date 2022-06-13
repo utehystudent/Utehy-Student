@@ -15,28 +15,27 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.utehystudent.R;
 
-public class CongThongTinActivity extends AppCompatActivity {
+public class TraCuuDiemActivity extends AppCompatActivity {
     Toolbar toolbar;
     WebView webView;
     ProgressDialog progressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_cong_thong_tin);
+        setContentView(R.layout.activity_tra_cuu_diem);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Đang tải dữ liệu...");
 
-        toolbar = findViewById(R.id.CongTT_toolbar);
+        toolbar = findViewById(R.id.TraCuuDiem_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("CỔNG THÔNG TIN SINH VIÊN");
         toolbar.setNavigationOnClickListener(v -> finish());
         //
-        webView = findViewById(R.id.CongTT_webView);
+        webView = findViewById(R.id.TraCuuDiem_webView);
 
         webView.getSettings().setAppCacheEnabled(true);
 

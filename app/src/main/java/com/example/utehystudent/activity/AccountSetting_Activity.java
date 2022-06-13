@@ -24,9 +24,9 @@ import com.squareup.picasso.Picasso;
 
 public class AccountSetting_Activity extends AppCompatActivity {
     Toolbar toolbar;
-    ImageView imgAvt, imgSuaTen;
+    ImageView imgAvt;
     Button btnDoiMK, btnDangXuat;
-    TextView tvName;
+    TextView tvName, tvLop;
     FirebaseFirestore db;
     SharedPreferences userPref, accountPref;
 
@@ -43,12 +43,12 @@ public class AccountSetting_Activity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
         imgAvt = findViewById(R.id.AccountSetting_imgAvt);
-        imgSuaTen = findViewById(R.id.AccountSetting_imgSuaTen);
 
         btnDoiMK = findViewById(R.id.AccountSetting_btnDoiMK);
         btnDangXuat = findViewById(R.id.AccountSetting_btnDangXuat);
 
         tvName = findViewById(R.id.AccountSetting_tvName);
+        tvLop = findViewById(R.id.AccountSetting_tvLop);
 
         userPref = getSharedPreferences("User", Context.MODE_PRIVATE);
         accountPref = getSharedPreferences("Account", Context.MODE_PRIVATE);
@@ -162,14 +162,26 @@ public class AccountSetting_Activity extends AppCompatActivity {
 
     private void getDataUser() {
         String avt_link = userPref.getString("avt_link", "");
+        String username = userPref.getString("username", "");
+        String regency = userPref.getString("regency", "");
+        String classID = userPref.getString("class_ID", "");
         try {
-            Picasso.get().load(avt_link).resize(300, 300).centerCrop().into(imgAvt);
+            Picasso.get().load(avt_link).resize(280, 280).centerCrop().into(imgAvt);
         } catch (Exception e) {
             imgAvt.setImageResource(R.drawable.ic_student);
         }
 
         String name = userPref.getString("name", "");
-        tvName.setText(name);
+        tvName.setText(name+" ("+username+")");
+
+        String s = "";
+        if (regency.equals("lt")) {
+            s = "Lớp "+classID+" - LỚP TRƯỞNG";
+        }else {
+            s = "Lớp "+classID+" - THÀNH VIÊN";
+        }
+
+        tvLop.setText(s);
 
     }
 }

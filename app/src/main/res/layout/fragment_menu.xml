@@ -30,7 +30,7 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/Home_cardAvt"
+                android:id="@+id/AccountSetting_cardAvt"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_alignParentStart="true"
@@ -45,7 +45,7 @@
                 app:cardPreventCornerOverlap="false">
 
                 <ImageView
-                    android:id="@+id/Menu_imgAvt"
+                    android:id="@+id/AccountSetting_imgAvt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -55,12 +55,12 @@
 
 
             <TextView
-                android:id="@+id/Menu_tvTenSV"
+                android:id="@+id/AccountSetting_tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@+id/Home_cardAvt"
+                android:layout_toRightOf="@+id/AccountSetting_cardAvt"
                 android:fontFamily="@font/nunito"
                 android:text="HOÀNG VIỆT (10118456)"
                 android:textAllCaps="true"
@@ -68,13 +68,13 @@
                 android:textSize="18sp"></TextView>
 
             <TextView
-                android:id="@+id/Menu_tvLop"
+                android:id="@+id/AccountSetting_tvLop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Menu_tvTenSV"
+                android:layout_below="@+id/AccountSetting_tvName"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/Home_cardAvt"
+                android:layout_toRightOf="@+id/AccountSetting_cardAvt"
                 android:fontFamily="@font/nunito_light"
                 android:lineSpacingExtra="5dp"
                 android:text="Lớp: 101185 - Lớp trưởng"
@@ -148,7 +148,7 @@
                     android:padding="5dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
-                    android:text="   Cổng thông tin sinh viên"
+                    android:text="   Tin tức đoàn trường"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="#000"></Button>
@@ -211,23 +211,6 @@
                     android:textAllCaps="false"
                     android:textColor="#000"></Button>
 
-                <Button
-                    android:id="@+id/Menu_btnBangDiem"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/ic_mark_sheet"
-                    android:drawableRight="@drawable/ic_right_arrow"
-                    android:fontFamily="@font/nunito_light"
-                    android:padding="5dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="5dp"
-                    android:text="   Bảng điểm"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false"
-                    android:textColor="#000"></Button>
 
                 <Button
                     android:id="@+id/Menu_btnThuVienSo"
@@ -243,6 +226,24 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="5dp"
                     android:text="   Thư viện số"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="#000"></Button>
+
+                <Button
+                    android:id="@+id/Menu_btnTraCuuDiem"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#FFFFFF"
+                    android:drawableLeft="@drawable/ic_kinhlup"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="@font/nunito_light"
+                    android:padding="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:text="   Tra cứu điểm"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="#000"></Button>
@@ -315,24 +316,6 @@
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="#000"></Button>
-
-                <Button
-                    android:id="@+id/Menu_btnGuiDiem"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:background="#FFFFFF"
-                    android:drawableLeft="@drawable/ic_guidiem"
-                    android:drawableRight="@drawable/ic_right_arrow"
-                    android:fontFamily="@font/nunito_light"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="5dp"
-                    android:text="   Gửi điểm"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false"
-                    android:textColor="#000"></Button>
-
 
             </LinearLayout>
 
