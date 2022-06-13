@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="480dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="15dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_tvDN"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito"
+                android:text="MẬT KHẨU CŨ"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                android:layout_marginTop="10dp"
+                app:strokeColor ="#2F80ED"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="10dp">
+                <EditText
+                    android:id="@+id/dialogPassChange_edtMKCu"
+                    android:padding="10dp"
+                    android:lineSpacingExtra="5dp"
+                    android:drawablePadding="10dp"
+                    android:inputType="textPassword"
+                    android:minHeight="55dp"
+                    android:maxHeight="70dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_oldpass"
+                    android:hint="Mật khẩu cũ"
+                    android:background="@drawable/rounded2"></EditText>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/nunito"
+                android:text="MẬT KHẨU MỚI"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                android:layout_marginTop="10dp"
+                app:strokeColor ="#2F80ED"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="10dp">
+                <EditText
+                    android:id="@+id/dialogPassChange_edtMKMoi"
+                    android:padding="10dp"
+                    android:drawablePadding="10dp"
+                    android:minHeight="55dp"
+                    android:lineSpacingExtra="5dp"
+                    android:inputType="textPassword"
+                    android:maxHeight="70dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_newpass"
+                    android:hint="Nhập mật khẩu mới"
+                    android:background="@drawable/rounded2"></EditText>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_tvDN"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/nunito"
+                android:text="XÁC NHẬN MẬT KHẨU MỚI"
+                android:textColor="#2F80ED"
+                android:textSize="20sp"></TextView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                android:layout_marginTop="10dp"
+                app:strokeColor ="#2F80ED"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="10dp">
+                <EditText
+                    android:id="@+id/dialogPassChange_edtMKXacNhan"
+                    android:padding="10dp"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:minHeight="55dp"
+                    android:lineSpacingExtra="5dp"
+                    android:inputType="textPassword"
+                    android:maxHeight="70dp"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_xacnhanpass"
+                    android:hint="Nhập lại mật khẩu"
+                    android:background="@drawable/rounded2"></EditText>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:cardCornerRadius="10dp"
+                android:background="@drawable/gradient1"
+                app:cardElevation="10dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="40dp">
+                <Button
+                    android:id="@+id/dialogPassChange_btnLuu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient1"
+                    android:text="lưu"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/nunito"
+                    android:longClickable="false"
+                    ></Button>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

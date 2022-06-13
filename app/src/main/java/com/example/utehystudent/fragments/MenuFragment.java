@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.MenuViewModel;
+import com.example.utehystudent.activity.AccountSetting_Activity;
 import com.example.utehystudent.activity.AttendanceActivity;
 import com.example.utehystudent.activity.ClassManagementActivity;
 import com.example.utehystudent.activity.CongThongTinActivity;
@@ -29,7 +30,7 @@ public class MenuFragment extends Fragment {
     ImageView imgAvt;
     TextView tvName, tvClass;
     MenuViewModel menuViewModel;
-    Button btnClassManagement, btnSubjectManagement, btnDangXuat, btnDiemDanh, btnCongTT, btnTKB, btnThuVienSo;
+    Button btnClassManagement, btnSubjectManagement, btnDangXuat, btnDiemDanh, btnCongTT, btnTKB, btnThuVienSo, btnTaiKhoan;
 
     public MenuFragment() {
 
@@ -74,6 +75,10 @@ public class MenuFragment extends Fragment {
             Intent it = new Intent(requireActivity(), ThuVienSoActivity.class);
             startActivity(it);
         });
+        btnTaiKhoan.setOnClickListener(view -> {
+            Intent it = new Intent(requireActivity(), AccountSetting_Activity.class);
+            startActivity(it);
+        });
     }
 
     private void DangXuatTaiKhoan() {
@@ -95,6 +100,7 @@ public class MenuFragment extends Fragment {
         btnCongTT = view.findViewById(R.id.Menu_btnCongThongTin);
         btnTKB = view.findViewById(R.id.Menu_btnTKB);
         btnThuVienSo = view.findViewById(R.id.Menu_btnThuVienSo);
+        btnTaiKhoan = view.findViewById(R.id.Menu_btnTaiKhoan);
 
         menuViewModel = new ViewModelProvider(requireActivity()).get(MenuViewModel.class);
         menuViewModel.getCurrentUser().observe(requireActivity(), user -> {

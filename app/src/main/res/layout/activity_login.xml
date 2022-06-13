@@ -52,8 +52,7 @@
         app:strokeColor ="#2F80ED"
         app:strokeWidth="1dp"
         app:cardCornerRadius="10dp"
-        android:layout_below="@+id/Login_tvTK"
-        >
+        android:layout_below="@+id/Login_tvTK">
         <EditText
             android:id="@+id/Login_edtTK"
             android:background="@drawable/bo_edt"
