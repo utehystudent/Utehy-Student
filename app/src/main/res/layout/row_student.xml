@@ -20,16 +20,18 @@
             android:padding="5dp"
             android:orientation="horizontal">
             <ImageView
+                android:id="@+id/rowStudent_imgRSPW"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="30dp"
                 android:background="#FFFFFF"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/ic_edit2"
+                android:src="@drawable/ic_rs_pw"
                 android:textAlignment="center"></ImageView>
 
             <ImageView
+                android:id="@+id/rowStudent_imgDelete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"

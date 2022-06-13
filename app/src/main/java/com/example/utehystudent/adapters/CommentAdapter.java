@@ -16,9 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utehystudent.R;
 import com.example.utehystudent.model.Comment;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -60,11 +64,29 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             return;
         }
 
-        try {
-            Picasso.get().load(comment.getLinkAnhNguoiCmt()).resize(180, 180).centerCrop().into(holder.imgAvt);
-        } catch (Exception e) {
-            holder.imgAvt.setImageResource(R.drawable.ic_student);
-        }
+        DocumentReference docRef = db.collection("User").document(comment.getIdNguoiCmt());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        String link = document.getString("avt_link");
+                        try {
+                            Picasso.get().load(link).resize(180, 180).centerCrop().into(holder.imgAvt);
+                        } catch (Exception e) {
+                            holder.imgAvt.setImageResource(R.drawable.ic_student);
+                        }
+                    } else {
+                        Log.d("LOGGER", "No such document");
+                    }
+                } else {
+                    Log.d("LOGGER", "get failed with ", task.getException());
+                }
+            }
+        });
+
+
         holder.tvTen.setText(comment.getTenNguoiCmt());
         holder.tvND.setText(comment.getNoiDung());
         holder.tvNgay.setText(comment.getNgayCmt());

@@ -25,6 +25,7 @@ public class ClassManagementViewModel extends AndroidViewModel {
     MutableLiveData<ArrayList<User>> listUserLiveData = new MutableLiveData<>();
     UserRepo userRepo;
     ArrayList<User> usersList = new ArrayList<>();
+    ArrayList<User> usersList_clone = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ClassManagementViewModel(@NonNull Application application) {
@@ -64,6 +65,7 @@ public class ClassManagementViewModel extends AndroidViewModel {
                                 Log.d(TAG, "onComplete: "+document.toObject(User.class));
                             }
                             usersList = listUserInClass;
+                            usersList_clone = listUserInClass;
                             setListUserLiveData(usersList);
                             Log.d(TAG, "Size: "+listUserLiveData.getValue().size());
                         } else {
@@ -72,5 +74,20 @@ public class ClassManagementViewModel extends AndroidViewModel {
                         }
                     }
                 });
+    }
+
+    public void searchStudent(String s) {
+        if (s.equals("")) {
+            usersList = usersList_clone;
+            this.setListUserLiveData(usersList);
+        }else {
+            usersList.clear();
+            for (User user : usersList_clone){
+                if (user.getName().contains(s)) {
+                    usersList.add(user);
+                }
+            }
+            this.setListUserLiveData(usersList);
+        }
     }
 }

@@ -20,6 +20,9 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.AddStudent_Activity"
+            android:exported="true" />
+        <activity
             android:name=".activity.TraCuuDiemActivity"
             android:exported="false" />
         <activity
@@ -57,7 +60,7 @@
         <activity
             android:name=".activity.ClassManagementActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan" /> <!-- ADD THIS -->
+            android:windowSoftInputMode="adjustPan" />
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
