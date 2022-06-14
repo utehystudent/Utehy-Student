@@ -37,5 +37,8 @@ public class HomeAdmin_Activity extends AppCompatActivity {
         btnBM.setOnClickListener(view -> {
             startActivity(new Intent(this, BaoMat_Activity.class));
         });
+        btnBV.setOnClickListener(view -> {
+            startActivity(new Intent(this, PostList_Activity.class));
+        });
     }
 }

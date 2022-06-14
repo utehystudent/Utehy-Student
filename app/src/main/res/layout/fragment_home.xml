@@ -265,10 +265,15 @@
                 android:layout_marginLeft="10dp"></TextView>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Home_rcvThongBao"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_marginTop="15dp"
-                android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
+            <ProgressBar
+                android:id="@+id/Home_prgTbao"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"></ProgressBar>
 
         </LinearLayout>
     </ScrollView>

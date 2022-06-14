@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/postCreate_main_content_admin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".activity.PostCreate_Activity">
+
+    <ImageButton
+        android:id="@+id/postCreate_imbCancel_admin"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:src="@drawable/ic_close"></ImageButton>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tạo bài viết"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:fontFamily="@font/nunito"
+        android:textSize="20sp"></TextView>
+
+    <ImageButton
+        android:id="@+id/postCreate_imbAddImage_admin"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@null"
+        android:src="@drawable/ic_image_gallery"></ImageButton>
+
+
+    <RelativeLayout
+        android:id="@+id/postCreate_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/postCreate_cardBtnDang_admin"
+        android:layout_below="@+id/postCreate_imbAddImage_admin"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/postCreate_edtND_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:autoLink="all"
+            android:background="@drawable/remove_underscore"
+            android:fontFamily="@font/nunito_light"
+            android:hint="Nhập nội dung bài viết"
+            android:padding="10dp"
+            android:textColor="#000"></EditText>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postCreate_rcvImage_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/postCreate_edtND_admin"></androidx.recyclerview.widget.RecyclerView>
+
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/postCreate_cardBtnDang_admin"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        app:cardElevation="10dp">
+        <Button
+            android:id="@+id/postCreate_btnDang_admin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient1"
+            android:text="đăng"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:fontFamily="@font/nunito"
+            android:longClickable="false"
+            ></Button>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

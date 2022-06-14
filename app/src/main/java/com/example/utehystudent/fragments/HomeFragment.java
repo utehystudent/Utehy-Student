@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,9 @@ import com.example.utehystudent.ViewModel.UserViewModel;
 import com.example.utehystudent.activity.AttendanceDetailActivity;
 import com.example.utehystudent.activity.MainActivity;
 import com.example.utehystudent.adapters.SubjectAbsentAdapter;
+import com.example.utehystudent.adapters.ThongBaoAdmin_Adapter;
 import com.example.utehystudent.model.Attendance;
+import com.example.utehystudent.model.BaiViet;
 import com.example.utehystudent.model.Schedule_detail;
 import com.example.utehystudent.model.Subject;
 import com.example.utehystudent.model.SubjectAbsent;
@@ -37,6 +40,7 @@ import com.example.utehystudent.model.User;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -61,12 +65,15 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
     String classID;
     SharedPreferences pref;
     SubjectAbsentAdapter subjectAbsentAdapter;
-    RecyclerView rcvSubjectAbsent;
+    RecyclerView rcvSubjectAbsent, rcvThongBao;
     LinearLayoutManager linearLayoutManager;
     RecyclerView.ItemDecoration itemDecoration;
     ImageView imgGood;
     TextView tvChuaNghi;
     ShimmerFrameLayout shimmerSubjectAbsent;
+    ArrayList<BaiViet> listPost;
+    ProgressBar prgTbao;
+    ThongBaoAdmin_Adapter adapterTbao;
 
 
     public HomeFragment() {
@@ -97,17 +104,26 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
         listSubjectInTerm = new ArrayList<>();
         listDetail = new ArrayList<>();
 
+        listPost = new ArrayList<>();
+        prgTbao = view.findViewById(R.id.Home_prgTbao);
+
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
 
         db = FirebaseFirestore.getInstance();
 
         rcvSubjectAbsent = view.findViewById(R.id.Home_rcvSubjectAbsent);
+        rcvThongBao = view.findViewById(R.id.Home_rcvThongBao);
 
         linearLayoutManager = new LinearLayoutManager(requireActivity());
         rcvSubjectAbsent.setLayoutManager(linearLayoutManager);
         itemDecoration = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
         rcvSubjectAbsent.addItemDecoration(itemDecoration);
+        //
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(requireActivity());
+        rcvThongBao.setLayoutManager(linearLayoutManager2);
+        RecyclerView.ItemDecoration itemDecoration2 = new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL);
+        rcvThongBao.addItemDecoration(itemDecoration2);
 
         pref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
 
@@ -229,6 +245,9 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
                 }
             }
         });
+
+        getListPost();
+
         //dismiss loading dialog
         dialog.dismiss();
     }
@@ -298,6 +317,32 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
                             GetSubjectInTerm();
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void getListPost() {
+        rcvThongBao.setVisibility(View.GONE);
+        prgTbao.setVisibility(View.VISIBLE);
+        listPost.clear();
+        db.collection("Post")
+                .whereEqualTo("idNguoiDang", "admin")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot doc : task.getResult()) {
+                                listPost.add(doc.toObject(BaiViet.class));
+                            }
+                            Collections.sort(listPost);
+                            adapterTbao = new ThongBaoAdmin_Adapter(getContext(), listPost);
+                            rcvThongBao.setAdapter(adapterTbao);
+                            rcvThongBao.setVisibility(View.VISIBLE);
+                            prgTbao.setVisibility(View.GONE);
+                        }else {
+                            return;
                         }
                     }
                 });

@@ -20,6 +20,12 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.admin.PostList_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.DangBai_Activity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.BaoMat_Activity"
             android:exported="false" />
         <activity
