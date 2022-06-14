@@ -14,11 +14,7 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "faculty_ID='" + faculty_ID + '\'' +
-                ", department_id='" + department_id + '\'' +
-                ", department_name='" + department_name + '\'' +
-                '}';
+        return this.getDepartment_name();
     }
 
     public String getFaculty_ID() {

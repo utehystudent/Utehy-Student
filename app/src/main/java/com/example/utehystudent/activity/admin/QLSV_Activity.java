@@ -31,6 +31,8 @@ import com.example.utehystudent.adapters.SinhVienQL_Adapter;
 import com.example.utehystudent.model.Account;
 import com.example.utehystudent.model.Class;
 import com.example.utehystudent.model.Faculty;
+import com.example.utehystudent.model.Schedule;
+import com.example.utehystudent.model.Schedule_detail;
 import com.example.utehystudent.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,8 +45,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class QLSV_Activity extends AppCompatActivity implements Serializable {
     private static final String TAG = "QLSV_Activity";
@@ -328,7 +332,30 @@ public class QLSV_Activity extends AppCompatActivity implements Serializable {
                         @Override
                         public void onSuccess(Void unused) {
                             dialog.dismiss();
+                            //add class schedule
+                            addSchedule(classNew);
                             Toast.makeText(QLSV_Activity.this, "Thêm lớp thành công!", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        private void addSchedule(Class classNew) {
+                            Date date = new Date();
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                            String strDate = formatter.format(date);
+
+                            Schedule schedule = new Schedule(classNew.getClass_ID(), strDate);
+                            db.collection("Schedule")
+                                    .document(classNew.getClass_ID())
+                                    .set(schedule);
+                            Schedule_detail d = new Schedule_detail("Nghỉ", "Nghỉ", "Nghỉ");
+                            String[] day = new String[]{"Monday", "Tuesday", "Saturday", "Sunday"," Thursday", "Wednesday", "Friday"};
+                            for (String s : day) {
+                                db.collection("Schedule")
+                                        .document(classNew.getClass_ID())
+                                        .collection("Schedule_detail")
+                                        .document(s)
+                                        .set(d);
+                            }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -340,6 +367,8 @@ public class QLSV_Activity extends AppCompatActivity implements Serializable {
                         }
                     });
         });
+
+
 
         dialog.create();
         dialog.show();

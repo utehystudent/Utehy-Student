@@ -19,8 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activity.admin.AddContact_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.QLLienHe_Activity"
+            android:exported="false" />
 
-        <receiver android:name=".AlarmReceiver"></receiver>
+        <receiver android:name=".AlarmReceiver" />
 
         <activity
             android:name=".activity.admin.PostList_Activity"

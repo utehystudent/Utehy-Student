@@ -40,5 +40,8 @@ public class HomeAdmin_Activity extends AppCompatActivity {
         btnBV.setOnClickListener(view -> {
             startActivity(new Intent(this, PostList_Activity.class));
         });
+        btnLH.setOnClickListener(view -> {
+            startActivity(new Intent(this, QLLienHe_Activity.class));
+        });
     }
 }
