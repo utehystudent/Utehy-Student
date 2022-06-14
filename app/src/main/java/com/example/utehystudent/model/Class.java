@@ -44,4 +44,9 @@ public class Class {
     public void setCourse(String course) {
         this.course = course;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass_name();
+    }
 }

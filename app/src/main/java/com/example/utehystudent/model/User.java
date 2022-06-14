@@ -1,6 +1,8 @@
 package com.example.utehystudent.model;
 
-public class User implements Comparable<User>{
+import java.io.Serializable;
+
+public class User implements Comparable<User>, Serializable {
     private String username, faculty_ID, class_ID, name, regency, avt_link;
 
     public User() {

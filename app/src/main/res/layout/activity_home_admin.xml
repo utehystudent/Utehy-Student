@@ -13,7 +13,7 @@
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/utehy_logo"></ImageView>
+        android:src="@drawable/utehy_logo" />
 
     <TextView
         android:id="@+id/admin_tvXinChao"
@@ -21,11 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/admin_logo"
         android:layout_centerHorizontal="true"
-        android:textSize="25sp"
-        android:fontFamily="@font/nunito"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunito"
+        android:text="Xin chào QUẢN TRỊ VIÊN"
         android:textColor="#2979FF"
-        android:text="XIN CHÀO QUẢN TRỊ VIÊN"></TextView>
+        android:textSize="25sp" />
 
 
     <GridLayout
@@ -44,12 +44,13 @@
             app:cardCornerRadius="15dp">
 
             <Button
+                android:id="@+id/admin_btnSV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:drawableTop="@drawable/ic_student"
                 android:paddingTop="20dp"
-                android:text="SINH VIÊN"></Button>
+                android:text="SINH VIÊN" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -59,12 +60,13 @@
             app:cardCornerRadius="15dp">
 
             <Button
+                android:id="@+id/admin_btnLH"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:drawableTop="@drawable/ic_admin_contact"
                 android:paddingTop="20dp"
-                android:text="LIÊN HỆ"></Button>
+                android:text="LIÊN HỆ" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -75,12 +77,13 @@
             app:cardCornerRadius="15dp">
 
             <Button
+                android:id="@+id/admin_btnBV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:drawableTop="@drawable/ic_admin_post"
                 android:paddingTop="20dp"
-                android:text="ĐĂNG BÀI"></Button>
+                android:text="ĐĂNG BÀI" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -91,12 +94,13 @@
             app:cardCornerRadius="15dp">
 
             <Button
+                android:id="@+id/admin_btnMH"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:drawableTop="@drawable/ic_admin_book"
                 android:paddingTop="20dp"
-                android:text="MÔN HỌC"></Button>
+                android:text="MÔN HỌC" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -107,12 +111,13 @@
             app:cardCornerRadius="15dp">
 
             <Button
+                android:id="@+id/admin_btnPB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:drawableTop="@drawable/ic_admin_department"
                 android:paddingTop="20dp"
-                android:text="PHÒNG BAN"></Button>
+                android:text="PHÒNG BAN" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -123,18 +128,18 @@
             app:cardCornerRadius="15dp">
 
             <Button
+                android:id="@+id/admin_btnBM"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:drawableTop="@drawable/ic_admin_account"
                 android:paddingTop="20dp"
-                android:text="bảo mật"></Button>
+                android:text="bảo mật" />
         </androidx.cardview.widget.CardView>
 
         <View
             android:layout_width="1dp"
-            android:layout_height="20dp"
-            ></View>
+            android:layout_height="20dp" />
 
     </GridLayout>
 

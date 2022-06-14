@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.admin.QLSV_Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/adminQLSV_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="#651FFF"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3DDDD"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/border_spinner"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical">
+        <Spinner
+            android:id="@+id/adminQLSV_spinnerKhoa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/Login_cardTK"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_gravity="center"
+        app:strokeColor ="#D0B5B5"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="10dp">
+        <EditText
+            android:id="@+id/adminQLSV_edtSearch"
+            android:background="@drawable/bo_edt"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:focusedByDefault="false"
+            android:hint="Tìm kiếm"
+            android:drawableLeft="@drawable/ic_search"
+            android:layout_height="match_parent"></EditText>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/adminQLSV_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        tools:listitem="@layout/row_student_quanly"
+        android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

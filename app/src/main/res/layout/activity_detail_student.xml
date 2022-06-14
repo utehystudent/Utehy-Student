@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.admin.DetailStudent_Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detailStudent_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="#651FFF"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3DDDD"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/detailStudent_img"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_student"
+        android:layout_marginTop="30dp"></de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:id="@+id/detailStudent_tvTen"
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Họ tên: HOÀNG VIỆT"
+        android:textColor="#070707"
+        android:layout_marginLeft="30dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/nunito"></TextView>
+
+    <TextView
+        android:id="@+id/detailStudent_tvMaSV"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mã SV: 10118456"
+        android:layout_marginLeft="30dp"
+        android:textColor="#070707"
+        android:textSize="20sp"
+        android:fontFamily="@font/nunito"></TextView>
+
+    <TextView
+        android:id="@+id/detailStudent_tvMaLop"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mã lớp: 101185"
+        android:layout_marginLeft="30dp"
+        android:textColor="#070707"
+        android:textSize="20sp"
+        android:fontFamily="@font/nunito"></TextView>
+
+    <TextView
+        android:id="@+id/detailStudent_tvKhoa"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Khoa: Công nghệ thông tin"
+        android:layout_marginLeft="30dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/nunito"></TextView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/detailStudent_tvChucVu"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chức vụ: THÀNH VIÊN LỚP"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/nunito"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/detailStudent_btnCapQuyen"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
+            android:text="Cấp quyền"
+            android:background="#00E676"
+            android:textColor="#C31111"
+            android:layout_weight="1"></Button>
+        <Button
+            android:id="@+id/detailStudent_btnRSMK"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
+            android:text="Reset MK"
+            android:background="#00B0FF"
+            android:layout_marginLeft="30dp"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"></Button>
+        <Button
+            android:id="@+id/detailStudent_btnXoa"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
+            android:text="Xóa"
+            android:background="#FF3D00"
+            android:layout_marginLeft="30dp"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"></Button>
+    </LinearLayout>
+
+</LinearLayout>

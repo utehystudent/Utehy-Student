@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/contextQLSV_itCapQuyen"
+        android:icon="@drawable/ic_history2"
+        android:title="Cấp quyền lớp trưởng"/>
+    <item
+        android:id="@+id/contextQLSV_itRSPW"
+        android:icon="@drawable/ic_history2"
+        android:title="Reset mật khẩu"/>
+    <item
+        android:id="@+id/contextQLSV_itXoa"
+        android:icon="@drawable/ic_history2"
+        android:title="Xóa"/>
+</menu>

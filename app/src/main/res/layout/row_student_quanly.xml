@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/rowSVQL_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="15dp"
+    android:paddingLeft="5dp"
+    android:paddingTop="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
+        android:paddingBottom="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/rowSVQL_imgAvt"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_student" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="15dp">
+
+            <TextView
+                android:id="@+id/rowSVQL_tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Hoàng Việt"
+                android:textAllCaps="false"
+                android:textColor="#2F80ED"
+                android:textSize="23sp"></TextView>
+
+            <TextView
+                android:id="@+id/rowSVQL_tvClassID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Lớp: 101185"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:drawablePadding="10dp"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/rowSVQL_tvMaSV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/roboto_regular"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:drawablePadding="10dp"
+                android:text="Mã SV: 10118456"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="18sp"></TextView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
