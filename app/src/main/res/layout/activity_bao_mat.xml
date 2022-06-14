@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.admin.BaoMat_Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/baoMat_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="#651FFF"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3DDDD"/>
+
+    <Button
+        android:id="@+id/baoMat_btnDoiMK"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:drawableLeft="@drawable/ic_doimk"
+        android:fontFamily="@font/nunito_light"
+        android:paddingStart="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:layout_marginTop="50dp"
+        android:drawablePadding="20dp"
+        android:text="Đổi mật khẩu"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="#000"></Button>
+
+    <Button
+        android:id="@+id/baoMat_btnDangXuat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:background="#FFFFFF"
+        android:drawableLeft="@drawable/ic_signout"
+        android:fontFamily="@font/nunito_light"
+        android:paddingStart="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="20dp"
+        android:text="Đăng xuất"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="#FF3D00"></Button>
+
+</LinearLayout>

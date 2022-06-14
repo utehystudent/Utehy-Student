@@ -34,5 +34,8 @@ public class HomeAdmin_Activity extends AppCompatActivity {
         btnSV.setOnClickListener(view -> {
             startActivity(new Intent(this, QLSV_Activity.class));
         });
+        btnBM.setOnClickListener(view -> {
+            startActivity(new Intent(this, BaoMat_Activity.class));
+        });
     }
 }
