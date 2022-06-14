@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.utehystudent.R;
+import com.example.utehystudent.activity.admin.HomeAdmin_Activity;
 
 public class SplashActivity extends AppCompatActivity {
     final String TAG = "SplashActivity";
@@ -38,6 +39,11 @@ public class SplashActivity extends AppCompatActivity {
                 Intent it;
                 //nếu đã có tài khoản đăng nhập -> chuyển sang màn hình Home
                 if (!username.equals("")) {
+                    if (username.equals("admin")) {
+                        it = new Intent(SplashActivity.this, HomeAdmin_Activity.class);
+                        startActivity(it);
+                        return;
+                    }
                     it = new Intent(SplashActivity.this,MainActivity.class);
                     startActivity(it);
                 //nếu chưa -> chuyển sang màn đăng nhập tài khoản

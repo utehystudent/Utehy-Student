@@ -25,6 +25,7 @@ public class LoginViewModel extends AndroidViewModel {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private MutableLiveData<Account> accountLiveData;
     private MutableLiveData<Boolean> isSuccess;
+    public Boolean isAdmin;
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -32,6 +33,7 @@ public class LoginViewModel extends AndroidViewModel {
         userRepo = new UserRepo(application);
         accountLiveData = new MutableLiveData<>();
         isSuccess = new MutableLiveData<>();
+        isAdmin = false;
     }
 
     public MutableLiveData<Account> getAccountLiveData() {
@@ -68,6 +70,11 @@ public class LoginViewModel extends AndroidViewModel {
                                     accountLiveData.setValue(account);
                                     //SAVE DATA TO SHARED PREFERENCES
                                     accountRepo.SaveAccountToSF(account);
+                                    if (username.equals("admin")) {
+                                        isAdmin = true;
+                                    }else {
+                                        isAdmin = false;
+                                    }
                                 } else {
                                     Log.d(TAG, "Login failed");
                                     isSuccess.setValue(false);

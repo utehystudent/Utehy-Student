@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="30dp"
+    tools:context=".activity.admin.HomeAdmin_Activity">
+
+    <ImageView
+        android:id="@+id/admin_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/utehy_logo"></ImageView>
+
+    <TextView
+        android:id="@+id/admin_tvXinChao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/admin_logo"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:fontFamily="@font/nunito"
+        android:layout_marginTop="10dp"
+        android:textColor="#2979FF"
+        android:text="XIN CHÀO QUẢN TRỊ VIÊN"></TextView>
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/admin_tvXinChao"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:columnCount="2"
+        android:padding="5dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="start"
+            app:cardCornerRadius="15dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_student"
+                android:paddingTop="20dp"
+                android:text="SINH VIÊN"></Button>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="end"
+            app:cardCornerRadius="15dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_admin_contact"
+                android:paddingTop="20dp"
+                android:text="LIÊN HỆ"></Button>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="15dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_admin_post"
+                android:paddingTop="20dp"
+                android:text="ĐĂNG BÀI"></Button>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="15dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_admin_book"
+                android:paddingTop="20dp"
+                android:text="MÔN HỌC"></Button>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="15dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_admin_department"
+                android:paddingTop="20dp"
+                android:text="PHÒNG BAN"></Button>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="15dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:drawableTop="@drawable/ic_admin_account"
+                android:paddingTop="20dp"
+                android:text="bảo mật"></Button>
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            ></View>
+
+    </GridLayout>
+
+</RelativeLayout>

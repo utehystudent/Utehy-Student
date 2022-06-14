@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.LoginViewModel;
+import com.example.utehystudent.activity.admin.HomeAdmin_Activity;
 import com.example.utehystudent.repository.UserRepo;
 
 public class LoginActivity extends AppCompatActivity {
@@ -76,9 +77,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean == true) {
-                    Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(it);
+                    String username = edtTK.getText().toString();
+                    if (username.equals("admin")) {
+                        Intent it = new Intent(LoginActivity.this, HomeAdmin_Activity.class);
+                        startActivity(it);
+                        return;
+                    }else {
+                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(it);
+                    }
                 }else {
                     Toast.makeText(LoginActivity.this, "Fail", Toast.LENGTH_SHORT).show();
                 }
