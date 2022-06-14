@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,8 +46,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class HomeFragment extends Fragment implements SubjectAbsentAdapter.EventListener{
     final String TAG = "Home";
@@ -72,8 +76,9 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
     TextView tvChuaNghi;
     ShimmerFrameLayout shimmerSubjectAbsent;
     ArrayList<BaiViet> listPost;
-    ProgressBar prgTbao;
     ThongBaoAdmin_Adapter adapterTbao;
+    TextView tvCVHN;
+    Button btnAlarm;
 
 
     public HomeFragment() {
@@ -88,6 +93,7 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         imgAvt = view.findViewById(R.id.Home_imgAvt);
         tvName = view.findViewById(R.id.Home_tvTenSV);
         tvClass = view.findViewById(R.id.Home_tvLop);
@@ -104,8 +110,10 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
         listSubjectInTerm = new ArrayList<>();
         listDetail = new ArrayList<>();
 
+        tvCVHN = view.findViewById(R.id.Home_tvCVHomNay);
+        btnAlarm = view.findViewById(R.id.Home_btnAlarm);
+
         listPost = new ArrayList<>();
-        prgTbao = view.findViewById(R.id.Home_prgTbao);
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         scheduleViewModel = new ViewModelProvider(requireActivity()).get(ScheduleViewModel.class);
@@ -247,9 +255,40 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
         });
 
         getListPost();
+        getCongViecHomNay();
 
         //dismiss loading dialog
         dialog.dismiss();
+    }
+
+    private void getCongViecHomNay() {
+        tvCVHN.setVisibility(View.GONE);
+        //get today time
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        formatter.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+        String currentDate = formatter.format(date);
+
+        db.collection("Activity")
+                .whereEqualTo("date", currentDate)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String taskToday = "";
+                            for (DocumentSnapshot doc : task.getResult()) {
+                                taskToday += doc.getString("content");
+                            }
+                            if (taskToday.equals("")) {
+                                tvCVHN.setText("Không có công việc nào hôm nay");
+                            }else {
+                                tvCVHN.setText(taskToday);
+                            }
+                            tvCVHN.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
     }
 
     private void ShowLoadingDialog() {
@@ -324,7 +363,6 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
 
     private void getListPost() {
         rcvThongBao.setVisibility(View.GONE);
-        prgTbao.setVisibility(View.VISIBLE);
         listPost.clear();
         db.collection("Post")
                 .whereEqualTo("idNguoiDang", "admin")
@@ -340,7 +378,6 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
                             adapterTbao = new ThongBaoAdmin_Adapter(getContext(), listPost);
                             rcvThongBao.setAdapter(adapterTbao);
                             rcvThongBao.setVisibility(View.VISIBLE);
-                            prgTbao.setVisibility(View.GONE);
                         }else {
                             return;
                         }

@@ -46,6 +46,7 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
             String classID = pref.getString("class_ID", "");
 
             Pushy.subscribe(classID, mActivity);
+            Pushy.subscribe("utehy", mActivity);
             Log.d("Pushy", "Pushy subscribe topic: " + classID);
 
             // Registration succeeded, log token to logcat

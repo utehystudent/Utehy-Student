@@ -78,7 +78,6 @@
                     android:textColor="#fff"
                     android:textSize="15sp"></TextView>
             </RelativeLayout>
-
     </LinearLayout>
 
     <ScrollView
@@ -97,7 +96,7 @@
                 android:fontFamily="@font/nunito"
                 android:textStyle="bold"
                 android:textColor="#2F80ED"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"></TextView>
 
             <LinearLayout
@@ -230,6 +229,45 @@
                 android:visibility="gone"
                 android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="CÔNG VIỆC HÔM NAY"
+                    android:fontFamily="@font/nunito"
+                    android:textStyle="bold"
+                    android:textColor="#2F80ED"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"></TextView>
+
+                <Button
+                    android:id="@+id/Home_btnAlarm"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_alarm"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="20dp"></Button>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Home_tvCVHomNay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Không có công việc nào hôm nay"
+                android:fontFamily="@font/nunito"
+                android:textStyle="bold"
+                android:textColor="#FF0000"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"></TextView>
+
             <ImageView
                 android:id="@+id/Home_imgGood"
                 android:layout_width="match_parent"
@@ -261,7 +299,7 @@
                 android:fontFamily="@font/nunito"
                 android:textStyle="bold"
                 android:textColor="#2F80ED"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"></TextView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -269,12 +307,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 
-            <ProgressBar
-                android:id="@+id/Home_prgTbao"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"></ProgressBar>
-
+            <View android:layout_width="fill_parent" android:id="@+id/focus_view" android:layout_height="0dp" android:focusable="true" android:focusableInTouchMode="true"><requestFocus/></View>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
