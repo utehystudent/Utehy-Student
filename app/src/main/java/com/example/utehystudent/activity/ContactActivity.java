@@ -32,6 +32,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ContactActivity extends AppCompatActivity {
     private static final String TAG = "ContactActivity";
@@ -178,6 +179,7 @@ public class ContactActivity extends AppCompatActivity {
                             for (DocumentSnapshot snapshot : task.getResult()) {
                                 listContact.add(snapshot.toObject(Contact.class));
                             }
+                            Collections.sort(listContact);
                             contactAdapter.setData(listContact);
                         } else {
                             Log.d(TAG, "onComplete: GET FAULTY FAILED");

@@ -27,6 +27,8 @@ import com.example.utehystudent.activity.ThuVienSoActivity;
 import com.example.utehystudent.activity.TraCuuDiemActivity;
 import com.squareup.picasso.Picasso;
 
+import me.pushy.sdk.Pushy;
+
 public class MenuFragment extends Fragment {
     LinearLayout linearQT;
     ImageView imgAvt;
@@ -93,6 +95,7 @@ public class MenuFragment extends Fragment {
     }
 
     private void DangXuatTaiKhoan() {
+        Pushy.unregister(getContext());
         menuViewModel.SignOut();
         requireActivity().finish();
         Intent it = new Intent(requireActivity(), LoginActivity.class);

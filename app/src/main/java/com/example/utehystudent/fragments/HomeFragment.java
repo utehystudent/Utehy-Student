@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
     TextView tvChuaNghi;
     ShimmerFrameLayout shimmerSubjectAbsent;
 
+
     public HomeFragment() {
 
     }
@@ -301,6 +302,7 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
                     }
                 });
     }
+
 
     @Override
     public void onEvent(String subjectID) {

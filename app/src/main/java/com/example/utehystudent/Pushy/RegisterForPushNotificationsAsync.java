@@ -42,6 +42,12 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
             // Register the device for notifications
             String deviceToken = Pushy.register(mActivity);
 
+            SharedPreferences pref = mActivity.getSharedPreferences("User", Context.MODE_PRIVATE);
+            String classID = pref.getString("class_ID", "");
+
+            Pushy.subscribe(classID, mActivity);
+            Log.d("Pushy", "Pushy subscribe topic: " + classID);
+
             // Registration succeeded, log token to logcat
             Log.d("Pushy", "Pushy device token: " + deviceToken);
             // Provide token to onPostExecute()

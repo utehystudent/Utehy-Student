@@ -1,6 +1,6 @@
 package com.example.utehystudent.model;
 
-public class User {
+public class User implements Comparable<User>{
     private String username, faculty_ID, class_ID, name, regency, avt_link;
 
     public User() {
@@ -74,5 +74,21 @@ public class User {
                 ", regency='" + regency + '\'' +
                 ", avt_link='" + avt_link + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(User user) {
+        int idxName1 = this.getName().lastIndexOf(' ');
+        if (idxName1 == -1) {
+            throw new IllegalArgumentException("Only a single name: " + this.getName());
+        }
+        String lastName1  = this.getName().substring(idxName1 + 1);
+        idxName1 = user.getName().lastIndexOf(' ');
+        if (idxName1 == -1) {
+            throw new IllegalArgumentException("Only a single name: " + user.getName());
+        }
+        String lastName2  = user.getName().substring(idxName1 + 1);
+
+        return lastName1.compareTo(lastName2);
     }
 }

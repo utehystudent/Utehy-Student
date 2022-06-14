@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.utehystudent.Pushy.PushyAPI;
 import com.example.utehystudent.R;
 import com.example.utehystudent.adapters.PhotoAdapter;
 import com.example.utehystudent.model.BaiViet;
@@ -39,7 +40,9 @@ import com.gun0912.tedpermission.TedPermission;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gun0912.tedbottompicker.TedBottomPicker;
 
@@ -54,6 +57,10 @@ public class PostCreate_Activity extends AppCompatActivity {
     StorageReference storageReference;
     FirebaseFirestore db;
     SharedPreferences prefUser;
+    String name = "";
+    String classID = "";
+    String username = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +85,9 @@ public class PostCreate_Activity extends AppCompatActivity {
         listImageUri = new ArrayList<>();
 
         prefUser = getSharedPreferences("User", Context.MODE_PRIVATE);
+        name = prefUser.getString("name", "");
+        classID = prefUser.getString("class_ID", "");
+        username = prefUser.getString("username", "");
 
         String classID = prefUser.getString("class_ID", "");
         storageReference = FirebaseStorage.getInstance().getReference(classID);
@@ -113,6 +123,8 @@ public class PostCreate_Activity extends AppCompatActivity {
                 return;
             }
             sendPost();
+            String title = name+" đã đăng một bài viết mới vào "+classID;
+            sendNotificationToClass(edtND.getText().toString(), title, classID);
         });
     }
 
@@ -267,6 +279,39 @@ public class PostCreate_Activity extends AppCompatActivity {
                 .setEmptySelectionText("NO IMAGE")
                 .create();
         tedBottomPicker.show(getSupportFragmentManager());
+    }
+
+    public void sendNotificationToClass(String message, String title, String classID) {
+
+        String to = "/topics/"+classID;
+
+        // Set payload (any object, it will be serialized to JSON)
+        Map<String, String> payload = new HashMap<>();
+
+        // Add "message" parameter to payload
+        payload.put("message", message);
+        payload.put("idNguoiGui", username);
+        payload.put("title", title);
+
+        // iOS notification fields
+        Map<String, Object> notification = new HashMap<>();
+
+        notification.put("badge", 1);
+        notification.put("sound", "ping.aiff");
+        notification.put("title", title);
+        notification.put("body", message);
+
+        // Prepare the push request
+        PushyAPI.PushyPushRequest push = new PushyAPI.PushyPushRequest(payload, to, notification);
+
+        try {
+            // Try sending the push notification
+            PushyAPI.sendPush(push);
+        }
+        catch (Exception exc) {
+            // Error, print to console
+            System.out.println(exc.toString());
+        }
     }
 
 }

@@ -39,6 +39,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import gun0912.tedbottompicker.TedBottomPicker;
+import me.pushy.sdk.Pushy;
 
 public class AccountSetting_Activity extends AppCompatActivity {
     Toolbar toolbar;
@@ -94,6 +95,7 @@ public class AccountSetting_Activity extends AppCompatActivity {
     }
 
     private void signOut() {
+        Pushy.unregister(this);
         //Delete user data from SharedPreferences
         accountPref.edit().clear().commit();
         userPref.edit().clear().commit();

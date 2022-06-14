@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.CalendarWeekDay;
 import com.applandeo.materialcalendarview.EventDay;
+import com.example.utehystudent.Pushy.PushyAPI;
 import com.example.utehystudent.R;
 import com.example.utehystudent.activity.MainActivity;
 import com.example.utehystudent.calendar_setup.DrawableUtils;
@@ -38,7 +39,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LichHoatDongFragment extends Fragment {
     CalendarView calendarView;
@@ -54,6 +57,7 @@ public class LichHoatDongFragment extends Fragment {
     String classID = "";
     FirebaseFirestore db;
     Activity activity_chose = new Activity();
+    String username, maLop, name;
 
     public LichHoatDongFragment(Context context) {
         // Required empty public constructor
@@ -86,6 +90,9 @@ public class LichHoatDongFragment extends Fragment {
 
         SharedPreferences pref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
         regency = pref.getString("regency", "");
+        username = pref.getString("username", "");
+        maLop = pref.getString("class_ID", "");
+        name = pref.getString("name", "");
 
         if (!regency.equals("lt")) {
             imgUnpin.setVisibility(View.GONE);
@@ -247,6 +254,10 @@ public class LichHoatDongFragment extends Fragment {
             activity_chose.setContent(edtContent.getText().toString());
             //update activity to firestore
             getDocumentID(activity_chose, dialog);
+            //send notification
+            String message = activity_chose.getContent();
+            String title = name+" đã thay đổi hoạt động ngày "+activity_chose.getDate();
+            sendNotificationToClass(message, title, classID);
         });
 
         dialog.create();
@@ -284,7 +295,6 @@ public class LichHoatDongFragment extends Fragment {
                     btnThemTbao.setVisibility(View.GONE);
 
                     setUpCalendar();
-
                 })
                 .addOnFailureListener(e -> {
                     dialog.dismiss();
@@ -420,6 +430,10 @@ public class LichHoatDongFragment extends Fragment {
             activity.setContent(edtContent.getText().toString());
             //add activity to firestore
             addActivity(activity, dialog);
+            //send notification
+            String message = edtContent.getText().toString();
+            String title = name+" đã thêm một hoạt động vào ngày "+activity.getDate();
+            sendNotificationToClass(message, title, classID);
         });
 
         dialog.create();
@@ -446,5 +460,38 @@ public class LichHoatDongFragment extends Fragment {
                     Toast.makeText(context, "Thêm hoạt động thất bại", Toast.LENGTH_SHORT).show();
                     return;
                 });
+    }
+
+    public void sendNotificationToClass(String message, String title, String classID) {
+
+        String to = "/topics/"+classID;
+
+        // Set payload (any object, it will be serialized to JSON)
+        Map<String, String> payload = new HashMap<>();
+
+        // Add "message" parameter to payload
+        payload.put("message", message);
+        payload.put("idNguoiGui", username);
+        payload.put("title", title);
+
+        // iOS notification fields
+        Map<String, Object> notification = new HashMap<>();
+
+        notification.put("badge", 1);
+        notification.put("sound", "ping.aiff");
+        notification.put("title", title);
+        notification.put("body", message);
+
+        // Prepare the push request
+        PushyAPI.PushyPushRequest push = new PushyAPI.PushyPushRequest(payload, to, notification);
+
+        try {
+            // Try sending the push notification
+            PushyAPI.sendPush(push);
+        }
+        catch (Exception exc) {
+            // Error, print to console
+            System.out.println(exc.toString());
+        }
     }
 }
