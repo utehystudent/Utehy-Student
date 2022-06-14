@@ -1,9 +1,14 @@
 package com.example.utehystudent.fragments;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +30,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.utehystudent.AlarmReceiver;
 import com.example.utehystudent.R;
 import com.example.utehystudent.ViewModel.ScheduleViewModel;
 import com.example.utehystudent.ViewModel.UserViewModel;
@@ -40,6 +48,7 @@ import com.example.utehystudent.model.User;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -79,6 +88,7 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
     ThongBaoAdmin_Adapter adapterTbao;
     TextView tvCVHN;
     Button btnAlarm;
+    AlarmManager alarmManager;
 
 
     public HomeFragment() {
@@ -160,6 +170,12 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
         }
 
         BindData();
+
+        btnAlarm.setOnClickListener(v -> {
+            showDialogAlarmSetup();
+        });
+
+        createNotificationChannel();
 
         return view;
     }
@@ -383,6 +399,77 @@ public class HomeFragment extends Fragment implements SubjectAbsentAdapter.Event
                         }
                     }
                 });
+    }
+
+    private void showDialogAlarmSetup() {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.alarm_setup);
+        dialog.show();
+
+        final int[] hour = {0};
+        final int[] min = {0};
+        
+        TimePicker timePicker = dialog.findViewById(R.id.AlarmSetup_Picker);
+        timePicker.setIs24HourView(true);
+
+        TextInputEditText edtContent = dialog.findViewById(R.id.AlarmSetup_edtContent);
+        Button btnXong = dialog.findViewById(R.id.AlarmSetup_btnXong);
+
+        edtContent.setText(tvCVHN.getText().toString().trim());
+
+        Calendar calendar = Calendar.getInstance();
+
+
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                hour[0] = hourOfDay;
+                min[0] = minute;
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+            }
+        });
+
+        btnXong.setOnClickListener(v -> {
+            cancelAlarm(requireActivity());
+            alarmManager = (AlarmManager) requireActivity().getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(requireActivity(), AlarmReceiver.class);
+            intent.putExtra("message", edtContent.getText().toString().trim());
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(requireActivity(), 0, intent, 0);
+
+            Log.d("alarmm", "showDialogAlarmSetup: "+calendar.getTimeInMillis());
+
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            Toast.makeText(requireActivity(), "Nhắc nhở vào lúc: "+hour[0]+":"+min[0], Toast.LENGTH_SHORT).show();
+
+            dialog.dismiss();
+        });
+
+    }
+
+    private void cancelAlarm(Context context) {
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
+        Log.d("alarmm", "cancelAlarm: HỦY");
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "android";
+            String description = "Channel alarm";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("android", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager manager = requireActivity().getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
     }
 
 

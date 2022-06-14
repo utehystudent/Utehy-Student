@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
+
+        <receiver android:name=".AlarmReceiver"></receiver>
+
         <activity
             android:name=".activity.admin.PostList_Activity"
             android:exported="false" />
