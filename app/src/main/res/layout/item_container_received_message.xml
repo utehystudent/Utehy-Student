@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/itemReceivedMessage_tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/nunito"
+        android:text="Hoàng Việt"
+        android:textColor="#737376"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/itemReceivedMessage_tvMessage"
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintStart_toStartOf="@+id/itemReceivedMessage_tvMessage"></TextView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/itemReceivedMessage_imgAvt"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#fff"
+        app:layout_constraintBottom_toBottomOf="@+id/itemReceivedMessage_tvMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        ></de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:id="@+id/itemReceivedMessage_tvMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/background_received_message"
+        android:padding="12dp"
+        android:lineSpacingExtra="3dp"
+        android:textColor="#fff"
+        android:textSize="13sp"
+        android:maxWidth="250dp"
+        app:layout_constraintStart_toEndOf="@id/itemReceivedMessage_imgAvt"
+        app:layout_constraintTop_toTopOf="@id/itemReceivedMessage_tvName"></TextView>
+
+    <TextView
+        android:id="@+id/itemReceivedMessage_tvTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#737376"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@id/itemReceivedMessage_tvMessage"
+        app:layout_constraintTop_toBottomOf="@id/itemReceivedMessage_tvMessage"></TextView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

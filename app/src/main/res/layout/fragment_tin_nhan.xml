@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:tag="thongbao"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="#fff"
+    tools:context=".fragments.TinNhanFragment">
+
+    <View
+        android:id="@+id/fragmentTN_viewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="66dp"
+        android:background="@drawable/background_content_top"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentTN_layoutSend"
+        app:layout_constraintTop_toTopOf="parent"
+        ></View>
+
+    <ImageView
+        android:id="@+id/framentTN_imgInfo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="4dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_info24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentTN_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:padding="5dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/fragmentTN_viewBackground"
+        app:layout_constraintTop_toBottomOf="@+id/framentTN_imgInfo"></androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/fragmentTN_prgBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/fragmentTN_viewBackground"
+        app:layout_constraintEnd_toEndOf="@id/fragmentTN_viewBackground"
+        app:layout_constraintStart_toStartOf="@id/fragmentTN_viewBackground"
+        app:layout_constraintTop_toTopOf="@id/fragmentTN_viewBackground"></ProgressBar>
+
+    <FrameLayout
+        android:id="@+id/fragmentTN_layoutSend"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/background_chat_input"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageView
+            android:id="@+id/fragmentTN_imgSend"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_send24"
+            app:tint="#fff"></ImageView>
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/fragmentTN_edtInput"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/background_chat_input"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="#fff"
+        android:textColorHint="#5D7C95"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragmentTN_layoutSend"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="Aa"></EditText>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

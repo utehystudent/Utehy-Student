@@ -14,7 +14,7 @@ import com.example.utehystudent.fragments.BangTinFragment;
 import com.example.utehystudent.fragments.HomeFragment;
 import com.example.utehystudent.fragments.LichHoatDongFragment;
 import com.example.utehystudent.fragments.MenuFragment;
-import com.example.utehystudent.fragments.ThongBaoFragment;
+import com.example.utehystudent.fragments.TinNhanFragment;
 import com.example.utehystudent.model.Activity;
 import com.example.utehystudent.model.Attendance;
 import com.example.utehystudent.model.SubjectAbsent;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_calendar));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_news));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_home));
-        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_noti));
+        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_mess));
         bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.ic_menu));
 
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment();
                         break;
                     case 4:
-                        fragment = new ThongBaoFragment();
+                        fragment = new TinNhanFragment();
                         break;
                     case 5:
                         fragment = new MenuFragment();
@@ -88,11 +88,12 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
+
             }
         });
 
         //set notification count
-        bottomNavigation.setCount(4, "2");
+        bottomNavigation.setCount(4, "");
         //set home fragment is default
         bottomNavigation.show(3, true);
 
