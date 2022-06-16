@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -295,6 +296,9 @@ public class AttendanceActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.AttendanceMenu_icXong:
                 SaveAttendance();
+                break;
+            case R.id.AttendanceMenu_icXemLSDiemDanh:
+                startActivity(new Intent(AttendanceActivity.this, AttendanceHistory_Activity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

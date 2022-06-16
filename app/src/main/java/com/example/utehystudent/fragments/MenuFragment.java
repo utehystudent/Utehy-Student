@@ -123,7 +123,7 @@ public class MenuFragment extends Fragment {
             String textInfo = "";
             if (user.getRegency().equals("lt")) {
                 linearQT.setVisibility(View.VISIBLE);
-                textInfo = "Mã sinh viên: " + user.getUsername() + "\nLớp: " + user.getClass_ID() + " - LỚP TRƯỞNG";
+                textInfo = "Mã sinh viên: " + user.getUsername() + "\nLớp: " + user.getClass_ID() + " - CÁN BỘ LỚP";
             } else {
                 linearQT.setVisibility(View.GONE);
                 textInfo = "Mã sinh viên: " + user.getUsername() + "\nLớp: " + user.getClass_ID() + " - THÀNH VIÊN";
