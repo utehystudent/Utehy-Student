@@ -56,6 +56,8 @@ public class Contact_Admin_Adapter extends RecyclerView.Adapter<Contact_Admin_Ad
             holder.tvPosition.setText(contact.getPosition());
             holder.tvEmail.setText(contact.getEmail());
             holder.tvPhone.setText(contact.getPhone());
+
+
         }
     }
 

@@ -72,6 +72,7 @@ public class QLLienHe_Activity extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void Init() {
@@ -84,7 +85,9 @@ public class QLLienHe_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
             }
+
         });
+
 
         db = FirebaseFirestore.getInstance();
         pref = getSharedPreferences("User", Context.MODE_PRIVATE);

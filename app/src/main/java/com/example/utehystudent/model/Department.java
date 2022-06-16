@@ -1,6 +1,6 @@
 package com.example.utehystudent.model;
 
-public class Department {
+public class Department implements Comparable<Department>{
     private String faculty_ID, department_id, department_name;
 
     public Department(String faculty_ID, String department_id, String department_name) {
@@ -39,5 +39,11 @@ public class Department {
 
     public void setDepartment_name(String department_name) {
         this.department_name = department_name;
+    }
+
+
+    @Override
+    public int compareTo(Department department) {
+        return this.getDepartment_name().compareTo(this.getDepartment_name());
     }
 }

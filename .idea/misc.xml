@@ -55,6 +55,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_post_list.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_post_viewer.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_qllien_he.xml" value="0.16145833333333334" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_qlphong_ban.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_qlsv.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_subject_management.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/activity_thoi_khoa_bieu.xml" value="0.16" />
@@ -72,6 +73,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/dialog_cancel_post.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/dialog_chitiet_tkb.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/dialog_doi_mk.xml" value="0.16145833333333334" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/dialog_edit_contact.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/dialog_themlop_admin.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/dialog_themsv_admin.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/edit_activity_schedule.xml" value="0.16145833333333334" />

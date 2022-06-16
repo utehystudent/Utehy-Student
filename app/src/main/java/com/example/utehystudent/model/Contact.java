@@ -89,12 +89,13 @@ public class Contact implements Comparable<Contact>{
     public int compareTo(Contact contact) {
         int idxName1 = this.getName().lastIndexOf(' ');
         if (idxName1 == -1) {
-            throw new IllegalArgumentException("Only a single name: " + this.getName());
+            idxName1 = this.getName().indexOf(' ');
         }
         String lastName1  = this.getName().substring(idxName1 + 1);
+
         idxName1 = contact.getName().lastIndexOf(' ');
         if (idxName1 == -1) {
-            throw new IllegalArgumentException("Only a single name: " + contact.getName());
+            idxName1 = contact.getName().indexOf(' ');
         }
         String lastName2  = contact.getName().substring(idxName1 + 1);
 

@@ -20,6 +20,9 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.admin.QLPhongBan_Activity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.AddContact_Activity"
             android:exported="false" />
         <activity
