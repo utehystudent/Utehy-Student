@@ -106,6 +106,7 @@ public class QLLienHe_Activity extends AppCompatActivity {
         rcvDepartment.setFocusable(false);
         contactAdapter = new ContactAdapter(this);
         rcvContact.setAdapter(contactAdapter);
+
         phongBanAdapter = new PhongBan_Admin_Adapter(this);
         rcvDepartment.setAdapter(phongBanAdapter);
 

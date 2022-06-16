@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".activity.admin.QLPhongBan_Activity">
 
     <androidx.appcompat.widget.Toolbar
@@ -49,7 +50,32 @@
             android:id="@+id/QLPB_rcv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            tools:listitem="@layout/item_ql_phongban"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginTop="40dp" />
+
+        <LinearLayout
+            android:id="@+id/QLPB_linearNothing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="150dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/nothing" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chưa có phòng ban nào"
+                android:textSize="25sp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
