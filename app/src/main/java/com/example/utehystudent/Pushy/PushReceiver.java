@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 
 import androidx.core.app.NotificationCompat;
@@ -25,7 +26,6 @@ public class PushReceiver extends BroadcastReceiver {
             // Attempt to extract the "title" property from the data payload, or fallback to app shortcut label
             //String notificationTitle = intent.getStringExtra("title") != null ? intent.getStringExtra("title") : context.getPackageManager().getApplicationLabel(context.getApplicationInfo()).toString();
             String notificationTitle = intent.getStringExtra("title");
-
             // Attempt to extract the "message" property from the data payload: {"message":"Hello World!"}
             String notificationText = intent.getStringExtra("message") != null ? intent.getStringExtra("message") : "Test notification";
 

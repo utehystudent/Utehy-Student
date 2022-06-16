@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.utehystudent.Pushy.PushyAPI;
 import com.example.utehystudent.R;
 import com.example.utehystudent.adapters.ChatAdapter;
 import com.example.utehystudent.model.Chat;
@@ -36,6 +37,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TinNhanFragment extends Fragment {
 
@@ -68,6 +71,8 @@ public class TinNhanFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tin_nhan, container, false);
 
+        pref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+
         rcv = view.findViewById(R.id.fragmentTN_rcv);
         chatAdapter = new ChatAdapter(view.getContext());
 
@@ -83,7 +88,6 @@ public class TinNhanFragment extends Fragment {
 
         listChat = new ArrayList<>();
 
-        pref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
         classID = pref.getString("class_ID", "");
 
         LinearLayoutManager manager = new LinearLayoutManager(requireActivity());
@@ -139,6 +143,7 @@ public class TinNhanFragment extends Fragment {
 
     private void sendMessage(String message) {
         String username = pref.getString("username", "");
+        String name = pref.getString("name", "");
         timestamp = new Timestamp(System.currentTimeMillis());
         Chat chat = new Chat("chat"+username+""+timestamp.getTime(), username, "", classID, message);
         db.collection("Chat")
@@ -147,6 +152,7 @@ public class TinNhanFragment extends Fragment {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         edtChat.setText("");
+                        sendNotificationToClass(chat.getNoiDung(), name);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -181,6 +187,41 @@ public class TinNhanFragment extends Fragment {
                         rcv.scrollToPosition(listChat.size()-1);
                     }
                 });
+    }
+
+    public void sendNotificationToClass(String message, String title) {
+        String username = pref.getString("username", "");
+        String classID = pref.getString("class_ID", "");
+
+        String to = "/topics/"+classID;
+
+        // Set payload (any object, it will be serialized to JSON)
+        Map<String, String> payload = new HashMap<>();
+
+        // Add "message" parameter to payload
+        payload.put("message", message);
+        payload.put("idNguoiGui", username);
+        payload.put("title", title);
+
+        // iOS notification fields
+        Map<String, Object> notification = new HashMap<>();
+
+        notification.put("badge", 1);
+        notification.put("sound", "ping.aiff");
+        notification.put("title", title);
+        notification.put("body", message);
+
+        // Prepare the push request
+        PushyAPI.PushyPushRequest push = new PushyAPI.PushyPushRequest(payload, to, notification);
+
+        try {
+            // Try sending the push notification
+            PushyAPI.sendPush(push);
+        }
+        catch (Exception exc) {
+            // Error, print to console
+            System.out.println(exc.toString());
+        }
     }
 
 }
