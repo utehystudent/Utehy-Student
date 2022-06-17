@@ -20,6 +20,12 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.CallingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CallingSetupActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AttendanceHistoryDetail_Activity"
             android:exported="false" />
         <activity
