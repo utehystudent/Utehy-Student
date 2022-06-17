@@ -1,6 +1,6 @@
 package com.example.utehystudent.model;
 
-public class StudentAttendance {
+public class StudentAttendance implements Comparable<StudentAttendance>{
     private String username, faculty_ID, class_ID, name, regency, avt_link;
     private Boolean isChosen;
 
@@ -84,5 +84,13 @@ public class StudentAttendance {
                 ", avt_link='" + avt_link + '\'' +
                 ", isChosen=" + isChosen +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(StudentAttendance studentAttendance) {
+        String name1 = this.name.substring(this.name.lastIndexOf(" "));
+        String name2 = studentAttendance.getName().substring(studentAttendance.getName().lastIndexOf(" "));
+        return name1.compareTo(name2);
     }
 }

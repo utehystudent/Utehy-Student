@@ -271,5 +271,6 @@ public class AttendanceHistory_Activity extends AppCompatActivity implements Ser
         Intent intent = new Intent(this, AttendanceHistoryDetail_Activity.class);
         intent.putExtra("attendance", attendance);
         startActivity(intent);
+        finish();
     }
 }

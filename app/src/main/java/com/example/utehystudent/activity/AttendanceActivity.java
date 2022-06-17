@@ -43,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Objects;
 
 public class AttendanceActivity extends AppCompatActivity {
@@ -133,6 +134,7 @@ public class AttendanceActivity extends AppCompatActivity {
         //set data student to recycle view
         attendanceViewModel.getListStudentAttendanceLiveData().observe(this, studentAttendances -> {
             listStudentAttendance = new ArrayList<>();
+            Collections.sort(studentAttendances);
             listStudentAttendance.addAll(studentAttendances);
             studentAttendanceAdapter = new StudentAttendanceAdapter(AttendanceActivity.this,listStudentAttendance);
             rcvStudents.setAdapter(studentAttendanceAdapter);

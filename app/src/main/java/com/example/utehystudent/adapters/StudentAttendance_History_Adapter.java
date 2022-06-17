@@ -63,8 +63,10 @@ public class StudentAttendance_History_Adapter extends RecyclerView.Adapter<Stud
         holder.ckb.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b == true) {
                 holder.tvName.setTextColor(Color.parseColor("#2F80ED"));
+                student.setChosen(true);
             }else {
                 holder.tvName.setTextColor(Color.RED);
+                student.setChosen(false);
             }
         });
     }
