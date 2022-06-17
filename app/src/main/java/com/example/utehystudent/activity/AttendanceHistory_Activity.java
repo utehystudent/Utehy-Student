@@ -2,6 +2,7 @@ package com.example.utehystudent.activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -30,13 +31,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Objects;
 
-public class AttendanceHistory_Activity extends AppCompatActivity {
+public class AttendanceHistory_Activity extends AppCompatActivity implements Serializable {
     Toolbar toolbar;
     Spinner spnMH;
     TextView tvNgay;
@@ -263,5 +265,11 @@ public class AttendanceHistory_Activity extends AppCompatActivity {
         listAttendance = new ArrayList<>();
         adapter = new AttendanceHistory_Adapter(this);
         adapter.setData(listAttendance);
+    }
+
+    public void viewDetail(Attendance attendance) {
+        Intent intent = new Intent(this, AttendanceHistoryDetail_Activity.class);
+        intent.putExtra("attendance", attendance);
+        startActivity(intent);
     }
 }

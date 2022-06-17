@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utehystudent.R;
+import com.example.utehystudent.activity.AttendanceHistory_Activity;
 import com.example.utehystudent.model.Attendance;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,6 +75,9 @@ public class AttendanceHistory_Adapter extends RecyclerView.Adapter<AttendanceHi
         //set so nguoi nghi
         holder.tvSoNghi.setText("Số người nghỉ: " + attendance.getList_Absent().size());
 
+        holder.item.setOnClickListener(view ->{
+            ((AttendanceHistory_Activity) context).viewDetail(attendance);
+        });
     }
 
     @Override
@@ -85,13 +90,14 @@ public class AttendanceHistory_Adapter extends RecyclerView.Adapter<AttendanceHi
 
     public class AttendanceHistoryViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTenMH, tvNgay, tvSoNghi;
-
+        private LinearLayout item;
         public AttendanceHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTenMH = itemView.findViewById(R.id.rowAttendanceHis_tvTenMH);
             tvNgay = itemView.findViewById(R.id.rowAttendanceHis_tvNgay);
             tvSoNghi = itemView.findViewById(R.id.rowAttendanceHis_tvSoNghi);
+            item = itemView.findViewById(R.id.rowAttendanceHis_item);
         }
     }
 
