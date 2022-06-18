@@ -51,8 +51,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.File;
@@ -263,8 +261,8 @@ public class AttendanceActivity extends AppCompatActivity {
         hssfCell = hssfRow.createCell(0);
         hssfCell.setCellValue("LỚP: "+attendance.getClass_ID());
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.LEFT);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_LEFT);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_LEFT);
 
         hssfRow = hssfSheet.createRow(1);
         hssfRow.setHeight((short) 500);
@@ -273,41 +271,40 @@ public class AttendanceActivity extends AppCompatActivity {
         LocalDateTime now = LocalDateTime.now();
         hssfCell.setCellValue("NGÀY TẠO: "+dtf.format(now));
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.LEFT);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_LEFT);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_LEFT);
 
         hssfRow = hssfSheet.createRow(2);
         hssfRow.setHeight((short) 500);
         hssfCell = hssfRow.createCell(0);
         hssfCell.setCellValue("TÊN MÔN HỌC: "+attendance.getSubject_ID()+" - "+subjectList.get(subjectSpinner.getSelectedItemPosition()).getSubject_name());
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.LEFT);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_LEFT);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_LEFT);
 
         hssfRow = hssfSheet.createRow(3);
         hssfRow.setHeight((short) 500);
         hssfCell = hssfRow.createCell(0);
         hssfCell.setCellValue("GIÁO VIÊN GIẢNG DẠY: "+attendance.getTeacher_Name());
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.LEFT);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_LEFT);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_LEFT);
 
         hssfRow = hssfSheet.createRow(4);
         hssfRow.setHeight((short) 500);
         hssfCell = hssfRow.createCell(0);
         hssfCell.setCellValue("SỐ LƯỢNG SINH VIÊN: "+listStudentAttendance.size());
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.LEFT);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_LEFT);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_LEFT);
 
         hssfRow = hssfSheet.createRow(5);
         hssfRow.setHeight((short) 500);
         hssfCell = hssfRow.createCell(0);
         hssfCell.setCellValue("NGƯỜI TẠO: "+getStudentMadeName(attendance.getStudent_Made()));
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.LEFT);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-
+        cellStyle.setAlignment(cellStyle.ALIGN_LEFT);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_LEFT);
 
         //title row
         hssfRow = hssfSheet.createRow(7);
@@ -316,26 +313,26 @@ public class AttendanceActivity extends AppCompatActivity {
         hssfCell = hssfRow.createCell(0);
         hssfCell.setCellValue("STT");
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.CENTER);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_CENTER);
 
         hssfCell = hssfRow.createCell(1);
         hssfCell.setCellValue("MÃ SINH VIÊN");
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.CENTER);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_CENTER);
 
         hssfCell = hssfRow.createCell(2);
         hssfCell.setCellValue("HỌ VÀ TÊN");
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.CENTER);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_CENTER);
 
         hssfCell = hssfRow.createCell(3);
         hssfCell.setCellValue("TÌNH TRẠNG");
         cellStyle = hssfCell.getCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.CENTER);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+        cellStyle.setVerticalAlignment(cellStyle.ALIGN_CENTER);
         //end of title row
 
         //set data for attendance student
@@ -350,20 +347,20 @@ public class AttendanceActivity extends AppCompatActivity {
             hssfCell = hssfRow.createCell(0);
             hssfCell.setCellValue(i+1+"");
             cellStyle = hssfCell.getCellStyle();
-            cellStyle.setAlignment(HorizontalAlignment.CENTER);
-            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.ALIGN_CENTER);
             //cột 2
             hssfCell = hssfRow.createCell(1);
             hssfCell.setCellValue(student.getUsername());
             cellStyle = hssfCell.getCellStyle();
-            cellStyle.setAlignment(HorizontalAlignment.CENTER);
-            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.ALIGN_CENTER);
             //cột 3
             hssfCell = hssfRow.createCell(2);
             hssfCell.setCellValue(student.getName());
             cellStyle = hssfCell.getCellStyle();
-            cellStyle.setAlignment(HorizontalAlignment.CENTER);
-            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.ALIGN_CENTER);
             //cột 4
             hssfCell = hssfRow.createCell(3);
             if (student.getChosen() == true) {
@@ -372,8 +369,8 @@ public class AttendanceActivity extends AppCompatActivity {
                 hssfCell.setCellValue("Nghỉ");
             }
             cellStyle = hssfCell.getCellStyle();
-            cellStyle.setAlignment(HorizontalAlignment.CENTER);
-            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            cellStyle.setAlignment(cellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(cellStyle.ALIGN_CENTER);
 
             //tăng index lên 1 sang dòng tiếp
             indexRow ++;
