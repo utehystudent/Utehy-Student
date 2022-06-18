@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utehystudent.R;
+import com.example.utehystudent.activity.admin.PostList_Activity;
 import com.example.utehystudent.model.BaiViet;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -80,6 +81,14 @@ public class ThongBaoAdmin_Adapter extends RecyclerView.Adapter<ThongBaoAdmin_Ad
                 holder.imgAnhBV.setVisibility(View.GONE);
                 holder.tvSoAnhThem.setVisibility(View.GONE);
             }
+
+            holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    ((PostList_Activity) ThongBaoAdmin_Adapter.this.context).openBottomSheetDialog(baiViet);
+                    return false;
+                }
+            });
         }
     }
 

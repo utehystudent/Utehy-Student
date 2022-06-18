@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +20,16 @@ import com.example.utehystudent.R;
 import com.example.utehystudent.adapters.ThongBaoAdmin_Adapter;
 import com.example.utehystudent.model.BaiViet;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PostList_Activity extends AppCompatActivity {
     ThongBaoAdmin_Adapter adapter;
@@ -33,6 +39,7 @@ public class PostList_Activity extends AppCompatActivity {
     TextView tvDangBai;
     ProgressBar prg;
     FirebaseFirestore db;
+    BottomSheetDialog bottomSheetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,7 @@ public class PostList_Activity extends AppCompatActivity {
 
         tvDangBai.setOnClickListener(view -> {
             startActivity(new Intent(this, DangBai_Activity.class));
+            finish();
         });
     }
 
@@ -58,6 +66,8 @@ public class PostList_Activity extends AppCompatActivity {
                 finish();
             }
         });
+
+        bottomSheetDialog = new BottomSheetDialog(this);
 
         db = FirebaseFirestore.getInstance();
 
@@ -91,6 +101,7 @@ public class PostList_Activity extends AppCompatActivity {
                             for (DocumentSnapshot doc : task.getResult()) {
                                 listPost.add(doc.toObject(BaiViet.class));
                             }
+                            Collections.sort(listPost);
                             adapter = new ThongBaoAdmin_Adapter(PostList_Activity.this, listPost);
                             rcv.setAdapter(adapter);
                             rcv.setVisibility(View.VISIBLE);
@@ -100,5 +111,48 @@ public class PostList_Activity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void openBottomSheetDialog(BaiViet post) {
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet2);
+
+        Button btnXoa = bottomSheetDialog.findViewById(R.id.bottomSheet2_btnXoa);
+        Button btnHuy = bottomSheetDialog.findViewById(R.id.bottomSheet2_btnHuy);
+
+        btnHuy.setOnClickListener(view -> {
+            bottomSheetDialog.dismiss();
+            return;
+        });
+
+        btnXoa.setOnClickListener(view -> {
+            db.collection("Post")
+                    .document(post.getIdBaiViet())
+                    .delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(PostList_Activity.this, "Gỡ thông báo thành công", Toast.LENGTH_SHORT).show();
+                            for (BaiViet bv : listPost) {
+                                if (bv.getIdBaiViet().equals(post.getIdBaiViet())) {
+                                    listPost.remove(bv);
+                                    break;
+                                }
+                            }
+                            bottomSheetDialog.dismiss();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(PostList_Activity.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+                            bottomSheetDialog.dismiss();
+                            return;
+                        }
+                    });
+        });
+
+        bottomSheetDialog.create();
+        bottomSheetDialog.show();
+
     }
 }

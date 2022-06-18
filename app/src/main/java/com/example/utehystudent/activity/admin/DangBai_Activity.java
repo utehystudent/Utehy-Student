@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -62,7 +63,6 @@ public class DangBai_Activity extends AppCompatActivity {
     String classID = "";
     String username = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +76,7 @@ public class DangBai_Activity extends AppCompatActivity {
     private void Event() {
         imbCancel.setOnClickListener(view -> {
             if (listImageUri.size() == 0 && edtND.getText().toString().equals("")) {
+                startActivity(new Intent(DangBai_Activity.this, PostList_Activity.class));
                 finish();
             } else {
                 openCancelPostDialog();
@@ -156,13 +157,13 @@ public class DangBai_Activity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         // Handle unsuccessful uploads
-                        Toast.makeText(DangBai_Activity.this,"Lưu ảnh thất bại",Toast.LENGTH_SHORT).show();
-                        Log.d("post","thatbai");
+                        Toast.makeText(DangBai_Activity.this, "Lưu ảnh thất bại", Toast.LENGTH_SHORT).show();
+                        Log.d("post", "thatbai");
                     }
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.d("post","thanhcong");
+                        Log.d("post", "thanhcong");
                         fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
@@ -207,8 +208,7 @@ public class DangBai_Activity extends AppCompatActivity {
         try {
             // Try sending the push notification
             PushyAPI.sendPush(push);
-        }
-        catch (Exception exc) {
+        } catch (Exception exc) {
             // Error, print to console
             System.out.println(exc.toString());
         }
@@ -307,11 +307,12 @@ public class DangBai_Activity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference("admin");
         db = FirebaseFirestore.getInstance();
 
-
         photoAdapter = new PhotoAdapter(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false);
         rcvImage.setLayoutManager(gridLayoutManager);
         rcvImage.setFocusable(false);
         rcvImage.setAdapter(photoAdapter);
     }
+
+
 }
