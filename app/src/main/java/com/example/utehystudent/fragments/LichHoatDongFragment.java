@@ -339,7 +339,7 @@ public class LichHoatDongFragment extends Fragment {
                                     events.add(new EventDay(calendar1, DrawableUtils.getThreeDots(context)));
                                 } else {
                                     int t = daysBetween(today, dateSK);
-                                    if (t <= 0) {
+                                    if (t < 0) {        //old t <= 0
                                         Calendar calendar2 = Calendar.getInstance();
                                         calendar2.add(Calendar.DAY_OF_WEEK, t);
                                         events.add(new EventDay(calendar2, DrawableUtils.getThreeDots(context)));
