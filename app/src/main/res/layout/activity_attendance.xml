@@ -29,7 +29,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E3DDDD"></View>
+                android:background="#E3DDDD" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                     android:text="Môn học: "
                     android:textColor="#2F80ED"
                     android:textSize="20sp"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/Attendance_spinner"
@@ -59,7 +59,7 @@
                     android:spinnerMode="dropdown"
                     android:fontFamily="@font/nunito_light"
                     android:textSize="20sp"
-                    android:textStyle="normal"></Spinner>
+                    android:textStyle="normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +78,7 @@
                     android:text="Số TC: "
                     android:textColor="#2F80ED"
                     android:textSize="20sp"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/Attendance_tvSoTC"
@@ -91,7 +91,7 @@
                     android:paddingLeft="10dp"
                     android:text="---"
                     android:textColor="#000"
-                    android:textSize="20sp"></TextView>
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -110,7 +110,7 @@
                     android:text="Ngày: "
                     android:textColor="#2F80ED"
                     android:textSize="20sp"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/Attendance_tvDate"
@@ -123,7 +123,7 @@
                     android:paddingLeft="10dp"
                     android:text="16/05/2022"
                     android:textColor="#000"
-                    android:textSize="20sp"></TextView>
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/Attendance_imgChooseDate"
@@ -131,7 +131,7 @@
                     android:layout_height="20dp"
                     android:src="@drawable/ic_edit"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"></ImageView>
+                    android:layout_marginLeft="20dp" />
             </LinearLayout>
 
             <RadioGroup
@@ -165,6 +165,17 @@
                     android:text="TỐI" />
             </RadioGroup>
 
+            <RadioButton
+                android:id="@+id/Attendance_radioXuatExel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xuất file excel"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_gravity=""
+                android:textStyle="bold"
+                android:textColor="#FF3D00" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,7 +186,7 @@
                 android:text="Tên giảng viên: "
                 android:textColor="#2F80ED"
                 android:textSize="20sp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/Login_cardTK"
@@ -196,7 +207,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bo_edt"
                     android:padding="10dp"
-                    android:hint="Nhập tên giảng viên"></EditText>
+                    android:hint="Nhập tên giảng viên" />
             </com.google.android.material.card.MaterialCardView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -205,8 +216,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:padding="5dp"
-                android:scrollbars="none"
-                ></androidx.recyclerview.widget.RecyclerView>
+                android:scrollbars="none" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

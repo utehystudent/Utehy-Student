@@ -1,12 +1,16 @@
 package com.example.utehystudent.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
@@ -15,8 +19,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +31,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -39,8 +46,21 @@ import com.example.utehystudent.model.StudentAttendance;
 import com.example.utehystudent.model.Subject;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -52,6 +72,8 @@ public class AttendanceActivity extends AppCompatActivity {
     Spinner subjectSpinner;
     TextView tvSoTC, tvNgay;
     RadioGroup timeRadioGroup;
+    RadioButton rdExport;
+    Boolean isExport;
     EditText edtTenGV;
     RecyclerView rcvStudents;
     ImageView imgChooseDate;
@@ -68,11 +90,18 @@ public class AttendanceActivity extends AppCompatActivity {
     int selectedDayOfMonth;
     String classID, studentID, subject_ID, date, time, attendance_ID;
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        verifyStoragePermissions(this);
         Init();
     }
 
@@ -94,6 +123,8 @@ public class AttendanceActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         rcvStudents.addItemDecoration(itemDecoration);
         imgChooseDate = findViewById(R.id.Attendance_imgChooseDate);
+        rdExport = findViewById(R.id.Attendance_radioXuatExel);
+        isExport = false;
         //
         LocalDate currentDate = LocalDate.now();
         selectedYear = currentDate.getYear();
@@ -182,12 +213,194 @@ public class AttendanceActivity extends AppCompatActivity {
                 listStudentAbsent.add(student.getUsername());
             }
         }
+        if (rdExport.isChecked() == true) {
+            exportExcel(attendance);
+        }
         attendance.setList_Absent(listStudentAbsent);
         attendanceViewModel.CreateAttendance(attendance);
         Log.d("AttendanceActivity", "CreateAttendance: "+attendance.toString());
         subjectSpinner.setSelection(0);
         edtTenGV.setText("");
         attendanceViewModel.ResetListStudentAttendance();
+    }
+
+    private String getStudentMadeName(String id) {
+        String rs = "";
+        for (StudentAttendance student : listStudentAttendance) {
+            if (student.getUsername().equals(id)) {
+                rs = student.getName();
+                break;
+            }
+        }
+        return rs;
+    }
+
+    private void exportExcel(Attendance attendance) {
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+
+        HSSFSheet hssfSheet = hssfWorkbook.createSheet();
+
+        hssfSheet.setColumnWidth(0, 25 * 256);
+        hssfSheet.setColumnWidth(1, 25 * 256);
+        hssfSheet.setColumnWidth(2, 25 * 256);
+        hssfSheet.setColumnWidth(3, 25 * 256);
+
+
+        hssfSheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 6));
+        hssfSheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 6));
+        hssfSheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 6));
+        hssfSheet.addMergedRegion(new CellRangeAddress(3, 3, 0, 6));
+        hssfSheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 6));
+        hssfSheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 6));
+
+        //set data for information excel
+        HSSFRow hssfRow;
+        HSSFCell hssfCell;
+        CellStyle cellStyle;
+
+        hssfRow = hssfSheet.createRow(0);
+        hssfRow.setHeight((short) 500);
+        hssfCell = hssfRow.createCell(0);
+        hssfCell.setCellValue("LỚP: "+attendance.getClass_ID());
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.LEFT);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        hssfRow = hssfSheet.createRow(1);
+        hssfRow.setHeight((short) 500);
+        hssfCell = hssfRow.createCell(0);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm 'ngày' dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        hssfCell.setCellValue("NGÀY TẠO: "+dtf.format(now));
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.LEFT);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        hssfRow = hssfSheet.createRow(2);
+        hssfRow.setHeight((short) 500);
+        hssfCell = hssfRow.createCell(0);
+        hssfCell.setCellValue("TÊN MÔN HỌC: "+attendance.getSubject_ID()+" - "+subjectList.get(subjectSpinner.getSelectedItemPosition()).getSubject_name());
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.LEFT);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        hssfRow = hssfSheet.createRow(3);
+        hssfRow.setHeight((short) 500);
+        hssfCell = hssfRow.createCell(0);
+        hssfCell.setCellValue("GIÁO VIÊN GIẢNG DẠY: "+attendance.getTeacher_Name());
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.LEFT);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        hssfRow = hssfSheet.createRow(4);
+        hssfRow.setHeight((short) 500);
+        hssfCell = hssfRow.createCell(0);
+        hssfCell.setCellValue("SỐ LƯỢNG SINH VIÊN: "+listStudentAttendance.size());
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.LEFT);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        hssfRow = hssfSheet.createRow(5);
+        hssfRow.setHeight((short) 500);
+        hssfCell = hssfRow.createCell(0);
+        hssfCell.setCellValue("NGƯỜI TẠO: "+getStudentMadeName(attendance.getStudent_Made()));
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.LEFT);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+
+        //title row
+        hssfRow = hssfSheet.createRow(7);
+        hssfRow.setHeight((short) 500);
+
+        hssfCell = hssfRow.createCell(0);
+        hssfCell.setCellValue("STT");
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        hssfCell = hssfRow.createCell(1);
+        hssfCell.setCellValue("MÃ SINH VIÊN");
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        hssfCell = hssfRow.createCell(2);
+        hssfCell.setCellValue("HỌ VÀ TÊN");
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        hssfCell = hssfRow.createCell(3);
+        hssfCell.setCellValue("TÌNH TRẠNG");
+        cellStyle = hssfCell.getCellStyle();
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        //end of title row
+
+        //set data for attendance student
+        int indexRow = 8;
+        for (int i = 0; i < listStudentAttendance.size(); ++i) {
+            StudentAttendance student = listStudentAttendance.get(i);
+
+            hssfRow = hssfSheet.createRow(indexRow);
+            hssfRow.setHeight((short) 500);
+
+            //cột 1
+            hssfCell = hssfRow.createCell(0);
+            hssfCell.setCellValue(i+1+"");
+            cellStyle = hssfCell.getCellStyle();
+            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            //cột 2
+            hssfCell = hssfRow.createCell(1);
+            hssfCell.setCellValue(student.getUsername());
+            cellStyle = hssfCell.getCellStyle();
+            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            //cột 3
+            hssfCell = hssfRow.createCell(2);
+            hssfCell.setCellValue(student.getName());
+            cellStyle = hssfCell.getCellStyle();
+            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            //cột 4
+            hssfCell = hssfRow.createCell(3);
+            if (student.getChosen() == true) {
+                hssfCell.setCellValue("Có mặt");
+            }else {
+                hssfCell.setCellValue("Nghỉ");
+            }
+            cellStyle = hssfCell.getCellStyle();
+            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+            //tăng index lên 1 sang dòng tiếp
+            indexRow ++;
+        }
+        String filename = "DD"+attendance.getClass_ID()+"_"+attendance.getSubject_ID()+"_"+attendance.getTime()+"_"+attendance.getAttendance_Date()+".xls";
+        File filePath = new File(Environment.getExternalStorageDirectory()+"/"+filename);
+
+        try {
+            if (!filePath.exists()) {
+                filePath.createNewFile();
+            }
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+            hssfWorkbook.write(fileOutputStream);
+
+            if (fileOutputStream != null) {
+                fileOutputStream.flush();
+                fileOutputStream.close();
+                Toast.makeText(this, "Export Successfully", Toast.LENGTH_SHORT).show();
+                Log.d("path", "Path: "+filePath);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("TAG", "onCreate: " + e.getMessage());
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        Toast.makeText(this, "Xuất file excel thành công", Toast.LENGTH_SHORT).show();
     }
 
     public void SetCheckedStudent(String studentID, Boolean checked) {
@@ -222,6 +435,17 @@ public class AttendanceActivity extends AppCompatActivity {
     }
 
     private void Events() {
+        rdExport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    isExport = true;
+                }else {
+                    isExport = false;
+                }
+            }
+        });
+
         subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -347,4 +571,20 @@ public class AttendanceActivity extends AppCompatActivity {
         //Check if this subject in this day is made before
         attendanceViewModel.CheckExistedAttendance(attendance_ID);
     }
+
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+
 }

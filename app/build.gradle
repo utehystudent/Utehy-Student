@@ -91,4 +91,7 @@ dependencies {
 
     // Jitsi Meet
     implementation ('org.jitsi.react:jitsi-meet-sdk:5.1.0') { transitive = true }
+
+    //POI
+    implementation 'org.apache.poi:poi:3.17'
 }
