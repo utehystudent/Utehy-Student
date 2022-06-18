@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment();
                         break;
                     case 4:
-                        fragment = new TinNhanFragment();
+                        fragment = new TinNhanFragment(MainActivity.this);
                         break;
                     case 5:
                         fragment = new MenuFragment();

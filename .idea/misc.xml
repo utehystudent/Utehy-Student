@@ -12,6 +12,7 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/background_sent_message.xml" value="0.14166666666666666" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/bo_edt.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/border.xml" value="0.170446735395189" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/border_photo.xml" value="0.15694444444444444" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/border_spinner.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/button_state.xml" value="0.170446735395189" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/drawable/calendar_day_background.xml" value="0.15208333333333332" />
@@ -89,11 +90,11 @@
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_lich_hoat_dong.xml" value="0.16" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_menu.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_thong_bao.xml" value="0.16" />
-        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_tin_nhan.xml" value="0.16145833333333334" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/fragment_tin_nhan.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/item_baiviet.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/item_binh_luan.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/item_bomon.xml" value="0.16145833333333334" />
-        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/item_container_received_message.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/item_container_received_message.xml" value="0.152" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/item_container_sent_message.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/item_image.xml" value="0.16145833333333334" />
         <entry key="..\:/AndroidStudioProjects/UTEHYStudent/app/src/main/res/layout/item_photo.xml" value="0.176" />

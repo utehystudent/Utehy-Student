@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -50,10 +49,19 @@
         android:layout_marginTop="4dp"
         android:textColor="#737376"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@id/itemReceivedMessage_tvMessage"
-        app:layout_constraintTop_toBottomOf="@id/itemReceivedMessage_tvMessage"></TextView>
+        app:layout_constraintStart_toStartOf="@id/itemReceivedMessage_imgAnh"
+        app:layout_constraintTop_toBottomOf="@id/itemReceivedMessage_imgAnh"></TextView>
 
-
-
+    <ImageView
+        android:id="@+id/itemReceivedMessage_imgAnh"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/itemReceivedMessage_tvMessage"
+        app:layout_constraintStart_toStartOf="@+id/itemReceivedMessage_tvMessage"
+        android:layout_marginTop="3dp"
+        app:layout_constraintWidth_percent="0.75"
+        app:layout_constraintHeight_percent="0.7"
+        android:src="@drawable/utehy_logo"></ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,10 @@
 package com.example.utehystudent.fragments;
 
+import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -33,37 +37,59 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import gun0912.tedbottompicker.TedBottomPicker;
+
 public class TinNhanFragment extends Fragment {
+
+    Context activity, context;
 
     private RecyclerView rcv;
     ChatAdapter chatAdapter;
     ArrayList<Chat> listChat;
     FirebaseFirestore db;
     SharedPreferences pref;
+    StorageReference storageReference;
     ProgressBar prgBar;
     String classID = "";
 
     EditText edtChat;
-    ImageView imgSendChat;
+    ImageView imgSendChat, imgPickPhoto;
 
     Timestamp timestamp;
 
-    FrameLayout frameSend;
+    FrameLayout frameSend, framePickPhoto;
+
+    Uri uriTN;
+    Boolean hasImage = false;
+
 
     public TinNhanFragment() {
         // Required empty public constructor
     }
 
+    public TinNhanFragment(Context context) {
+        this.context = context;
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this.getContext();
     }
 
     @Override
@@ -76,10 +102,14 @@ public class TinNhanFragment extends Fragment {
         rcv = view.findViewById(R.id.fragmentTN_rcv);
         chatAdapter = new ChatAdapter(view.getContext());
 
+        storageReference = FirebaseStorage.getInstance().getReference("/"+pref.getString("class_ID", ""));
+
         edtChat = view.findViewById(R.id.fragmentTN_edtInput);
         imgSendChat = view.findViewById(R.id.fragmentTN_imgSend);
+        imgPickPhoto = view.findViewById(R.id.fragmentTN_imgPickPhoto);
 
         frameSend = view.findViewById(R.id.fragmentTN_layoutSend);
+        framePickPhoto = view.findViewById(R.id.fragmentTN_layoutPickPhoto);
         frameSend.setVisibility(View.GONE);
 
         prgBar = view.findViewById(R.id.fragmentTN_prgBar);
@@ -116,7 +146,7 @@ public class TinNhanFragment extends Fragment {
                 edtChat.requestFocus();
                 return;
             }
-            sendMessage(edtChat.getText().toString().trim());
+            sendMessage(edtChat.getText().toString().trim(), "");
         });
 
         edtChat.addTextChangedListener(new TextWatcher() {
@@ -139,13 +169,18 @@ public class TinNhanFragment extends Fragment {
 
             }
         });
+
+        framePickPhoto.setOnClickListener(view -> {
+            requestPermission();
+        });
+
     }
 
-    private void sendMessage(String message) {
+    private void sendMessage(String message, String imgLink) {
         String username = pref.getString("username", "");
         String name = pref.getString("name", "");
         timestamp = new Timestamp(System.currentTimeMillis());
-        Chat chat = new Chat("chat"+username+""+timestamp.getTime(), username, "", classID, message);
+        Chat chat = new Chat("chat"+username+""+timestamp.getTime(), username, imgLink, classID, message);
         db.collection("Chat")
                 .add(chat)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -221,6 +256,88 @@ public class TinNhanFragment extends Fragment {
         catch (Exception exc) {
             // Error, print to console
             System.out.println(exc.toString());
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = activity.getContentResolver();
+        String extension;
+
+        //Check uri format to avoid null
+        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            //If scheme is a content
+            final MimeTypeMap mime = MimeTypeMap.getSingleton();
+            extension = mime.getExtensionFromMimeType(cR.getType(uri));
+        } else {
+            //If scheme is a File
+            //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file name with spaces and special characters.
+            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
+
+        }
+        return extension;
+    }
+
+    private void requestPermission() {
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                openBottomPicker();
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(requireActivity(), "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        TedPermission.with(requireActivity())
+                .setPermissionListener(permissionlistener)
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setPermissions(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .check();
+    }
+
+    private void openBottomPicker() {
+        TedBottomPicker.OnImageSelectedListener listener = new TedBottomPicker.OnImageSelectedListener() {
+            @Override
+            public void onImageSelected(Uri uri) {
+                uploadImage(uri);
+            }
+        };
+
+        TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(requireActivity())
+                .setOnImageSelectedListener(listener)
+                .setCompleteButtonText("DONE")
+                .setEmptySelectionText("NO IMAGE")
+                .create();
+        tedBottomPicker.show(requireActivity().getSupportFragmentManager());
+    }
+
+    private void uploadImage(Uri uri) {
+        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        if (uri != null) {
+            String fileName = "chatimage"+pref.getString("username","")+""+ts.getTime()+"." + getFileExtension(uri);
+            StorageReference fileRef = storageReference.child(fileName);
+            UploadTask uploadTask = fileRef.putFile(uri);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                    Toast.makeText(requireActivity(),"Gửi ảnh thất bại",Toast.LENGTH_SHORT).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d("post","thanhcong");
+                    fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String link_img = String.valueOf(uri);
+                            sendMessage(edtChat.getText().toString().trim(), link_img);
+                        }
+                    });
+                }
+            });
         }
     }
 

@@ -68,7 +68,6 @@ public class LichHoatDongFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this.getContext();
-
     }
 
     @Override

@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -16,7 +15,7 @@
         android:maxWidth="250dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/itemSentMessage_tvTime"
@@ -25,8 +24,19 @@
         android:layout_marginTop="5dp"
         android:textColor="#737376"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemSentMessage_tvMessage"></TextView>
+        app:layout_constraintEnd_toEndOf="@id/itemSentMessage_imgAnh"
+        app:layout_constraintTop_toBottomOf="@id/itemSentMessage_imgAnh" />
 
+
+    <ImageView
+        android:id="@+id/itemSentMessage_imgAnh"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/utehy_logo"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/itemSentMessage_tvMessage"
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintTop_toBottomOf="@+id/itemSentMessage_tvMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
