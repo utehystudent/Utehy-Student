@@ -1,6 +1,6 @@
 package com.example.utehystudent.model;
 
-public class Subject {
+public class Subject implements Comparable<Subject>{
     private String faculty_ID, subject_ID, subject_name;
     private int num_cred;
 
@@ -54,5 +54,10 @@ public class Subject {
                 ", subject_name='" + subject_name + '\'' +
                 ", num_cred=" + num_cred +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Subject subject) {
+        return this.getFaculty_ID().compareTo(subject.getFaculty_ID());
     }
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.admin.ImportExcelContact_Activity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/ImportExcelSub_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="#2F80ED" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3DDDD" />
+
+    <Button
+        android:id="@+id/ImportExcelSub_btnChonFile"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Chọn file"
+        android:background="@drawable/gradient1"
+        android:textColor="#fff"></Button>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ImportExcelSub_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:padding="15dp"
+        android:layout_marginTop="25dp" />
+
+    <ProgressBar
+        android:id="@+id/ImportExcelSub_prgBar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"></ProgressBar>
+
+</LinearLayout>

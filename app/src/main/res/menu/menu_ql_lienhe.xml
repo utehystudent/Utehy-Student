@@ -5,5 +5,9 @@
         android:id="@+id/menu_QLLH_itAdd"
         android:icon="@drawable/ic_add"
         app:showAsAction="ifRoom"
-        android:title="Thêm sinh viên mới"/>
+        android:title="Thêm liên hệ mới"/>
+    <item
+        android:id="@+id/menu_QLLH_itExcel"
+        android:icon="@drawable/ic_add"
+        android:title="Dùng file excel"/>
 </menu>

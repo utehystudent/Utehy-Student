@@ -1,6 +1,8 @@
 package com.example.utehystudent.model;
 
-public class Contact implements Comparable<Contact>{
+import java.io.Serializable;
+
+public class Contact implements Comparable<Contact>, Serializable {
     private String faculty_ID, department, name, position, email, phone, avt_link;
 
     public Contact(String faculty_ID, String department, String name, String position, String email, String phone, String avt_link) {

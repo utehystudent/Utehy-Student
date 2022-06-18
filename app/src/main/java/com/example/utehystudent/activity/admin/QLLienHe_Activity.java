@@ -34,11 +34,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class QLLienHe_Activity extends AppCompatActivity {
+public class QLLienHe_Activity extends AppCompatActivity implements Serializable {
     private static final String TAG = "QLLienHe_Activity";
+
     Toolbar toolbar;
     FirebaseFirestore db;
     SharedPreferences pref;
@@ -50,6 +52,7 @@ public class QLLienHe_Activity extends AppCompatActivity {
     ArrayList<Contact> listContact;
     ContactAdapter contactAdapter;
     ArrayAdapter<Faculty> spinnerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +90,6 @@ public class QLLienHe_Activity extends AppCompatActivity {
             }
 
         });
-
 
         db = FirebaseFirestore.getInstance();
         pref = getSharedPreferences("User", Context.MODE_PRIVATE);
@@ -205,6 +207,10 @@ public class QLLienHe_Activity extends AppCompatActivity {
             case R.id.menu_QLLH_itAdd:
                 addContact();
                 break;
+            case R.id.menu_QLLH_itExcel:
+                Intent intent = new Intent(QLLienHe_Activity.this, ImportExcelContact_Activity.class);
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -212,4 +218,5 @@ public class QLLienHe_Activity extends AppCompatActivity {
     private void addContact() {
         startActivity(new Intent(this, AddContact_Activity.class));
     }
+
 }

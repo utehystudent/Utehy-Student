@@ -46,5 +46,8 @@ public class HomeAdmin_Activity extends AppCompatActivity {
         btnPB.setOnClickListener(view -> {
             startActivity(new Intent(this, QLPhongBan_Activity.class));
         });
+        btnMH.setOnClickListener(view -> {
+            startActivity(new Intent(this, QLMonHoc_Activity.class));
+        });
     }
 }

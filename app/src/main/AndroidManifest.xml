@@ -21,6 +21,12 @@
         android:theme="@style/Theme.UTEHYStudent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.admin.QLMonHoc_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.admin.ImportExcelContact_Activity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CallingActivity"
             android:exported="false" />
         <activity
