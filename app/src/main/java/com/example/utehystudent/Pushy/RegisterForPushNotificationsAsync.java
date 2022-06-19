@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+
 import com.example.utehystudent.ViewModel.LoginViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,8 +47,14 @@ public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Obj
             SharedPreferences pref = mActivity.getSharedPreferences("User", Context.MODE_PRIVATE);
             String classID = pref.getString("class_ID", "");
 
-            Pushy.subscribe(classID, mActivity);
-            Pushy.subscribe("utehy", mActivity);
+//            Pushy.subscribe(classID, mActivity);
+//            Pushy.subscribe("utehy", mActivity);
+
+            String[] listTopic = new String[2];
+            listTopic[0] = classID;
+            listTopic[1] = "utehy";
+            Pushy.subscribe(listTopic, mActivity);
+
             Log.d("Pushy", "Pushy subscribe topic: " + classID);
 
             // Registration succeeded, log token to logcat

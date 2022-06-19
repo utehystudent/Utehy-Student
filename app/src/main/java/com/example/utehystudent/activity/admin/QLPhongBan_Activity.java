@@ -148,14 +148,14 @@ public class QLPhongBan_Activity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_ql_lienhe, menu);
+        getMenuInflater().inflate(R.menu.menu_ql_phongban, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_QLLH_itAdd:
+            case R.id.menu_QLPB_itAdd:
                 addDepartment();
                 break;
         }

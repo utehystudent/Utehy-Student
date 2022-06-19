@@ -29,6 +29,7 @@ import com.example.utehystudent.adapters.ContactAdapter;
 import com.example.utehystudent.model.Contact;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.apache.poi.POIXMLException;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
@@ -105,7 +106,6 @@ public class ImportExcelContact_Activity extends AppCompatActivity implements Se
             if (data == null) {
                 return;
             }
-            Toast.makeText(ImportExcelContact_Activity.this, "Pick file success", Toast.LENGTH_SHORT).show();
             readExcelFile(data.getData());
         }
     }
@@ -140,17 +140,23 @@ public class ImportExcelContact_Activity extends AppCompatActivity implements Se
             InputStream inputStream = contentResolver.openInputStream(Uri.parse(uri.toString()));
 
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+
             XSSFSheet sheet = workbook.getSheetAt(0);
 
             int rowCount = sheet.getPhysicalNumberOfRows();
-            Log.d("vvv", "readExcelFile: NUM COUNT ROW: "+rowCount);
 
             FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
             StringBuilder sb = new StringBuilder();
 
+            btnChonFile.setText(getFileName(uri));
+
             for (int r = 1; r < rowCount; r++) {
                 Row row = sheet.getRow(r);
                 int cellCount = row.getPhysicalNumberOfCells();
+
+                if (cellCount > 7) {
+                    continue;
+                }
 
                 for (int c = 0; c < cellCount; ++c) {
                     if (c > 8) {
@@ -166,10 +172,19 @@ public class ImportExcelContact_Activity extends AppCompatActivity implements Se
             }
             parseStringBuilder(sb);
 
+
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Toast.makeText(ImportExcelContact_Activity.this, "File không tồn tại.", Toast.LENGTH_SHORT).show();
+            rcv.setVisibility(View.VISIBLE);
+            return;
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(ImportExcelContact_Activity.this, "File không đúng định dạng.", Toast.LENGTH_SHORT).show();
+            rcv.setVisibility(View.VISIBLE);
+            return;
+        } catch (POIXMLException e) {
+            Toast.makeText(ImportExcelContact_Activity.this, "File không đúng định dạng.", Toast.LENGTH_SHORT).show();
+            rcv.setVisibility(View.VISIBLE);
+            return;
         }
     }
 
